@@ -4,9 +4,9 @@
   "description": "Frontend Application",
   "main": "index.js",
   "scripts": {
-    "start": "webpack serve --mode development --open",
-    "build": "webpack --mode production",
-    "server": "node server.js"
+      "start": "webpack serve --mode development --open",
+      "build": "rm -rf build && webpack --mode production",
+      "server": "node server.js"
   },
   "author": "",
   "license": "ISC",
