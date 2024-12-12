@@ -270,11 +270,16 @@ export const translations = {
           fields: {
             name: {
               label: "Name",
-              placeholder: "John Doe"
+              placeholder: "John Smith"
             },
             email: {
               label: "Email",
               placeholder: "john@example.com"
+            },
+            phone: {
+              label: "Phone Number",
+              placeholder: "+1 (555) 000-0000",
+              error: "Please enter a valid phone number"
             },
             message: {
               label: "Message",
@@ -282,8 +287,8 @@ export const translations = {
             }
           },
           submitButton: "Send Message",
-          successMessage: "Thank you for reaching out! Your message has been sent successfully. We'll get back to you shortly.",
-          errorMessage: "We apologize, but there was an error sending your message. Please try again or contact us directly at ciao@mastrohr.com"
+          successMessage: "Thank you for contacting us! Your message has been sent successfully. We will respond as soon as possible.",
+          errorMessage: "We apologize, but there was an error sending your message. Please try again or contact us directly at hello@mastrohr.com"
         },
         info: {
           title: "Contact Information",
@@ -688,6 +693,11 @@ export const translations = {
             email: {
               label: "Email",
               placeholder: "mario@esempio.com"
+            },
+            phone: {
+              label: "Numero di Telefono",
+              placeholder: "+39 XXX XXX XXXX",
+              error: "Inserisci un numero di telefono valido"
             },
             message: {
               label: "Messaggio",

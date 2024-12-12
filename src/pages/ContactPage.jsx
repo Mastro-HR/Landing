@@ -10,12 +10,29 @@ const ContactPage = () => {
   const [isCalendlyOpen, setIsCalendlyOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
+  const [formErrors, setFormErrors] = useState({});
   const formRef = useRef();
   const { language } = useLanguage();
   const t = translations[language].contact;
 
+  const validatePhoneNumber = (phone) => {
+    const phoneRegex = /^\+?[\d\s-()]{10,}$/;
+    return phoneRegex.test(phone);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setFormErrors({});
+    
+    const phone = formRef.current.user_phone.value;
+    if (!validatePhoneNumber(phone)) {
+      setFormErrors(prev => ({
+        ...prev,
+        phone: t.form.fields.phone.error || 'Please enter a valid phone number'
+      }));
+      return;
+    }
+
     setIsSubmitting(true);
     setSubmitStatus(null);
   
@@ -23,6 +40,7 @@ const ContactPage = () => {
       const formData = {
         user_name: formRef.current.user_name.value,
         user_email: formRef.current.user_email.value,
+        user_phone: phone,
         message: formRef.current.message.value,
         company_name: 'Mastro HR',
         recipient_name: 'Mastro',
@@ -30,10 +48,10 @@ const ContactPage = () => {
       };
   
       const result = await emailjs.send(
-        'service_125thg3', // ServiceID
-        'template_cxqhkvt', // TemplateID
+        'service_125thg3',
+        'template_cxqhkvt',
         formData,
-        'pCtFfq9ELn8aEBTtz' // Public Key
+        'pCtFfq9ELn8aEBTtz'
       );
   
       if (result.text === 'OK') {
@@ -87,6 +105,28 @@ const ContactPage = () => {
     </motion.div>
   );
 
+  const InputField = ({ id, label, type, placeholder, required = true, error }) => (
+    <div>
+      <label className="block text-sm font-medium text-primary-100 mb-2" htmlFor={id}>
+        {label} {required && <span className="text-accent-500">*</span>}
+      </label>
+      <input
+        id={id}
+        name={id}
+        type={type}
+        required={required}
+        className={`w-full px-4 py-3 bg-primary-50/5 border ${
+          error ? 'border-red-400' : 'border-primary-50/20'
+        } rounded-lg text-primary-50 placeholder-primary-200 focus:outline-none focus:border-accent-500
+        transition-colors duration-200`}
+        placeholder={placeholder}
+      />
+      {error && (
+        <p className="mt-1 text-sm text-red-400">{error}</p>
+      )}
+    </div>
+  );
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-teal-500 via-teal-600 to-teal-700 overflow-hidden">
       <div className="absolute inset-0 bg-grid opacity-20" />
@@ -114,40 +154,31 @@ const ContactPage = () => {
                 <h2 className="text-3xl font-bold text-primary-50 mb-8">{t.form.title}</h2>
                 <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid sm:grid-cols-2 gap-6">
-                    <div>
-                      <label className="block text-sm font-medium text-primary-100 mb-2" htmlFor="user_name">
-                        {t.form.fields.name.label}
-                      </label>
-                      <input
-                        id="user_name"
-                        name="user_name"
-                        type="text"
-                        required
-                        className="w-full px-4 py-3 bg-primary-50/5 border border-primary-50/20 rounded-lg 
-                        text-primary-50 placeholder-primary-200 focus:outline-none focus:border-accent-500
-                        transition-colors duration-200"
-                        placeholder={t.form.fields.name.placeholder}
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-primary-100 mb-2" htmlFor="user_email">
-                        {t.form.fields.email.label}
-                      </label>
-                      <input
-                        id="user_email"
-                        name="user_email"
-                        type="email"
-                        required
-                        className="w-full px-4 py-3 bg-primary-50/5 border border-primary-50/20 rounded-lg 
-                        text-primary-50 placeholder-primary-200 focus:outline-none focus:border-accent-500
-                        transition-colors duration-200"
-                        placeholder={t.form.fields.email.placeholder}
-                      />
-                    </div>
+                    <InputField
+                      id="user_name"
+                      label={t.form.fields.name.label}
+                      type="text"
+                      placeholder={t.form.fields.name.placeholder}
+                    />
+                    <InputField
+                      id="user_email"
+                      label={t.form.fields.email.label}
+                      type="email"
+                      placeholder={t.form.fields.email.placeholder}
+                    />
                   </div>
+                  
+                  <InputField
+                    id="user_phone"
+                    label={t.form.fields.phone.label}
+                    type="tel"
+                    placeholder={t.form.fields.phone.placeholder || "+1 (555) 000-0000"}
+                    error={formErrors.phone}
+                  />
+
                   <div>
                     <label className="block text-sm font-medium text-primary-100 mb-2" htmlFor="message">
-                        {t.form.fields.message.label}
+                      {t.form.fields.message.label} <span className="text-accent-500">*</span>
                     </label>
                     <textarea
                       id="message"
@@ -247,9 +278,7 @@ const ContactPage = () => {
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="bg-white rounded-lg w-full max-w-2xl relative"
-              onClick={(e) => e.stopPropagation()}>
-              {/* Close button */}
+              className="bg-white rounded-lg w-full max-w-2xl relative">
               <button
                 onClick={() => setIsCalendlyOpen(false)}
                 className="absolute right-2 top-2 z-50 p-2 rounded-full hover:bg-gray-100 transition-colors duration-200"
@@ -257,7 +286,6 @@ const ContactPage = () => {
                 <XCircle className="w-6 h-6 text-gray-600" />
               </button>
               
-              {/* Add padding to account for the close button */}
               <div className="pt-12">
                 <InlineWidget 
                   url="https://calendly.com/michelepavone-info/30min"
