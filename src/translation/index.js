@@ -9,8 +9,8 @@ export const translations = {
       },
       hero: {
         badge: 'AI-Powered HR Technology',
-        titleLine1: 'Hire Right',
-        titleLine2: 'Grow Faster',
+        titleLine1: 'Where Executives',
+        titleLine2: 'Land',
         description: 'Revolutionize your talent acquisition with our adaptive AI process that evolves with your organization needs.',
         cta: 'Book a Demo',
         trust: 'Trusted by 500+ managers & executives',
@@ -427,8 +427,8 @@ export const translations = {
       },
       hero: {
         badge: 'Tecnologia HR con AI',
-        titleLine1: 'Hire Right',
-        titleLine2: 'Grow Faster',
+        titleLine1: 'Where Executives',
+        titleLine2: 'Land',
         description: 'Rivoluziona il modo di assumere, trovando gli executives giusti per far crescere la tua impresa.',
         cta: 'Prenota una Demo',
         trust: 'Suggerito da 500+ managers & executives',

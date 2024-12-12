@@ -9,7 +9,7 @@ const Footer = () => (
         <div className="space-y-2 mb-4 md:mb-0 text-center md:text-left w-full md:w-auto">
           <h3 className="text-xl font-bold">Mastro</h3>
           <p className="text-primary-100/80 text-sm leading-relaxed">
-            Hire Right. Grow Faster
+            Where. Executives. Land
           </p>
         </div>
         <div className="flex space-x-4">
