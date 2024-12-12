@@ -1,4 +1,3 @@
-// src/pages/NotFound.jsx
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -89,29 +88,18 @@ const NotFound = () => {
 
           <motion.div 
             className="flex flex-wrap gap-4 justify-center"
-            variants={contentVariants}
-          >
+            variants={contentVariants}>
             <Link
               to="/"
-              className="group relative overflow-hidden px-6 py-3 rounded-full 
-                       bg-primary-50 text-teal-700 font-medium 
-                       hover:shadow-xl hover:shadow-accent-500/20 
-                       transition-all duration-500 flex items-center gap-2"
-            >
+              className="group relative overflow-hidden px-6 py-3 rounded-full bg-primary-50 text-teal-700 font-medium hover:shadow-xl hover:shadow-accent-500/20 transition-all duration-500 flex items-center gap-2">
               <Home className="w-4 h-4" />
               <span className="relative z-10">Back to Home</span>
-              <div className="absolute inset-0 bg-gradient-to-r from-accent-500/90 to-accent-400/90 
-                            opacity-0 group-hover:opacity-10 transition-opacity duration-300" />
+              <div className="absolute inset-0 bg-gradient-to-r from-accent-500/90 to-accent-400/90 opacity-0 group-hover:opacity-10 transition-opacity duration-300" />
             </Link>
 
             <button
               onClick={() => window.history.back()}
-              className="group px-6 py-3 rounded-full 
-                       bg-primary-50/5 backdrop-blur-xl border border-primary-50/10 
-                       text-primary-50 font-medium 
-                       hover:bg-primary-50/10 transition-all duration-300 
-                       flex items-center gap-2"
-            >
+              className="group px-6 py-3 rounded-full bg-primary-50/5 backdrop-blur-xl border border-primary-50/10 text-primary-50 font-medium hover:bg-primary-50/10 transition-all duration-300 flex items-center gap-2">
               <ArrowLeft className="w-4 h-4" />
               <span>Go Back</span>
             </button>

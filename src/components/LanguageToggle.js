@@ -9,9 +9,7 @@ const LanguageToggle = () => {
   return (
     <button
       onClick={toggleLanguage}
-      className="flex items-center gap-2 px-3 py-2 rounded-full
-                text-primary-50 hover:bg-primary-50/10 
-                transition-all duration-300"
+      className="flex items-center gap-2 px-3 py-2 rounded-full text-primary-50 hover:bg-primary-50/10 transition-all duration-300"
       aria-label="Toggle language">
       <Globe className="w-5 h-5" />
       <span className="text-sm font-medium">

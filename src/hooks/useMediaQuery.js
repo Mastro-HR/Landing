@@ -1,4 +1,3 @@
-// useMediaQuery.js
 import { useState, useEffect, useCallback, useMemo } from 'react';
 
 export const breakpoints = {

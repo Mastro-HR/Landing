@@ -271,7 +271,7 @@ export const translations = {
           },
           submitButton: "Send Message",
           successMessage: "Thank you for reaching out! Your message has been sent successfully. We'll get back to you shortly.",
-          errorMessage: "We apologize, but there was an error sending your message. Please try again or contact us directly at ciao@mastrohr.com."
+          errorMessage: "We apologize, but there was an error sending your message. Please try again or contact us directly at ciao@mastrohr.com"
         },
         info: {
           title: "Contact Information",
@@ -567,7 +567,7 @@ export const translations = {
           },
           submitButton: "Invia Messaggio",
           successMessage: "Grazie per averci contattato! Il tuo messaggio è stato inviato con successo. Ti risponderemo al più presto.",
-          errorMessage: "Ci scusiamo, ma si è verificato un errore nell'invio del messaggio. Riprova o contattaci direttamente a ciao@mastrohr.com."
+          errorMessage: "Ci scusiamo, ma si è verificato un errore nell'invio del messaggio. Riprova o contattaci direttamente a ciao@mastrohr.com"
         },
         info: {
           title: "Informazioni di Contatto",

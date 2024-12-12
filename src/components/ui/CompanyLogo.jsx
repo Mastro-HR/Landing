@@ -1,4 +1,3 @@
-// src/components/ui/CompanyLogo.jsx
 import React from 'react';
 
 const CompanyLogo = ({ src, alt, className = '' }) => {

@@ -37,8 +37,7 @@ const TeamMember = ({ member, translations }) => (
     className="bg-primary-50/5 backdrop-blur-xl border border-primary-50/10 rounded-lg overflow-hidden shadow-lg"
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.5 }}
-  >
+    transition={{ duration: 0.5 }}>
     <img 
       src={member.image} 
       alt={`${translations.name} - ${translations.role}`} 
@@ -129,8 +128,7 @@ const TeamPage = () => {
 
       <motion.div 
         className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16"
-        style={{ y: parallaxY }}
-      >
+        style={{ y: parallaxY }}>
         <motion.div
           className="space-y-8 sm:space-y-10 mb-16"
           initial="hidden"
@@ -139,29 +137,23 @@ const TeamPage = () => {
             visible: {
               transition: { staggerChildren: 0.15 }
             }
-          }}
-        >
+          }}>
           <motion.div
-            className="inline-flex items-center px-4 py-2 rounded-full
-            bg-primary-50/5 backdrop-blur-xl border border-primary-50/10
-            shadow-lg shadow-accent-500/20"
-            variants={titleVariants}
-          >
+            className="inline-flex items-center px-4 py-2 rounded-full bg-primary-50/5 backdrop-blur-xl border border-primary-50/10 shadow-lg shadow-accent-500/20"
+            variants={titleVariants}>
             <Users className="w-4 h-4 mr-2 text-accent-500 animate-pulse" />
             <span className="text-primary-50 font-medium">{t.badge}</span>
           </motion.div>
 
           <motion.h1 
             className="text-4xl sm:text-5xl lg:text-6xl font-bold text-primary-50 leading-tight tracking-tight"
-            variants={titleVariants}
-          >
+            variants={titleVariants}>
             {t.title}
           </motion.h1>
           
           <motion.p
             className="text-lg sm:text-xl text-primary-100/80 max-w-2xl leading-relaxed"
-            variants={titleVariants}
-          >
+            variants={titleVariants}>
             {t.subtitle}
           </motion.p>
         </motion.div>

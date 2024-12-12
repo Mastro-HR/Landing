@@ -1,4 +1,3 @@
-// src/components/shared/UIComponents.jsx
 import React, { useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
@@ -73,18 +72,14 @@ BackgroundEffects.displayName = 'BackgroundEffects';
 export const CTAButton = React.memo(({ text, href, className = "" }) => (
   <Link
     to={href}
-    className={`group relative overflow-hidden px-5 sm:px-6 py-2.5 sm:py-3 rounded-full
-              font-medium text-base sm:text-lg hover:shadow-xl hover:shadow-accent-500/20
-              transition-all duration-300 flex items-center gap-2 ${className}`}
-  >
+    className={`group relative overflow-hidden px-5 sm:px-6 py-2.5 sm:py-3 rounded-full font-medium text-base sm:text-lg hover:shadow-xl hover:shadow-accent-500/20 transition-all duration-300 flex items-center gap-2 ${className}`}>
     <span className="relative z-10">{text}</span>
     <ChevronRight 
       className="w-4 h-4 group-hover:translate-x-1 transition-transform" 
       aria-hidden="true"
     />
     <div 
-      className="absolute inset-0 bg-gradient-to-r from-accent-500/90 to-accent-400/90
-                opacity-0 group-hover:opacity-10 transition-opacity duration-300"
+      className="absolute inset-0 bg-gradient-to-r from-accent-500/90 to-accent-400/90 opacity-0 group-hover:opacity-10 transition-opacity duration-300"
       aria-hidden="true"
     />
   </Link>

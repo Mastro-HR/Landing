@@ -24,7 +24,6 @@ const ContactPage = () => {
         user_name: formRef.current.user_name.value,
         user_email: formRef.current.user_email.value,
         message: formRef.current.message.value,
-        // Additional parameters for email formatting
         company_name: 'Mastro HR',
         recipient_name: 'Mastro',
         reply_to: formRef.current.user_email.value

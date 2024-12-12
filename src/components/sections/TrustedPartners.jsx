@@ -44,8 +44,7 @@ const PartnerLogo = ({ src, alt }) => {
     <motion.div
       className="group relative flex items-center justify-center min-w-[120px] xs:min-w-[140px] sm:min-w-[180px] lg:min-w-[200px]"
       whileHover={{ scale: 1.01 }}
-      transition={{ duration: 0.2 }}
-    >
+      transition={{ duration: 0.2 }}>
       <div className="relative overflow-hidden rounded-lg bg-white p-2 xs:p-3 sm:p-6 shadow-sm transition-all duration-300 w-full">
         <div className="relative z-10 flex items-center justify-center">
           {!imageError ? (
@@ -85,8 +84,7 @@ const TrustedPartners = () => {
           className="text-center mb-6 xs:mb-8 sm:mb-10"
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
+          viewport={{ once: true }}>
           <h2 className="text-2xl xs:text-3xl sm:text-4xl font-semibold text-gray-900">
             {t.title}
           </h2>
@@ -107,8 +105,7 @@ const TrustedPartners = () => {
                 {[...Array(2)].map((_, setIndex) => (
                   <div
                     key={setIndex}
-                    className="flex items-center gap-3 xs:gap-4 sm:gap-6 md:gap-8"
-                  >
+                    className="flex items-center gap-3 xs:gap-4 sm:gap-6 md:gap-8">
                     {partnerOrganizations.map((partner, index) => (
                       <PartnerLogo
                         key={`set${setIndex}-${index}`}

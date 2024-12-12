@@ -37,8 +37,7 @@ const LanguageSelector = ({ isMobile = false }) => {
           onClick={() => setIsOpen(!isOpen)}
           className="flex items-center space-x-2 p-3 w-full rounded-full bg-primary-800/40"
           aria-expanded={isOpen}
-          aria-haspopup="true"
-        >
+          aria-haspopup="true">
           <Globe className="w-6 h-6 text-primary-50" />
           <span className="text-primary-50">Select Language</span>
         </button>
@@ -50,14 +49,12 @@ const LanguageSelector = ({ isMobile = false }) => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.2 }}
-              className="absolute right-0 mt-2 w-full rounded-xl bg-primary-800/90 backdrop-blur-sm border border-primary-50/10 shadow-lg overflow-hidden"
-            >
+              className="absolute right-0 mt-2 w-full rounded-xl bg-primary-800/90 backdrop-blur-sm border border-primary-50/10 shadow-lg overflow-hidden">
               {languages.map((lang) => (
                 <button
                   key={lang.code}
                   onClick={() => handleLanguageChange(lang.code)}
-                  className="w-full flex items-center justify-between px-4 py-3 text-primary-50 hover:bg-primary-700/50"
-                >
+                  className="w-full flex items-center justify-between px-4 py-3 text-primary-50 hover:bg-primary-700/50">
                   <div className="flex items-center space-x-3">
                     <span className="text-xl">{lang.flag}</span>
                     <span className="text-lg">{lang.name}</span>
@@ -80,8 +77,7 @@ const LanguageSelector = ({ isMobile = false }) => {
         onClick={() => setIsOpen(!isOpen)}
         className="flex items-center space-x-1 p-2 rounded-full hover:bg-primary-50/10 transition-colors duration-200"
         aria-expanded={isOpen}
-        aria-haspopup="true"
-      >
+        aria-haspopup="true">
         <Globe className="w-5 h-5 text-primary-50" />
       </button>
 
@@ -92,14 +88,12 @@ const LanguageSelector = ({ isMobile = false }) => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
-            className="absolute right-0 mt-2 w-48 rounded-xl bg-primary-800/90 backdrop-blur-sm border border-primary-50/10 shadow-lg overflow-hidden"
-          >
+            className="absolute right-0 mt-2 w-48 rounded-xl bg-primary-800/90 backdrop-blur-sm border border-primary-50/10 shadow-lg overflow-hidden">
             {languages.map((lang) => (
               <button
                 key={lang.code}
                 onClick={() => handleLanguageChange(lang.code)}
-                className="w-full flex items-center justify-between px-4 py-3 text-primary-50 hover:bg-primary-700/50"
-              >
+                className="w-full flex items-center justify-between px-4 py-3 text-primary-50 hover:bg-primary-700/50">
                 <div className="flex items-center space-x-3">
                   <span className="text-xl">{lang.flag}</span>
                   <span>{lang.name}</span>

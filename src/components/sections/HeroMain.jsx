@@ -48,7 +48,7 @@ const HeroMain = () => {
 
   return (
     <section className="relative min-h-[100svh] overflow-hidden bg-gradient-to-b from-teal-500 to-teal-700">
-      {/* Background bubbles section - remains unchanged */}
+      {/* Background bubbles section */}
       <div className="absolute inset-0 z-0">
         {bubbles.map(bubble => (
           <motion.div
@@ -84,7 +84,7 @@ const HeroMain = () => {
         className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
         style={{ y: parallaxY }}>
         <div className="min-h-[100svh] flex flex-col justify-center pt-24 pb-16">
-          <div className="w-full lg:w-3/4 xl:w-3/5"> {/* Increased width for better text accommodation */}
+          <div className="w-full lg:w-3/4 xl:w-3/5">
             <motion.div
               className="space-y-8 sm:space-y-10"
               initial="hidden"
@@ -93,20 +93,16 @@ const HeroMain = () => {
                 visible: {
                   transition: { staggerChildren: 0.15 }
                 }
-              }}
-            >
+              }}>
               {/* Badge section with improved padding */}
               <motion.div
-                className="inline-flex items-center px-5 py-2.5 rounded-full
-                         bg-primary-50/5 backdrop-blur-xl border border-primary-50/10
-                         shadow-lg shadow-accent-500/20"
-                variants={titleVariants}
-              >
+                className="inline-flex items-center px-5 py-2.5 rounded-full bg-primary-50/5 backdrop-blur-xl border border-primary-50/10 shadow-lg shadow-accent-500/20"
+                variants={titleVariants}>
                 <span className="w-2 h-2 rounded-full bg-accent-500 mr-3 animate-pulse" />
                 <span className="text-primary-50 font-medium text-base sm:text-lg">{t.badge}</span>
               </motion.div>
 
-              {/* Title and description section with improved spacing */}
+              {/* Title and description section */}
               <div className="space-y-8">
                 <motion.h1 className="space-y-4">
                   <motion.span
@@ -134,16 +130,11 @@ const HeroMain = () => {
                 variants={titleVariants}>
                 <Link
                   to="/contact-sales"
-                  className="group relative overflow-hidden px-6 py-3.5 rounded-full 
-                           bg-primary-50 text-teal-700 font-medium text-lg 
-                           hover:shadow-xl hover:shadow-accent-500/20 
-                           transition-all duration-500 flex items-center gap-2
-                           w-fit">
+                  className="group relative overflow-hidden px-6 py-3.5 rounded-full bg-primary-50 text-teal-700 font-medium text-lg hover:shadow-xl hover:shadow-accent-500/20 transition-all duration-500 flex items-center gap-2 w-fit">
                   <span className="relative z-10 whitespace-nowrap">{t.cta}</span>
                   <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform flex-shrink-0" />
                   <div
-                    className="absolute inset-0 bg-gradient-to-r from-accent-500/90 to-accent-400/90 
-                             opacity-0 group-hover:opacity-10 transition-opacity duration-300"
+                    className="absolute inset-0 bg-gradient-to-r from-accent-500/90 to-accent-400/90 opacity-0 group-hover:opacity-10 transition-opacity duration-300"
                   />
                 </Link>
 
@@ -155,9 +146,7 @@ const HeroMain = () => {
                         key={profile.id}
                         className="relative w-10 h-10"
                         whileHover={{ scale: 1.1, zIndex: 10 }}>
-                        <div className="absolute inset-0 rounded-full 
-                                    bg-gradient-to-r from-primary-50/5 to-primary-50/5 
-                                    backdrop-blur-md border border-primary-50/20" />
+                        <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary-50/5 to-primary-50/5 backdrop-blur-md border border-primary-50/20" />
                         <img
                           src={profile.image}
                           alt={`${t.altText.profile} ${profile.id}`}

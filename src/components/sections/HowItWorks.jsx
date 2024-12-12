@@ -25,8 +25,7 @@ const ProcessStep = ({ icon: Icon, title, description, delay = 0 }) => (
       visible: { opacity: 1, y: 0 }
     }}
     transition={{ duration: 0.9, delay, ease: [0.165, 0.84, 0.44, 1] }}
-    className="relative bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-6 flex flex-col items-center text-center shadow-lg"
-  >
+    className="relative bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-6 flex flex-col items-center text-center shadow-lg">
     <div className="absolute -top-4 rounded-full p-3 bg-accent-500/10 backdrop-blur-xl border border-accent-500/20">
       <Icon className="w-6 h-6 text-accent-500" />
     </div>
@@ -40,23 +39,17 @@ const TechnologyCard = ({ icon: Icon, title, description, tags, details, isExpan
 
   return (
     <motion.div
-      className={`group bg-white/90 backdrop-blur-md rounded-2xl p-6 sm:p-8 
-                 shadow-lg hover:shadow-xl border border-primary-100 
-                 hover:border-primary-200 relative overflow-hidden
-                 transition-all duration-500 ${isExpanded ? 'lg:col-span-2 row-span-2' : ''}`}
+      className={`group bg-white/90 backdrop-blur-md rounded-2xl p-6 sm:p-8 shadow-lg hover:shadow-xl border border-primary-100 hover:border-primary-200 relative overflow-hidden transition-all duration-500 ${isExpanded ? 'lg:col-span-2 row-span-2' : ''}`}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: index * 0.15 }}
       whileHover={{ y: -4 }}
-      onClick={() => !isMobile && onToggle()}
-    >
+      onClick={() => !isMobile && onToggle()}>
       <div className="relative z-10 h-full flex flex-col">
         <div className="flex items-start justify-between mb-6">
           <motion.div 
-            className="w-14 h-14 rounded-xl bg-gradient-to-br from-accent-500/10 to-accent-400/10 
-                      flex items-center justify-center text-accent-500"
-            whileHover={{ scale: 1.05 }}
-          >
+            className="w-14 h-14 rounded-xl bg-gradient-to-br from-accent-500/10 to-accent-400/10 flex items-center justify-center text-accent-500"
+            whileHover={{ scale: 1.05 }}>
             <Icon className="w-7 h-7" />
           </motion.div>
           {!isMobile && (
@@ -67,8 +60,7 @@ const TechnologyCard = ({ icon: Icon, title, description, tags, details, isExpan
               }}
               className="p-2 rounded-full hover:bg-primary-50 transition-colors"
               whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-            >
+              whileTap={{ scale: 0.95 }}>
               {isExpanded ? (
                 <Minus className="w-5 h-5 text-primary-400" />
               ) : (
@@ -92,8 +84,7 @@ const TechnologyCard = ({ icon: Icon, title, description, tags, details, isExpan
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              className="mb-6"
-            >
+              className="mb-6">
               <ul className="space-y-3">
                 {details.map((detail, idx) => (
                   <motion.li
@@ -101,8 +92,7 @@ const TechnologyCard = ({ icon: Icon, title, description, tags, details, isExpan
                     initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: idx * 0.1 }}
-                    className="flex items-center text-primary-600"
-                  >
+                    className="flex items-center text-primary-600">
                     <ArrowRight className="w-4 h-4 mr-2 text-accent-500" />
                     {detail}
                   </motion.li>
@@ -120,10 +110,7 @@ const TechnologyCard = ({ icon: Icon, title, description, tags, details, isExpan
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: idx * 0.1 }}
-                className="bg-primary-50/80 text-primary-600 rounded-full px-3 py-1 
-                         text-sm font-medium border border-primary-100
-                         hover:bg-primary-100 transition-colors"
-              >
+                className="bg-primary-50/80 text-primary-600 rounded-full px-3 py-1 text-sm font-medium border border-primary-100 hover:bg-primary-100 transition-colors">
                 {tag}
               </motion.span>
             ))}
@@ -216,30 +203,25 @@ const HowItWorks = () => {
       <motion.div
         ref={ref}
         className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24"
-        style={{ y: parallaxY }}
-      >
+        style={{ y: parallaxY }}>
         {/* Header Section */}
         <motion.div
           className="text-center mb-20"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.6 }}
-        >
+          transition={{ duration: 0.6 }}>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="inline-flex items-center px-4 py-2 rounded-full 
-                      bg-accent-500/10 text-accent-600 mb-6"
-          >
+            className="inline-flex items-center px-4 py-2 rounded-full bg-accent-500/10 text-accent-600 mb-6">
             <Brain className="w-4 h-4 mr-2" />
             <span className="text-sm font-medium">{t.badge}</span>
           </motion.div>
 
           <h2 className="text-4xl font-bold text-primary-900 mb-6">
             <span className="block">{t.title.line1}</span>
-            <span className="block bg-gradient-to-r from-accent-500 to-accent-400 
-                           text-transparent bg-clip-text">
+            <span className="block bg-gradient-to-r from-accent-500 to-accent-400 text-transparent bg-clip-text">
               {t.title.line2}
             </span>
           </h2>
@@ -280,19 +262,13 @@ const HowItWorks = () => {
           className="text-center"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
+          transition={{ duration: 0.6 }}>
           <Link
             to="/demo"
-            className="group relative overflow-hidden px-8 py-4 rounded-full
-                     bg-gradient-to-r from-accent-500 to-accent-400 text-white 
-                     font-medium text-lg inline-flex items-center gap-2
-                     hover:shadow-xl hover:shadow-accent-500/20 transition-all"
-          >
+            className="group relative overflow-hidden px-8 py-4 rounded-full bg-gradient-to-r from-accent-500 to-accent-400 text-white font-medium text-lg inline-flex items-center gap-2 hover:shadow-xl hover:shadow-accent-500/20 transition-all">
             <span className="relative z-10">{tPillars.cta}</span>
             <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            <div className="absolute inset-0 bg-gradient-to-r from-accent-600 to-accent-500
-                         opacity-0 group-hover:opacity-100 transition-opacity" />
+            <div className="absolute inset-0 bg-gradient-to-r from-accent-600 to-accent-500 opacity-0 group-hover:opacity-100 transition-opacity" />
           </Link>
         </motion.div>
       </motion.div>

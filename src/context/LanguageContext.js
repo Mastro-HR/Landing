@@ -1,4 +1,3 @@
-// Optional: Enhanced LanguageContext if you want direct language selection
 import React, { createContext, useContext, useState } from 'react';
 
 const LanguageContext = createContext();

@@ -9,16 +9,11 @@ const PowerStat = ({ icon: Icon, value, label, delay }) => (
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.9, delay, ease: [0.165, 0.84, 0.44, 1] }}
-    className="relative bg-primary-50/5 backdrop-blur-xl border border-primary-50/10 
-               rounded-2xl p-6 flex flex-col items-center text-center"
-  >
-    <div className="absolute -top-4 rounded-full p-3 bg-accent-500/10 backdrop-blur-xl 
-                    border border-accent-500/20">
+    className="relative bg-primary-50/5 backdrop-blur-xl border border-primary-50/10 rounded-2xl p-6 flex flex-col items-center text-center">
+    <div className="absolute -top-4 rounded-full p-3 bg-accent-500/10 backdrop-blur-xl border border-accent-500/20">
       <Icon className="w-6 h-6 text-accent-500" />
     </div>
-    <div className="mt-6 text-3xl sm:text-4xl lg:text-5xl font-bold mb-3 
-                    bg-gradient-to-r from-accent-500 to-accent-400 
-                    text-transparent bg-clip-text">
+    <div className="mt-6 text-3xl sm:text-4xl lg:text-5xl font-bold mb-3 bg-gradient-to-r from-accent-500 to-accent-400 text-transparent bg-clip-text">
       {value}
     </div>
     <p className="text-primary-100/80 text-sm sm:text-base max-w-[200px] leading-relaxed">
@@ -102,22 +97,19 @@ const PowerSection = () => {
 
       <motion.div
         className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
-        style={{ y: parallaxY }}
-      >
+        style={{ y: parallaxY }}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease: [0.165, 0.84, 0.44, 1] }}
-          className="text-center mb-16"
-        >
+          className="text-center mb-16">
 
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 text-primary-50">
             {t.title.split('Mastro HR').map((part, i, arr) => (
               <React.Fragment key={i}>
                 {part}
                 {i < arr.length - 1 && (
-                  <span className="bg-gradient-to-r from-accent-500 to-accent-400 
-                                 text-transparent bg-clip-text">
+                  <span className="bg-gradient-to-r from-accent-500 to-accent-400 text-transparent bg-clip-text">
                     Mastro HR
                   </span>
                 )}
@@ -145,8 +137,7 @@ const PowerSection = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.4 }}
-          className="mt-16 text-center"
-        >
+          className="mt-16 text-center">
           <p className="text-primary-100/80 text-base sm:text-lg">
             {t.footerText}
           </p>
