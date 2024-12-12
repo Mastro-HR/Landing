@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin'); // Add this line
 
 module.exports = {
   entry: './src/index.js',
@@ -24,11 +25,25 @@ module.exports = {
         test: /\.css$/,
         use: ['style-loader', 'css-loader', 'postcss-loader'],
       },
+      // Add this rule for image files
+      {
+        test: /\.(png|jpg|jpeg|gif|svg)$/i,
+        type: 'asset/resource',
+      }
     ],
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: './public/index.html',
+    }),
+    // Add this plugin to copy static files
+    new CopyPlugin({
+      patterns: [
+        {
+          from: "public/images",
+          to: "images"
+        },
+      ],
     }),
   ],
   resolve: {
