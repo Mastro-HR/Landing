@@ -1,11 +1,15 @@
 {
-  "rewrites": [
+    "rewrites": [
       {
-          "source": "/(.*)",
-          "destination": "/index.html"
+        "source": "/images/:path*",
+        "destination": "/images/:path*"
+      },
+      {
+        "source": "/(.*)",
+        "destination": "/index.html"
       }
-  ],
-  "github": {
+    ],
+    "github": {
       "silent": true
+    }
   }
-}

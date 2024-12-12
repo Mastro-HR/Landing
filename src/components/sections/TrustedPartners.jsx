@@ -10,7 +10,7 @@ const partnerOrganizations = [
   { src: '/images/CMOS.png', alt: 'CMOS' },
   { src: '/images/MB.png', alt: 'MB' },
   { src: '/images/TG.png', alt: 'Traction' },
-  { src: '/images/AA.png', alt: 'African Assets' }
+  { src: '/images/AA.png', alt: 'Aziende Agricole' }
 ];
 
 const usePartnerDisplay = () => {
