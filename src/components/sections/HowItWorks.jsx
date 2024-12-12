@@ -264,7 +264,7 @@ const HowItWorks = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}>
           <Link
-            to="/demo"
+            to="/contact-sales"
             className="group relative overflow-hidden px-8 py-4 rounded-full bg-gradient-to-r from-accent-500 to-accent-400 text-white font-medium text-lg inline-flex items-center gap-2 hover:shadow-xl hover:shadow-accent-500/20 transition-all">
             <span className="relative z-10">{tPillars.cta}</span>
             <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />

@@ -30,10 +30,10 @@ const ContactPage = () => {
       };
   
       const result = await emailjs.send(
-        'service_nhzv0si',
-        'template_lefmfgu',
+        'service_125thg3', // ServiceID
+        'template_cxqhkvt', // TemplateID
         formData,
-        'MH3PZvwl-MF4ZWLVw'
+        'pCtFfq9ELn8aEBTtz' // Public Key
       );
   
       if (result.text === 'OK') {
@@ -237,15 +237,36 @@ const ContactPage = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center"
-            onClick={() => setIsCalendlyOpen(false)}>
+            className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 overflow-y-auto"
+            onClick={(e) => {
+              if (e.target === e.currentTarget) {
+                setIsCalendlyOpen(false);
+              }
+            }}>
             <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="bg-white rounded-lg p-4 w-full max-w-2xl"
+              className="bg-white rounded-lg w-full max-w-2xl relative"
               onClick={(e) => e.stopPropagation()}>
-              <InlineWidget url="https://calendly.com/michelepavone-info/30min" />
+              {/* Close button */}
+              <button
+                onClick={() => setIsCalendlyOpen(false)}
+                className="absolute right-2 top-2 z-50 p-2 rounded-full hover:bg-gray-100 transition-colors duration-200"
+                aria-label="Close calendar">
+                <XCircle className="w-6 h-6 text-gray-600" />
+              </button>
+              
+              {/* Add padding to account for the close button */}
+              <div className="pt-12">
+                <InlineWidget 
+                  url="https://calendly.com/michelepavone-info/30min"
+                  styles={{
+                    height: '600px',
+                    width: '100%'
+                  }}
+                />
+              </div>
             </motion.div>
           </motion.div>
         )}

@@ -45,7 +45,7 @@ const PartnerLogo = ({ src, alt }) => {
       className="group relative flex items-center justify-center min-w-[120px] xs:min-w-[140px] sm:min-w-[180px] lg:min-w-[200px]"
       whileHover={{ scale: 1.01 }}
       transition={{ duration: 0.2 }}>
-      <div className="relative overflow-hidden rounded-lg bg-white p-2 xs:p-3 sm:p-6 shadow-sm transition-all duration-300 w-full">
+      <div className="relative overflow-hidden bg-transparent p-2 xs:p-3 sm:p-6 transition-all duration-300 w-full">
         <div className="relative z-10 flex items-center justify-center">
           {!imageError ? (
             <motion.img
@@ -100,8 +100,7 @@ const TrustedPartners = () => {
                 className="flex animate-scroll gap-x-3 xs:gap-x-4 sm:gap-x-6 md:gap-x-8"
                 style={{ 
                   animationPlayState: shouldReduceMotion ? 'paused' : 'running' 
-                }}
-              >
+                }}>
                 {[...Array(2)].map((_, setIndex) => (
                   <div
                     key={setIndex}

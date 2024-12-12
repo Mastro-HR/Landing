@@ -1,65 +1,71 @@
 import React from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { FaLinkedin, FaTwitter } from 'react-icons/fa';
-import { Users } from 'lucide-react';
+import { FaLinkedin } from 'react-icons/fa';
+import { Users, ArrowUpRight } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { translations } from '../translation';
 
 const teamMembers = [
   {
-    id: 'elena',
-    image: '/images/elena-rodriguez.jpg',
-    linkedin: 'https://www.linkedin.com/in/elena-rodriguez',
-    twitter: 'https://twitter.com/elenarod'
+    id: 'michele',
+    image: '/images/michele.jpg',
+    linkedin: 'https://www.linkedin.com/in/michelepavone/',
   },
   {
-    id: 'marcus',
+    id: 'marta',
     image: '/images/marcus-chen.jpg',
-    linkedin: 'https://www.linkedin.com/in/marcus-chen',
-    twitter: 'https://twitter.com/marcuschen'
+    linkedin: 'https://www.linkedin.com/in/michelepavone/',
   },
   {
-    id: 'aisha',
-    image: '/images/aisha-patel.jpg',
-    linkedin: 'https://www.linkedin.com/in/aisha-patel',
-    twitter: 'https://twitter.com/aishapatel'
-  },
-  {
-    id: 'david',
-    image: '/images/david-muller.jpg',
-    linkedin: 'https://www.linkedin.com/in/david-muller',
-    twitter: 'https://twitter.com/davidmuller'
+    id: 'gian',
+    image: '/images/gian.jpg',
+    linkedin: 'https://www.linkedin.com/in/gianmarco-scalabrin/',
   }
 ];
 
 const TeamMember = ({ member, translations }) => (
   <motion.div 
-    className="bg-primary-50/5 backdrop-blur-xl border border-primary-50/10 rounded-lg overflow-hidden shadow-lg"
+    className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden"
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
     transition={{ duration: 0.5 }}>
-    <img 
-      src={member.image} 
-      alt={`${translations.name} - ${translations.role}`} 
-      className="w-full h-64 object-cover" 
-    />
-    <div className="p-6">
-      <h3 className="text-xl font-semibold mb-2 text-primary-50">{translations.name}</h3>
-      <p className="text-accent-400 mb-4">{translations.role}</p>
-      <p className="text-primary-100/80 mb-4">{translations.bio}</p>
-      <div className="flex space-x-4">
-        <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="text-primary-100 hover:text-accent-400 transition-colors">
-          <FaLinkedin size={24} />
-        </a>
-        <a href={member.twitter} target="_blank" rel="noopener noreferrer" className="text-primary-100 hover:text-accent-400 transition-colors">
-          <FaTwitter size={24} />
+    <div className="aspect-[3/4] relative">
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-teal-900/90" />
+      <img 
+        src={member.image} 
+        alt={`${translations.name} - ${translations.role}`} 
+        className="w-full h-full object-cover" 
+      />
+      <div className="absolute bottom-6 left-6 right-6">
+        <p className="text-accent-400 font-medium mb-1">{translations.role}</p>
+        <h3 className="text-2xl font-bold text-white">{translations.name}</h3>
+      </div>
+    </div>
+    <div className="p-6 space-y-6">
+      <p className="text-primary-100/80 leading-relaxed">
+        {translations.bio}
+      </p>
+      <div className="flex items-center justify-between">
+        <span className="text-primary-100/60 text-sm">
+          {translations.role}
+        </span>
+        <a 
+          href={member.linkedin} 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className="group flex items-center gap-2 px-4 py-2 bg-accent-500/10 hover:bg-accent-500/20 
+          rounded-full text-primary-50 transition-all duration-300">
+          <FaLinkedin className="w-4 h-4" />
+          <span className="text-sm font-medium">Connect</span>
+          <ArrowUpRight className="w-4 h-4 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all" />
         </a>
       </div>
     </div>
   </motion.div>
 );
 
-const TeamPage = () => {
+const AboutUs = () => {
   const { language } = useLanguage();
   const t = translations[language].aboutUs;
   const { scrollY } = useScroll();
@@ -82,20 +88,8 @@ const TeamPage = () => {
     ][i % 7]
   }));
 
-  const titleVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.8,
-        ease: [0.165, 0.84, 0.44, 1]
-      }
-    }
-  };
-
   return (
-    <section className="relative min-h-[100svh] overflow-hidden bg-gradient-to-b from-teal-500 to-teal-700">
+    <section className="relative min-h-screen bg-gradient-to-b from-teal-600 to-teal-800 pb-24">
       <div className="absolute inset-0 z-0">
         {bubbles.map(bubble => (
           <motion.div
@@ -121,44 +115,29 @@ const TeamPage = () => {
             }}
           />
         ))}
-
         <div className="absolute inset-0 bg-grid opacity-20" />
-        <div className="absolute inset-0 bg-flow opacity-30" />
       </div>
 
       <motion.div 
-        className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16"
+        className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 lg:pt-32"
         style={{ y: parallaxY }}>
-        <motion.div
-          className="space-y-8 sm:space-y-10 mb-16"
-          initial="hidden"
-          animate="visible"
-          variants={{
-            visible: {
-              transition: { staggerChildren: 0.15 }
-            }
-          }}>
-          <motion.div
-            className="inline-flex items-center px-4 py-2 rounded-full bg-primary-50/5 backdrop-blur-xl border border-primary-50/10 shadow-lg shadow-accent-500/20"
-            variants={titleVariants}>
-            <Users className="w-4 h-4 mr-2 text-accent-500 animate-pulse" />
+        {/* Header Section */}
+        <div className="max-w-3xl mb-20">
+          <div className="inline-flex items-center px-4 py-2 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 mb-6">
+            <Users className="w-4 h-4 mr-2 text-accent-500" />
             <span className="text-primary-50 font-medium">{t.badge}</span>
-          </motion.div>
-
-          <motion.h1 
-            className="text-4xl sm:text-5xl lg:text-6xl font-bold text-primary-50 leading-tight tracking-tight"
-            variants={titleVariants}>
+          </div>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-primary-50 leading-tight 
+            tracking-tight mb-8">
             {t.title}
-          </motion.h1>
-          
-          <motion.p
-            className="text-lg sm:text-xl text-primary-100/80 max-w-2xl leading-relaxed"
-            variants={titleVariants}>
+          </h1>
+          <p className="text-xl text-primary-100/80 leading-relaxed">
             {t.subtitle}
-          </motion.p>
-        </motion.div>
+          </p>
+        </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {/* Team Grid */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {teamMembers.map((member) => (
             <TeamMember 
               key={member.id} 
@@ -172,4 +151,4 @@ const TeamPage = () => {
   );
 };
 
-export default TeamPage;
+export default AboutUs;

@@ -61,15 +61,16 @@ const Header = () => {
             animate={{ scale: isMenuOpen ? 0.95 : 1 }}>
             <Link
               to="/"
-              className="text-2xl font-bold text-primary-50 hover:text-accent-500 transition-colors duration-300"
-              aria-label="MASTRO Home">
-              MASTRO HR
+              className="text-2xl font-semibold text-primary-50 hover:text-accent-500 transition-colors duration-300"
+              aria-label="Home">
+              MASTRO
             </Link>
           </motion.div>
 
           <div className="hidden md:flex md:items-center md:space-x-8">
             <NavLink to="/about-us">{t.aboutUs}</NavLink>
             <NavLink to="/experts-network">{t.ourNetwork}</NavLink>
+            <NavLink to="/careers">{t.careers}</NavLink>
             <NavLink to="/contact-sales">{t.contactSales}</NavLink>
             <motion.button
               onClick={() => navigate('/demo')}

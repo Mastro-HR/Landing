@@ -5,6 +5,7 @@ export const translations = {
         contactSales: 'Contact Sales',
         Demo: 'Try Us',
         ourNetwork: "Our Network",
+        careers: 'Careers'
       },
       hero: {
         badge: 'AI-Powered HR Technology',
@@ -126,7 +127,7 @@ export const translations = {
         badge: 'Executive AI Technology',
         title: 'Next-Generation Leadership Assessment',
         subtitle: 'Our advanced AI platform revolutionizes executive recruitment through sophisticated analysis and intelligent decision support.',
-        cta: 'Experience our AI Models',
+        cta: 'Schedule a Demo',
         features: {
           leadership: {
             title: 'Advanced Leadership Assessment',
@@ -162,7 +163,6 @@ export const translations = {
       },
       aiPlatform: {
         title: 'The AI-powered talent experience platform',
-        cta: 'Learn more',
         sections: [
           {
             title: "Hyper-personalize, engage, and convert candidates",
@@ -217,6 +217,23 @@ export const translations = {
             count: '25+',
             description: 'Domain experts across various industries'
           }
+        },
+        profiles: {
+          davide: {
+            name: 'Davide Cervellin',
+            role: 'C-level Executive',
+            bio: 'C-level Executive, author of the successful Office of Cards column, recognized advisor, with an international career in companies like eBay, PayPal and Booking.com.'
+          },
+          massimo: {
+            name: 'Massimo Ernesto Martini',
+            role: 'CFO & General Manager',
+            bio: 'CFO and General Manager with a high-profile international career in companies like IBM, Kelkoo and Yahoo! Italia, where he led strategic and digital transformations.'
+          },
+          marco: {
+            name: 'Marco Ottolini',
+            role: 'CTO',
+            bio: 'Experienced CTO specialized in creating scalable architectures for business growth. Visionary leader with experience in startups and established companies.'
+          }
         }
       },
       aboutUs: {
@@ -224,26 +241,21 @@ export const translations = {
         title: 'The Visionaries Behind Mastro',
         subtitle: 'Our team of experts is dedicated to revolutionizing talent acquisition through innovative AI solutions. Get to know the minds shaping the future of HR technology.',
         team: {
-          elena: {
-            name: 'Elena Rodriguez',
-            role: 'CEO & Co-Founder',
-            bio: 'With 15+ years in tech and HR, Elena leads Mastro vision to revolutionize talent acquisition.'
+          michele: {
+            name: 'Michele Pavone',
+            role: 'Co-Founder',
+            bio: 'With 15+ years in tech and HR, McMickey leads Mastro vision to revolutionize talent acquisition.'
           },
-          marcus: {
-            name: 'Marcus Chen',
-            role: 'CTO & Co-Founder',
+          marta: {
+            name: 'Marta Della Valle',
+            role: 'Co-Founder',
             bio: 'AI expert and former Google engineer, Marcus drives Mastro cutting-edge technology.'
           },
-          aisha: {
-            name: 'Aisha Patel',
-            role: 'Head of Product',
-            bio: 'Aisha brings a decade of product management experience from top Silicon Valley startups.'
+          gian: {
+            name: 'Gianmarco Scalabrin',
+            role: 'Co-Founder',
+            bio: 'AI expert and former Google engineer, Marcus drives Mastro cutting-edge technology.'
           },
-          david: {
-            name: 'David Müller',
-            role: 'Head of AI Research',
-            bio: 'PhD in Machine Learning, David leads Mastro AI innovations and academic partnerships.'
-          }
         },
         altText: {
           teamPhoto: 'Team member photo'
@@ -294,6 +306,111 @@ export const translations = {
           button: "Book a Time"
         }
       },
+      careers: {
+        badge: 'Join Our Team',
+        title: 'Open Positions',
+        subtitle: 'Join our mission to revolutionize talent acquisition through innovative AI solutions.',
+        apply: 'Apply Now',
+        viewPosition: 'View Position',
+        closePosition: 'Close Position',
+        description: 'Description',
+        requirements: 'Requirements',
+        benefits: 'Benefits',
+        positions: {
+          contentCreator: {
+            role: "Content Creator & Social Media Manager",
+            tagline: "Join Us as Our Next Creative Voice!",
+            location: "Milan / Remote",
+            type: "Full-time",
+            description: "We're seeking a dynamic Content Creator & Social Media Manager to shape our brand's voice and digital presence. In this role, you'll craft compelling narratives across various platforms, engage with our community, and drive our digital marketing strategy forward.",
+            requirements: [
+              "Proven track record in content creation and social media management",
+              "Strong storytelling abilities and creative writing skills",
+              "Experience with digital marketing tools and analytics",
+              "Understanding of B2B content marketing",
+              "Excellent communication skills in both Italian and English",
+              "Knowledge of HR tech industry preferred"
+            ],
+            benefits: [
+              "Competitive salary package",
+              "Remote work flexibility",
+              "Professional development opportunities",
+              "Creative autonomy",
+              "Modern work environment",
+              "International exposure"
+            ]
+          },
+          partnershipManager: {
+            role: "Partnership Manager",
+            tagline: "Golden Opportunity - Shape the Future of HR Tech Partnerships",
+            location: "Milan / Remote",
+            type: "Full-time",
+            description: "Join Mastro HR as a Partnership Manager and play a pivotal role in expanding our network. You'll develop and nurture strategic relationships that drive growth and innovation in the HR technology space.",
+            requirements: [
+              "Proven experience in partnership development",
+              "Strong negotiation and relationship-building skills",
+              "Strategic thinking and business acumen",
+              "Experience in the HR tech or SaaS industry",
+              "Excellent communication skills in Italian and English",
+              "Track record of successful partnership outcomes"
+            ],
+            benefits: [
+              "Competitive compensation package",
+              "Performance-based incentives",
+              "Flexible working arrangements",
+              "Professional growth opportunities",
+              "International business exposure",
+              "Innovative work environment"
+            ]
+          },
+          hrSpecialist: {
+            role: "HR Specialist",
+            tagline: "Revolutionary Opportunity - Transform HR with AI",
+            location: "Milan / Remote",
+            type: "Full-time",
+            description: "Be part of the revolution in HR technology. As our HR Specialist, you'll bridge the gap between traditional HR practices and cutting-edge AI solutions, helping shape the future of talent acquisition.",
+            requirements: [
+              "Strong background in HR operations",
+              "Experience with HR technologies and HRIS",
+              "Understanding of modern recruitment processes",
+              "Data-driven approach to HR solutions",
+              "Excellent interpersonal skills",
+              "Knowledge of HR analytics"
+            ],
+            benefits: [
+              "Competitive salary package",
+              "Career advancement opportunities",
+              "Flexible work environment",
+              "Continuous learning programs",
+              "Healthcare benefits",
+              "Work-life balance"
+            ]
+          },
+          salesManager: {
+            role: "Performance & Relations Manager",
+            tagline: "Exceptional Opportunity for Ambitious Sales Professionals",
+            location: "Milan / Remote",
+            type: "Full-time",
+            description: "We're looking for a driven Performance & Relations Manager to join our growing team. This role is perfect for someone who excels in building relationships, understands the HR tech landscape, and is passionate about driving business growth.",
+            requirements: [
+              "Proven track record in B2B sales",
+              "Experience in software or HR technology sales",
+              "Strong negotiation and closing skills",
+              "Strategic approach to client relationships",
+              "Results-oriented mindset",
+              "Excellence in relationship building"
+            ],
+            benefits: [
+              "Competitive base salary plus commission",
+              "Uncapped earnings potential",
+              "Career growth opportunities",
+              "Comprehensive training program",
+              "Work flexibility",
+              "Modern sales tools and resources"
+            ]
+          }
+        }
+      },
     },
     it: {
       nav: {
@@ -301,6 +418,7 @@ export const translations = {
         contactSales: 'Contattaci',
         Demo: 'Provaci',
         ourNetwork: "Il Nostro Network",
+        careers: 'Lavora con Noi',
       },
       hero: {
         badge: 'Tecnologia HR con AI',
@@ -331,11 +449,11 @@ export const translations = {
       experienceOverview: {
         badge: 'La Piattaforma che eleva il tuo Business',
         title: {
-          line1: 'Il Futuro del Recruiting:',
-          line2: 'Semplice, Veloce, Strategico'
+          line1: 'Il Futuro del Recruiting',
+          line2: 'Semplice. Veloce.'
         },
         description: 'Trasforma il tuo processo di selezione con la nostra piattaforma AI avanzata che impara, si adatta e si ottimizza continuamente per fornire risultati eccezionali.',
-        cta: 'Scopri il Futuro del Recruiting',
+        cta: 'Provaci',
         features: {
           workflow: {
             title: 'Orchestrazione Intelligente del Workflow',
@@ -422,7 +540,7 @@ export const translations = {
         badge: 'Tecnologia AI per Executives',
         title: 'La tecnologia che trasforma il recruiting',
         subtitle: 'Grazie alla potenza dell’intelligenza artificiale, MastroHR rivoluziona il processo di selezione, garantendo precisione, velocità e risultati tangibili',
-        cta: 'Prova la nostra AI',
+        cta: 'Prenota una Demo',
         features: {
           leadership: {
             title: 'Analisi avanzate per decisioni migliori',
@@ -458,7 +576,6 @@ export const translations = {
       },
       aiPlatform: {
         title: 'La piattaforma talent experience basata su IA',
-        cta: 'Scopri di più',
         sections: [
           {
             title: "Personalizza, coinvolgi e converti i candidati",
@@ -513,6 +630,23 @@ export const translations = {
             count: '25+',
             description: 'Esperti di dominio in vari settori'
           }
+        },
+        profiles: {
+          davide: {
+            name: 'Davide Cervellin',
+            role: 'C-level Executive',
+            bio: 'C-level Executive, autore di successo della rubrica Office of Cards, advisor riconosciuto, con una carriera internazionale in aziende come eBay, PayPal e Booking.com.'
+          },
+          massimo: {
+            name: 'Massimo Ernesto Martini',
+            role: 'CFO e General Manager',
+            bio: 'CFO e General Manager con una carriera internazionale di alto profilo in aziende come IBM, Kelkoo e Yahoo! Italia, dove ha guidato trasformazioni strategiche e digitali.'
+          },
+          marco: {
+            name: 'Marco Ottolini',
+            role: 'CTO',
+            bio: 'Experienced CTO specializzato nella creazione di architetture scalabili per la crescita aziendale. Leader visionario con esperienza in startup e aziende consolidate.'
+          }
         }
       },
       aboutUs: {
@@ -520,26 +654,21 @@ export const translations = {
         title: 'I Visionari Dietro Mastro',
         subtitle: 'Il nostro team di esperti è dedicato a rivoluzionare acquisizione di talenti attraverso soluzioni innovative di AI. Scopri le menti che plasmano il futuro della tecnologia HR.',
         team: {
-          elena: {
-            name: 'Elena Rodriguez',
-            role: 'CEO e Co-Fondatrice',
-            bio: 'Con oltre 15 anni di esperienza in tecnologia e HR, Elena guida la visione di Mastro per rivoluzionare acquisizione di talenti.'
+          michele: {
+            name: 'Michele Pavone',
+            role: 'Co-Fondatore',
+            bio: 'Con oltre 20 anni di esperienza in tecnologia e HR, Michele guida la visione di Mastro.'
           },
-          marcus: {
-            name: 'Marcus Chen',
-            role: 'CTO e Co-Fondatore',
+          marta: {
+            name: 'Marta Della Valle',
+            role: 'Co-Fondatrice',
+            bio: 'Esperta di AI ed ex ingegnere Google, Marcus guida la tecnologia all` avanguardia di Mastro.'
+          },
+          gian: {
+            name: 'Gian',
+            role: 'Co-Fondatore',
             bio: 'Esperto di AI ed ex ingegnere Google, Marcus guida la tecnologia all` avanguardia di Mastro.'
           },
-          aisha: {
-            name: 'Aisha Patel',
-            role: 'Responsabile Prodotto',
-            bio: 'Aisha porta un decennio di esperienza nella gestione prodotti dalle principali startup della Silicon Valley.'
-          },
-          david: {
-            name: 'David Müller',
-            role: 'Responsabile Ricerca AI',
-            bio: 'PhD in Machine Learning, David guida le innovazioni AI di Mastro e le partnership accademiche.'
-          }
         },
         altText: {
           teamPhoto: 'Foto del membro del team'
@@ -588,6 +717,111 @@ export const translations = {
           title: "Prenota un Appuntamento",
           description: "Scegli l'orario che preferisci e discutiamo come Mastro può rivoluzionare il tuo processo di acquisizione talenti.",
           button: "Prenota Ora"
+        }
+      },
+      careers: {
+        badge: 'Unisciti al Team',
+        title: 'Lavora con Noi',
+        subtitle: 'Unisciti alla nostra missione di rivoluzionare acquisizione di talenti attraverso soluzioni innovative di AI.',
+        apply: 'Candidati Ora',
+        viewPosition: 'Vedi Posizione',
+        closePosition: 'Chiudi Posizione',
+        description: 'Descrizione',
+        requirements: 'Requisiti',
+        benefits: 'Benefici',
+        positions: {
+          contentCreator: {
+            role: "Content Creator e Social Media Manager",
+            tagline: "Stiamo cercando IL Content Creator e Social Media Manager!",
+            location: "Milano / Remote",
+            type: "Full-time",
+            description: "Cerchiamo una figura creativa e dinamica per gestire la nostra presenza digitale e dare voce al nostro brand. In questo ruolo, creerai contenuti coinvolgenti su diverse piattaforme, interagirai con la nostra community e guiderai la nostra strategia di marketing digitale.",
+            requirements: [
+              "Comprovata esperienza nella creazione di contenuti e gestione social",
+              "Forte capacità di storytelling e scrittura creativa",
+              "Esperienza con strumenti di marketing digitale e analytics",
+              "Comprensione del marketing B2B",
+              "Eccellenti capacità comunicative in italiano e inglese",
+              "Preferibile conoscenza del settore HR tech"
+            ],
+            benefits: [
+              "Pacchetto retributivo competitivo",
+              "Flessibilità di lavoro remoto",
+              "Opportunità di sviluppo professionale",
+              "Autonomia creativa",
+              "Ambiente di lavoro moderno",
+              "Esposizione internazionale"
+            ]
+          },
+          partnershipManager: {
+            role: "Partnership Manager",
+            tagline: "OPPORTUNITÀ D'ORO – Partnership Manager per Mastro HR",
+            location: "Milano / Remote",
+            type: "Full-time",
+            description: "Unisciti a Mastro HR come Partnership Manager e svolgi un ruolo chiave nell'espansione del nostro network. Svilupperai e curerai relazioni strategiche che guidano la crescita e l'innovazione nel settore HR tech.",
+            requirements: [
+              "Comprovata esperienza nello sviluppo di partnership",
+              "Forti capacità di negoziazione e costruzione di relazioni",
+              "Pensiero strategico e acume commerciale",
+              "Esperienza nel settore HR tech o SaaS",
+              "Eccellenti capacità comunicative in italiano e inglese",
+              "Track record di partnership di successo"
+            ],
+            benefits: [
+              "Pacchetto retributivo competitivo",
+              "Incentivi basati sulle performance",
+              "Flessibilità lavorativa",
+              "Opportunità di crescita professionale",
+              "Esposizione internazionale",
+              "Ambiente di lavoro innovativo"
+            ]
+          },
+          hrSpecialist: {
+            role: "HR Specialist",
+            tagline: "RIVOLUZIONANTE - HR Specialist in Mastro HR",
+            location: "Milano / Remote",
+            type: "Full-time",
+            description: "Entra a far parte della rivoluzione nella tecnologia HR. Come nostro HR Specialist, colmerai il divario tra le pratiche HR tradizionali e le soluzioni AI all'avanguardia, contribuendo a plasmare il futuro dell'acquisizione di talenti.",
+            requirements: [
+              "Solida esperienza nelle operazioni HR",
+              "Esperienza con tecnologie HR e HRIS",
+              "Comprensione dei moderni processi di recruiting",
+              "Approccio data-driven alle soluzioni HR",
+              "Eccellenti capacità interpersonali",
+              "Conoscenza dell'HR analytics"
+            ],
+            benefits: [
+              "Pacchetto retributivo competitivo",
+              "Opportunità di avanzamento di carriera",
+              "Ambiente di lavoro flessibile",
+              "Programmi di formazione continua",
+              "Benefit sanitari",
+              "Equilibrio vita-lavoro"
+            ]
+          },
+          salesManager: {
+            role: "Performance & Relations Manager",
+            tagline: "PERFORMANCE & RELAZIONI",
+            location: "Milano / Remote",
+            type: "Full-time",
+            description: "Cerchiamo un Performance & Relations Manager determinato per unirsi al nostro team in crescita. Questo ruolo è perfetto per chi eccelle nella costruzione di relazioni, comprende il panorama HR tech ed è appassionato di crescita aziendale.",
+            requirements: [
+              "Comprovata esperienza nelle vendite B2B",
+              "Esperienza nella vendita di software o tecnologie HR",
+              "Forti capacità di negoziazione e closing",
+              "Approccio strategico alle relazioni con i clienti",
+              "Mentalità orientata ai risultati",
+              "Eccellenza nella costruzione di relazioni"
+            ],
+            benefits: [
+              "Stipendio base competitivo più commissioni",
+              "Potenziale di guadagno illimitato",
+              "Opportunità di crescita professionale",
+              "Programma di formazione completo",
+              "Flessibilità lavorativa",
+              "Strumenti e risorse di vendita moderni"
+            ]
+          }
         }
       },
     }

@@ -9,6 +9,7 @@ import ContactPage from './pages/ContactPage';
 import NotFound from './pages/NotFound';
 import Demo from './pages/Demo';
 import ExpertsNetwork from './pages/ExpertsNetwork';
+import CareersPage from './pages/Careers';
 import ScrollToTop from './components/ScrollTop';
 
 const Layout = ({ children }) => (
@@ -30,6 +31,7 @@ const App = () => {
           <Route path="/contact-sales" element={<Layout><ContactPage /></Layout>} />
           <Route path="/demo" element={<Layout><Demo /></Layout>} />
           <Route path="/experts-network" element={<Layout><ExpertsNetwork /></Layout>} />
+          <Route path="/careers" element={<Layout><CareersPage /></Layout>} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </LanguageProvider>
