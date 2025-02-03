@@ -82,6 +82,8 @@ module.exports = {
   ],
   resolve: {
     extensions: ['.js', '.jsx', '.json'],
+    symlinks: true,
+    enforceExtension: false,
     alias: {
       '@': path.resolve(__dirname, './src'),
       'components': path.resolve(__dirname, './src/components'),
@@ -93,10 +95,7 @@ module.exports = {
       'services': path.resolve(__dirname, './src/services'),
       'constants': path.resolve(__dirname, './src/constants')
     },
-    modules: ['node_modules', path.resolve(__dirname, './src')],
-    fallback: {
-      path: false
-    }
+    modules: ['node_modules', path.resolve(__dirname, './src')]
   },
   devServer: {
     historyApiFallback: true,
