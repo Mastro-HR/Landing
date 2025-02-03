@@ -32,7 +32,7 @@ const NotFound = () => {
   };
 
   return (
-    <section className="relative min-h-screen overflow-hidden bg-gradient-to-b from-teal-500 to-teal-700">
+    <section className="relative min-h-screen overflow-hidden bg-gradient-to-b from-teal-500 to-black">
       {/* Animated background bubbles */}
       <div className="absolute inset-0 z-0">
         {bubbles.map(bubble => (
@@ -91,7 +91,7 @@ const NotFound = () => {
             variants={contentVariants}>
             <Link
               to="/"
-              className="group relative overflow-hidden px-6 py-3 rounded-full bg-primary-50 text-teal-700 font-medium hover:shadow-xl hover:shadow-accent-500/20 transition-all duration-500 flex items-center gap-2">
+              className="group relative overflow-hidden px-6 py-3 rounded-full bg-primary-50 text-teal-800 font-medium hover:shadow-xl hover:shadow-accent-500/20 transition-all duration-500 flex items-center gap-2">
               <Home className="w-4 h-4" />
               <span className="relative z-10">Back to Home</span>
               <div className="absolute inset-0 bg-gradient-to-r from-accent-500/90 to-accent-400/90 opacity-0 group-hover:opacity-10 transition-opacity duration-300" />

@@ -1,45 +1,108 @@
-// tailwind.config.js
+/** @type {import('tailwindcss').Config} */
 module.exports = {
-    content: ["./src/**/*.{js,jsx,ts,tsx}"],
-    theme: {
-      extend: {
-        colors: {
-          primary: {
-            50: '#F5F7F9',
-            100: '#E1E7ED',
-            200: '#C3CFD9',
-            300: '#9DB1C3',
-            400: '#7890A9',
-            500: '#486A82',  // Main primary
-            600: '#345066',
-            700: '#243849',
-            800: '#15212D',
-            900: '#070B0F',
-          },
-          accent: {
-            50: '#FFF2F1',
-            100: '#FFE5E2',
-            200: '#FFCCC6',
-            300: '#FFA89E',
-            400: '#FF8B80',
-            500: '#FF6F61',  // Main accent
-            600: '#FF4D3D',
-            700: '#FF2A19',
-            800: '#F51A08',
-            900: '#C91507',
-          },
-          teal: {
-            500: '#1b4f5a',  // Main background
-            600: '#174751',
-            700: '#123540',
-            800: '#0E2830',
-            900: '#091B20',
-          },
+  // Define which files Tailwind should scan for classes
+  content: ["./src/**/*.{js,jsx,ts,tsx}"],
+  
+  theme: {
+    extend: {
+      // Color System
+      // Organized color palette with semantic naming and consistent scaling
+      colors: {
+        // Primary colors for main interface elements
+        primary: {
+          50: '#FAFBFC',  // Lightest shade for backgrounds
+          100: '#F0F2F4', // Light shade for subtle backgrounds
+          200: '#E2E5E9', // Light shade for borders
+          300: '#C5CAD1', // Medium shade for secondary text
+          400: '#A7AFB9', // Medium shade for primary text
+          500: '#151821', // Base dark color for main elements
+          600: '#111419', // Darker shade for hover states
+          700: '#0D1015', // Dark shade for active states
+          800: '#090B0F', // Very dark for contrast elements
+          900: '#050709', // Darkest shade for special emphasis
         },
-        backgroundImage: {
-          'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+        
+        // Accent colors for highlighting and call-to-action elements
+        accent: {
+          50: '#FFF5F2',  // Lightest accent for subtle highlights
+          100: '#FFE9E5', // Light accent for hover states
+          200: '#FFD4CC', // Light accent for active states
+          300: '#FFBFB3', // Medium accent for borders
+          400: '#FF9B8C', // Medium accent for secondary elements
+          500: '#DC3D2B', // Primary accent color - Mars red
+          600: '#C83525', // Deep accent for hover states
+          700: '#B42E1F', // Deep accent for active states
+          800: '#A02719', // Very deep accent for contrast
+          900: '#8C2013', // Darkest accent for special emphasis
         },
+        
+        // Teal variations for background depth
+        teal: {
+          500: '#090C11', // Base dark background
+          600: '#070A0E', // Deeper background
+          700: '#05080B', // Very deep background
+          800: '#030508', // Ultra deep background
+          900: '#020304', // Darkest background
+        },
+        
+        // Mars-themed colors for special elements
+        mars: {
+          rust: '#DD4B39',  // Rust color for decorative elements
+          sand: '#E86D5C',  // Sand color for surface accents
+          shadow: '#B8352A', // Shadow color for depth
+          dust: '#F24333',   // Dust color for highlights
+          night: '#0C0E12'   // Night color for dark sections
+        },
+        
+        // Surface colors for layering
+        surface: {
+          light: '#1C202A',  // Top layer surface
+          default: '#151821', // Main surface color
+          dark: '#0F1218',    // Deep surface color
+        }
+      },
+      
+      // Background Gradients
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+        'gradient-dark': 'linear-gradient(180deg, var(--tw-gradient-stops))',
+        'gradient-mars': 'linear-gradient(to bottom, var(--surface-light), var(--surface-dark))',
+      },
+      
+      // Custom Height Values
+      height: {
+        '128': '32rem', // 512px for large sections
+        '144': '36rem', // 576px for extra large sections
+        '160': '40rem', // 640px for hero sections
+        '192': '48rem', // 768px for full-page sections
+      },
+      
+      // Custom Transition Timing
+      transitionTimingFunction: {
+        'mars': 'cubic-bezier(0.4, 0, 0.2, 1)', // Custom easing for smooth transitions
+      },
+      
+      // Enhanced Shadow System
+      boxShadow: {
+        'mars': '0 4px 6px -1px rgba(220, 61, 43, 0.1), 0 2px 4px -1px rgba(220, 61, 43, 0.06)',      // Subtle accent shadow
+        'mars-lg': '0 10px 15px -3px rgba(220, 61, 43, 0.1), 0 4px 6px -2px rgba(220, 61, 43, 0.05)', // Larger accent shadow
+      },
+      
+      // Custom Animation Keyframes
+      keyframes: {
+        'fade-in': {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        }
+      },
+      
+      // Custom Animations
+      animation: {
+        'fade-in': 'fade-in 0.5s ease-in-out',
       },
     },
-    plugins: [],
-  };
+  },
+  
+  // Additional Tailwind Plugins
+  plugins: [],
+};

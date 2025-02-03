@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
-import { useMediaQuery } from '../../hooks/useMediaQuery';
-import { useLanguage } from '../../context/LanguageContext';
-import { translations } from '../../translation';
+import { useMediaQuery } from '@/hooks/useMediaQuery';
+import { useLanguage } from '@/context/LanguageContext';
+import { translations } from '@/pages/static_translation';
 
 const partnerOrganizations = [
   { src: '/images/OFP.png', alt: 'OFP' },
@@ -78,7 +78,7 @@ const TrustedPartners = () => {
   const t = translations[language].trustedPartners;
   
   return (
-    <section className="py-6 xs:py-8 sm:py-12 lg:py-16 bg-gradient-to-b from-gray-50/50 to-white">
+    <section className="py-6 xs:py-8 sm:py-12 lg:py-16 bg-white">
       <div className="max-w-7xl mx-auto px-3 xs:px-4 sm:px-6 lg:px-8">
         <motion.header
           className="text-center mb-6 xs:mb-8 sm:mb-10"
@@ -122,7 +122,7 @@ const TrustedPartners = () => {
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         .continuous-scroll-wrapper {
           mask: linear-gradient(
             to right,

@@ -2,6 +2,34 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Base Typography System */
+@layer base {
+  /* Root font size scaling for different screen sizes */
+  html {
+    font-size: 13px;
+    @screen md {
+      font-size: 14px;
+    }
+    @screen lg {
+      font-size: 15px;
+    }
+  }
+
+  /* Form element focus state removal
+     Eliminates default browser focus rings and outlines */
+  input,
+  textarea,
+  select,
+  [contenteditable="true"] {
+    @apply outline-none;
+    &:focus {
+      outline: none;
+      box-shadow: none;
+    }
+  }
+}
+
+/* Original Animations */
 @keyframes fade-in {
   from {
     opacity: 0;
@@ -168,6 +196,7 @@
   }
 }
 
+/* Animation Classes */
 .animate-fade-in {
   animation: fade-in 0.8s ease-out forwards;
 }
@@ -222,15 +251,6 @@
   animation-play-state: paused;
 }
 
-@keyframes continuous-scroll {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(calc(-50% - 12px)); /* Adjust based on gap */
-  }
-}
-
 .animate-wave {
   animation: wave 20s ease-in-out infinite;
 }
@@ -239,30 +259,70 @@
   animation: wave-reverse 15s ease-in-out infinite;
 }
 
-.text-gradient {
-  background: linear-gradient(135deg, #4f46e5, #a855f7, #6366f1);
-  background-size: 200% 200%;
-  animation: gradient-shift 8s ease infinite;
-  -webkit-background-clip: text;
-  color: transparent;
+/* Enhanced Utility Classes */
+@layer utilities {
+  .text-gradient {
+    @apply text-transparent bg-clip-text bg-gradient-to-r from-accent-500 to-accent-600;
+  }
+
+  .text-gradient-cool {
+    @apply text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-600;
+  }
+
+  .rounded-blob {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  }
+
+  .glass {
+    @apply bg-white/10 backdrop-blur-sm;
+  }
+
+  .glass-dark {
+    @apply bg-black/30 backdrop-blur-sm;
+  }
+
+  .hover-lift {
+    @apply transition-transform duration-200 hover:-translate-y-1;
+  }
+
+  .hover-scale {
+    @apply transition-transform duration-200 hover:scale-105;
+  }
+
+  .leading-relaxed {
+    line-height: 1.6;
+  }
+  .text-opacity-90 {
+    opacity: 0.9;
+  }
 }
 
-.gradient-text {
-  @apply text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600;
+
+/* Component Classes */
+@layer components {
+  .card {
+    @apply bg-surface-dark rounded-xl border border-surface-light/20 shadow-lg p-6 md:p-8;
+  }
+
+  .input-base {
+    @apply bg-surface-light rounded-lg border border-surface-light/20 px-4 py-2 text-sm md:text-base;
+  }
+
+  .button-base {
+    @apply rounded-lg px-4 py-2 font-medium transition-all duration-200;
+  }
 }
 
-.rounded-blob {
-  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+/* Responsive Spacing */
+.space-mobile {
+  @apply space-y-4 md:space-y-6 lg:space-y-8;
 }
 
-.bg-size-200 {
-  background-size: 200% auto;
+.gap-mobile {
+  @apply gap-4 md:gap-6 lg:gap-8;
 }
 
-.hover\:bg-pos-100:hover {
-  background-position: 100% center;
-}
-
+/* Utility Helpers */
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -270,4 +330,22 @@
 
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
+}
+
+/* Responsive Container Widths */
+.container-sm {
+  @apply max-w-3xl mx-auto px-4 md:px-6;
+}
+
+.container-md {
+  @apply max-w-4xl mx-auto px-4 md:px-6;
+}
+
+.container-lg {
+  @apply max-w-6xl mx-auto px-4 md:px-6;
+}
+
+/* Focus States */
+.focus-ring {
+  @apply focus:outline-none focus:ring-2 focus:ring-accent-500/50 focus:ring-offset-2 focus:ring-offset-surface-dark;
 }

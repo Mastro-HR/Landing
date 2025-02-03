@@ -2,14 +2,14 @@ import React from 'react';
 import { FaLinkedin, FaInstagram } from 'react-icons/fa';
 
 const Footer = () => (
-  <footer className="bg-gradient-to-t from-teal-900 to-teal-800 text-primary-50 py-12">
+  <footer className="bg-black text-primary-50 py-12">
     <div className="absolute inset-0 bg-grid opacity-10 pointer-events-none" />
     <div className="max-w-7xl mx-auto px-6 relative z-10">
       <div className="flex flex-col md:flex-row justify-between items-center mb-8">
         <div className="space-y-2 mb-4 md:mb-0 text-center md:text-left w-full md:w-auto">
           <h3 className="text-xl font-bold">Mastro</h3>
           <p className="text-primary-100/80 text-sm leading-relaxed">
-            Hire Right. Grow Faster
+            Hire Right. Grow Faster.
           </p>
         </div>
         <div className="flex space-x-4">
