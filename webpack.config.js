@@ -8,7 +8,7 @@ module.exports = {
     path: path.resolve(__dirname, 'build'),
     filename: '[name].[contenthash].js',
     chunkFilename: '[id].[contenthash].js',
-    publicPath: '/',
+    publicPath: './',
     clean: true
   },
   mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
@@ -95,7 +95,7 @@ module.exports = {
     port: 3000,
     static: {
       directory: path.join(__dirname, 'public'),
-      publicPath: '/'
+      publicPath: './'
     }
   },
   performance: {
