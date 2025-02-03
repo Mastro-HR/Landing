@@ -40,7 +40,6 @@ const HiringContextFormContainer = () => {
         setValidationStates((prev) => ({ ...prev, [questionId]: isValid }));
       }
 
-      // Log the received value
       console.log(`Received Answer for Question ID ${questionId}: "${value}"`);
 
       setAnswers((prev) => ({ ...prev, [questionId]: value }));
@@ -81,14 +80,14 @@ const HiringContextFormContainer = () => {
         }
       }
 
-      // Multi-select
+      // Multi-select validation
       if (question.type === 'multiselect') {
         if (!Array.isArray(answer) || answer.length === 0) {
           return translations?.errors?.selectOne[language];
         }
       }
 
-      // Single choice
+      // Single choice validation
       if (question.type === 'choice' && !answer) {
         return translations?.errors?.selectOption[language];
       }
@@ -181,7 +180,6 @@ const HiringContextFormContainer = () => {
       const result = await hiringContextService.analyzeHiringContext(formData, language);
       console.log('[HiringContextFormContainer] Received Analysis Result:', result);
 
-      // Validate response structure
       if (!result || typeof result !== 'object') {
         throw new Error('Invalid response format from the analysis service.');
       }
@@ -225,12 +223,25 @@ const HiringContextFormContainer = () => {
     return language === 'it' ? 'Torna indietro' : 'Go Back';
   };
 
+  // Memoize the validation change callback so it doesn't trigger re-renders
+  const currentQuestion = questions[currentStep];
+  const handleValidationChange = useCallback(
+    (isValid) => {
+      if (currentQuestion && currentQuestion.id) {
+        setValidationStates((prev) => ({
+          ...prev,
+          [currentQuestion.id]: isValid,
+        }));
+      }
+    },
+    [currentQuestion?.id]
+  );
+
   const renderDescriptionSection = () => (
     <div className="mb-12">
       <div className="flex items-center justify-center">
         <div className="text-gray-600 rounded-lg shadow-lg p-6 md:p-8 lg:p-10 max-w-3xl w-full">
           <div className="flex items-start">
-            {/* Optional: Add an icon */}
             <div className="flex-shrink-0">
               <svg
                 className="w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 text-accent-500 opacity-80"
@@ -275,11 +286,9 @@ const HiringContextFormContainer = () => {
     );
   }
 
-  const currentQuestion = questions[currentStep];
   const isLastStep = currentStep === questions.length - 1;
   const isCurrentAnswered =
     answers[currentQuestion?.id] !== undefined && answers[currentQuestion?.id] !== '';
-  // NEW: Get the validation state for the current question.
   const isCurrentValid = validationStates[currentQuestion?.id] ?? false;
 
   return (
@@ -329,12 +338,7 @@ const HiringContextFormContainer = () => {
                 onAnswer={handleAnswer}
                 disabled={isAnalyzing}
                 language={language}
-                onValidationChange={(isValid) => {
-                  setValidationStates((prev) => ({
-                    ...prev,
-                    [currentQuestion.id]: isValid
-                  }));
-                }}
+                onValidationChange={handleValidationChange}
               />
             )}
           </div>
@@ -344,8 +348,7 @@ const HiringContextFormContainer = () => {
             <button
               onClick={() => handleNavigation('prev')}
               disabled={currentStep === 0 || isAnalyzing}
-              className="flex items-center px-6 py-3 rounded-full text-primary-900
-                         disabled:opacity-50 transition-all hover:scale-[1.02]"
+              className="flex items-center px-6 py-3 rounded-full text-primary-900 disabled:opacity-50 transition-all hover:scale-[1.02]"
             >
               <ChevronLeft className="w-5 h-5 mr-2" />
               {translations?.navigation?.previous}
@@ -355,9 +358,7 @@ const HiringContextFormContainer = () => {
               <button
                 onClick={handleSubmit}
                 disabled={isAnalyzing || !isCurrentValid}
-                className="flex items-center px-6 py-3 rounded-full bg-accent-500
-                           hover:bg-accent-600 text-white disabled:opacity-50
-                           transition-transform hover:scale-[1.02]"
+                className="flex items-center px-6 py-3 rounded-full bg-accent-500 hover:bg-accent-600 text-white disabled:opacity-50 transition-transform hover:scale-[1.02]"
               >
                 {isAnalyzing ? <AnimatedLoader /> : translations?.analysis?.button}
               </button>
@@ -365,9 +366,7 @@ const HiringContextFormContainer = () => {
               <button
                 onClick={() => handleNavigation('next')}
                 disabled={!isCurrentAnswered}
-                className="flex items-center px-6 py-3 rounded-full bg-accent-500
-                           hover:bg-accent-600 text-white disabled:opacity-50
-                           transition-transform hover:scale-[1.02]"
+                className="flex items-center px-6 py-3 rounded-full bg-accent-500 hover:bg-accent-600 text-white disabled:opacity-50 transition-transform hover:scale-[1.02]"
               >
                 {translations?.navigation?.next}
                 <ChevronRight className="w-5 h-5 ml-2" />
