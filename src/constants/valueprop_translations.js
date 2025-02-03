@@ -63,9 +63,9 @@ export const valuePropositionTranslations = {
         improvement: "Le nostre valutazioni basate sull'IA rilevano il 95% degli indicatori di leadership essenziali, garantendo un'accuratezza dell'87% nella previsione del successo lavorativo."
       },    
       matchExpert: {
-        title: "Connettiti con la nostra rete di esperti di settore",
+        title: "Connettiti con il nostro network di esperti",
         problem: "La selezione manuale dei candidati ignora il 53% dei migliori talenti e può prolungare i tempi di reclutamento fino a quattro volte, causando opportunità perse e costi più elevati.",
-        improvement: "Il nostro processo di matching basato su IA e supportato da esperti riduce il tempo di assunzione del 65% e aumenta il tasso di inserimenti di successo del 74%, permettendoti di trovare il candidato giusto più rapidamente grazie alla guida del nostro team specializzato."
+        improvement: "Il nostro processo di matching basato su IA e supportato da esperti riduce tempi di assunzione del 65% e aumenta il tasso di inserimenti di successo del 74%."
       },    
     }
   }
