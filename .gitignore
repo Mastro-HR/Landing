@@ -40,3 +40,4 @@ Thumbs.db
 # Optional: Logging and debugging
 logs
 *.log
+.vercel

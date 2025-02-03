@@ -6,7 +6,8 @@
   "scripts": {
     "start": "webpack serve --mode development --open",
     "build": "rm -rf build && webpack --mode production",
-    "server": "node server.js"
+    "server": "node server.js",
+    "vercel-build": "npm run build"
   },
   "author": "",
   "license": "ISC",
@@ -52,5 +53,8 @@
     "webpack": "^5.97.1",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^5.2.0"
+  },
+  "engines": {
+    "node": ">=16.0.0"
   }
 }
