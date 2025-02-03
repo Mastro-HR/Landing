@@ -127,7 +127,7 @@ export const translations = {
         badge: 'Executive AI Technology',
         title: 'Next-Generation Leadership Assessment',
         subtitle: 'Our advanced AI platform revolutionizes executive recruitment through sophisticated analysis and intelligent decision support.',
-        cta: 'Schedule a Demo',
+        cta: 'Try Us',
         features: {
           leadership: {
             title: 'Advanced Leadership Assessment',
@@ -545,7 +545,7 @@ export const translations = {
         badge: 'Tecnologia AI per Executives',
         title: 'La tecnologia che trasforma il recruiting',
         subtitle: 'Grazie alla potenza dell’intelligenza artificiale, MastroHR rivoluziona il processo di selezione, garantendo precisione, velocità e risultati tangibili',
-        cta: 'Prenota una Demo',
+        cta: 'Provaci',
         features: {
           leadership: {
             title: 'Analisi avanzate per decisioni migliori',
