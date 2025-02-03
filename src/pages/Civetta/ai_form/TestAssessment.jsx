@@ -1,6 +1,6 @@
 // TestAssessment.js
 import React from 'react';
-import TestAssessment_Form_Container from '@/components/demo/TestAssessment_Demo/TestAssessment_Form_Container';
+import TestAssessment_Form_Container from '@/components/Demo/TestAssessment_Demo/TestAssessment_Form_Container';
 
 export default function TestAssessment() {
 

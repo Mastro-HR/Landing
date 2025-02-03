@@ -1,5 +1,5 @@
 import React from 'react';
-import HiringContext_Form_Container from '@/components/demo/HiringContext_Demo/HiringContext_Form_Container';
+import HiringContext_Form_Container from '@/components/Demo/HiringContext_Demo/HiringContext_Form_Container';
 
 export default function HiringContext() {
 

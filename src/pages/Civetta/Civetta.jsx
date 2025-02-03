@@ -1,5 +1,5 @@
 import React from 'react';
-import ValueProposition from '@/components/demo/ValueProposition';
+import ValueProposition from '@/components/Demo/ValueProposition';
 
 const Civetta = () => {
   return (

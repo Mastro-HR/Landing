@@ -1,6 +1,6 @@
 // CandidatePersona.js
 import React from 'react';
-import CandidatePersona_Form_Container from '@/components/demo/CandidatePersona_Demo/CandidatePersona_Form_Container';
+import CandidatePersona_Form_Container from '@/components/Demo/CandidatePersona_Demo/CandidatePersona_Form_Container';
 
 export default function CandidatePersona() {
 
