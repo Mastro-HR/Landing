@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack serve --mode development --open",
-    "build": "rm -rf build && webpack --mode production",
+    "build": "webpack --mode production",
     "server": "node server.js",
-    "vercel-build": "npm run build"
+    "vercel-build": "webpack --mode production"
   },
   "author": "",
   "license": "ISC",

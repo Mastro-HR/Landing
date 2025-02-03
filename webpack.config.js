@@ -83,11 +83,9 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx'],
     alias: {
-      '@': path.resolve(__dirname, 'src'),
+      '@': path.resolve(__dirname, 'src')
     },
-    modules: [path.resolve(__dirname, 'src'), 'node_modules'],
-    enforceExtension: false,
-    caseSensitive: false
+    modules: [path.resolve(__dirname, 'src'), 'node_modules']
   },
   devServer: {
     historyApiFallback: true,
@@ -107,27 +105,6 @@ module.exports = {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
         'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
-      },
-      onProxyReq: (proxyReq, req, res) => {
-        if (req.body) {
-          const bodyData = JSON.stringify(req.body);
-          proxyReq.setHeader('Content-Type', 'application/json');
-          proxyReq.setHeader('Content-Length', Buffer.byteLength(bodyData));
-          proxyReq.write(bodyData);
-        }
-      },
-      onProxyRes: (proxyRes, req, res) => {
-        proxyRes.headers['Access-Control-Allow-Origin'] = '*';
-      },
-      onError: (err, req, res) => {
-        console.error('Proxy Error:', err);
-        res.writeHead(500, {
-          'Content-Type': 'application/json'
-        });
-        res.end(JSON.stringify({
-          error: 'Proxy Error',
-          message: 'Could not connect to API server'
-        }));
       }
     }],
     client: {
