@@ -81,11 +81,22 @@ module.exports = {
     })
   ],
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js', '.jsx', '.json'],
     alias: {
-      '@': path.resolve(__dirname, 'src')
+      '@': path.resolve(__dirname, './src'),
+      'components': path.resolve(__dirname, './src/components'),
+      'pages': path.resolve(__dirname, './src/pages'),
+      'assets': path.resolve(__dirname, './src/assets'),
+      'utils': path.resolve(__dirname, './src/utils'),
+      'hooks': path.resolve(__dirname, './src/hooks'),
+      'styles': path.resolve(__dirname, './src/styles'),
+      'services': path.resolve(__dirname, './src/services'),
+      'constants': path.resolve(__dirname, './src/constants')
     },
-    modules: [path.resolve(__dirname, 'src'), 'node_modules']
+    modules: ['node_modules', path.resolve(__dirname, './src')],
+    fallback: {
+      path: false
+    }
   },
   devServer: {
     historyApiFallback: true,
@@ -94,26 +105,6 @@ module.exports = {
     static: {
       directory: path.join(__dirname, 'public'),
       publicPath: '/'
-    },
-    proxy: [{
-      context: ['/api'],
-      target: 'http://localhost:8000',
-      pathRewrite: { '^/api': '' },
-      changeOrigin: true,
-      secure: false,
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
-        'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
-      }
-    }],
-    client: {
-      overlay: {
-        errors: true,
-        warnings: false
-      },
-      progress: true,
-      logging: 'info'
     }
   },
   performance: {
