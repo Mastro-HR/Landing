@@ -8,7 +8,7 @@ module.exports = {
     path: path.resolve(__dirname, 'build'),
     filename: '[name].[contenthash].js',
     chunkFilename: '[id].[contenthash].js',
-    publicPath: './',
+    publicPath: '/',  // Changed from './' to '/' for proper routing
     clean: true
   },
   mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
@@ -44,7 +44,7 @@ module.exports = {
         use: ['style-loader', 'css-loader', 'postcss-loader']
       },
       {
-        test: /\.(png|jpg|jpeg|gif|svg)$/i,
+        test: /\.(png|jpg|jpeg|gif|svg|ico)$/i,  // Added ico format
         type: 'asset/resource',
         generator: {
           filename: 'assets/images/[name].[hash][ext]'
@@ -56,6 +56,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './public/index.html',
       filename: 'index.html',
+      favicon: './public/favicon.ico',  // Added favicon configuration
       inject: true,
       minify: {
         removeComments: true,
@@ -73,9 +74,11 @@ module.exports = {
     new CopyPlugin({
       patterns: [
         {
-          from: 'public/images',
-          to: 'images',
-          noErrorOnMissing: true
+          from: 'public',
+          to: '',
+          globOptions: {
+            ignore: ['**/index.html']  // Don't copy index.html as it's handled by HtmlWebpackPlugin
+          }
         }
       ]
     })
@@ -86,7 +89,7 @@ module.exports = {
     enforceExtension: false,
     alias: {
       '@': path.resolve(__dirname, 'src'),
-    },    
+    },
     modules: ['node_modules', path.resolve(__dirname, './src')]
   },
   devServer: {
@@ -95,7 +98,12 @@ module.exports = {
     port: 3000,
     static: {
       directory: path.join(__dirname, 'public'),
-      publicPath: './'
+      publicPath: '/'  // Changed from './' to '/'
+    },
+    compress: true,
+    open: true,
+    client: {
+      overlay: true
     }
   },
   performance: {
