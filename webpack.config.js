@@ -83,8 +83,11 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx'],
     alias: {
-      '@': path.resolve(__dirname, 'src')
-    }
+      '@': path.resolve(__dirname, 'src'),
+    },
+    modules: [path.resolve(__dirname, 'src'), 'node_modules'],
+    enforceExtension: false,
+    caseSensitive: false
   },
   devServer: {
     historyApiFallback: true,
