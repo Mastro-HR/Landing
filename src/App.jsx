@@ -5,8 +5,8 @@ import ReactGA from 'react-ga4';
 // ---------- Language Context ------------------------- //
 import { LanguageProvider } from './context/LanguageContext';
 
-import Header from '../components/Layout/Header';
-import Footer from '../components/Layout/Footer';
+import Header from '../components/Layout/Header.jsx';
+import Footer from '../components/Layout/Footer.jsx';
 
 // ----------------- Landing Main Pages ------------------------- //
 import HomePage from './pages/LandingPage/HomePage';
