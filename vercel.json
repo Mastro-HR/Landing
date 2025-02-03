@@ -12,7 +12,13 @@
   "routes": [
     {
       "src": "/favicon.ico",
+      "headers": { "cache-control": "public, max-age=31536000, immutable" },
       "dest": "/favicon.ico"
+    },
+    {
+      "src": "/favicon-(.*).png",
+      "headers": { "cache-control": "public, max-age=31536000, immutable" },
+      "dest": "/favicon-$1.png"
     },
     {
       "src": "^/(.*\\.(js|css|png|jpg|jpeg|gif|svg))$",
