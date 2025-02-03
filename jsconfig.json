@@ -2,16 +2,17 @@
   "compilerOptions": {
     "baseUrl": "src",
     "paths": {
-      "@/*": ["./*"],
+      "@/*": ["src/*"],
       "@components/*": ["src/components/*"],
-      "@/pages/*": ["pages/*"],
-      "@/assets/*": ["assets/*"],
-      "@/utils/*": ["utils/*"],
-      "@/hooks/*": ["hooks/*"],
-      "@/styles/*": ["styles/*"],
-      "@/services/*": ["services/*"],
-      "@/constants/*": ["constants/*"]
+      "@pages/*": ["src/pages/*"],
+      "@assets/*": ["src/assets/*"],
+      "@utils/*": ["src/utils/*"],
+      "@hooks/*": ["src/hooks/*"],
+      "@styles/*": ["src/styles/*"],
+      "@services/*": ["src/services/*"],
+      "@constants/*": ["src/constants/*"]
     },
+
     "jsx": "react",
     "module": "commonjs",
     "target": "es6",
