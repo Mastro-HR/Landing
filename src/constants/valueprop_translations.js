@@ -58,7 +58,7 @@ export const valuePropositionTranslations = {
         improvement: "Ottimizza la selezione con un matching candidato-ruolo fino all'82% più preciso, riducendo drasticamente rischi finanziari e strategici."
       },
       hiringAssessment: {
-        title: "Crea test di selezione per massima precisione",
+        title: "Crea test di selezione personalizzati",
         problem: "I metodi di valutazione tradizionali non identificano circa il 42% delle competenze chiave di leadership, causando spesso gap di performance dopo l'assunzione.",
         improvement: "Le nostre valutazioni basate sull'IA rilevano il 95% degli indicatori di leadership essenziali, garantendo un'accuratezza dell'87% nella previsione del successo lavorativo."
       },    
