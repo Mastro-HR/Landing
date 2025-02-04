@@ -18,7 +18,7 @@ const DescriptionBox = ({ title, text }) => (
           </div>
           
           <div className="flex-1 space-y-4">            
-            <p className="text-base md:text-lg text-gray-500 leading-relaxed max-w-3xl">
+            <p className="text-base md:text-lg text-gray-500 leading-relaxed">
               {text ||
                 'By analyzing your company details and your specific responses, we suggest you consider the following strategic steps to enhance your hiring context and organizational growth.'}
             </p>

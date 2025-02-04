@@ -81,8 +81,8 @@ export const formButtonTranslations = {
         retry: "Riprova Analisi"
       },
       sections: {
-        strategic_foundation: "Base Strategica",
-        talent_architecture: "Architettura del Talento",
+        strategic_foundation: "Riflessione Strategica",
+        talent_architecture: "Architettura del processo di selezione",
         growth_catalysts: "Catalizzatori di Crescita"
       },
       descriptions: {
