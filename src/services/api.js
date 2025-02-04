@@ -1,5 +1,5 @@
 // src/services/api.js
-const API_BASE_URL = 'http://localhost:8000';
+const API_BASE_URL = 'https://api.mastrohr.com';
 import { cleanUrl } from '@/utils/validation';
 
 export const hiringContextService = {
