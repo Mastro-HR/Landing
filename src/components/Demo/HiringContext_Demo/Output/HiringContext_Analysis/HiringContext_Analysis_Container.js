@@ -1,8 +1,6 @@
 import React, { memo, useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import {
-  ArrowLeft, Target, Brain, Users,
-} from 'lucide-react';
+import { ArrowLeft, Target, Brain, Users } from 'lucide-react';
 
 import DescriptionBox from './DescriptionBox';
 import SectionMenu from './SectionMenu';
@@ -24,7 +22,7 @@ const HiringContext_Analysis_Container = memo(function HiringContext_Analysis_Co
   language,
   answers = {},
 }) {
-  // Pull the main UI translations
+  // Pull the main UI translations (already filtered by the current language)
   const uiTranslations = useUITranslations();
   const localContact = localTranslations?.[language]?.contact || {};
 
@@ -40,23 +38,23 @@ const HiringContext_Analysis_Container = memo(function HiringContext_Analysis_Co
   const sections = {
     strategic_foundation: {
       icon: Target,
-      title: uiTranslations?.[language]?.sections?.strategic_foundation || 'Strategic Foundation',
+      title: uiTranslations?.sections?.strategic_foundation || 'Strategic Foundation',
       description:
-        uiTranslations?.[language]?.descriptions?.strategic_foundation ||
+        uiTranslations?.descriptions?.strategic_foundation ||
         'Market position & organizational dynamics',
     },
     talent_architecture: {
       icon: Users,
-      title: uiTranslations?.[language]?.sections?.talent_architecture || 'Talent Architecture',
+      title: uiTranslations?.sections?.talent_architecture || 'Talent Architecture',
       description:
-        uiTranslations?.[language]?.descriptions?.talent_architecture ||
+        uiTranslations?.descriptions?.talent_architecture ||
         'Capabilities & cultural alignment',
     },
     growth_catalysts: {
       icon: Brain,
-      title: uiTranslations?.[language]?.sections?.growth_catalysts || 'Growth Catalysts',
+      title: uiTranslations?.sections?.growth_catalysts || 'Growth Catalysts',
       description:
-        uiTranslations?.[language]?.descriptions?.growth_catalysts ||
+        uiTranslations?.descriptions?.growth_catalysts ||
         'Impact & risk optimization',
     },
   };
@@ -73,7 +71,7 @@ const HiringContext_Analysis_Container = memo(function HiringContext_Analysis_Co
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 1024);
-    handleResize(); // Check initial
+    handleResize(); // Check initial width
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
@@ -88,14 +86,18 @@ const HiringContext_Analysis_Container = memo(function HiringContext_Analysis_Co
         console.log('[HiringContext_Analysis_Container] Received form data:', {
           formData,
           analysisResult,
-          answers
+          answers,
         });
-  
-        if (!formData.contactInfo?.name?.trim() || !formData.contactInfo?.email?.trim() || !formData.contactInfo?.phone?.trim()) {
+
+        if (
+          !formData.contactInfo?.name?.trim() ||
+          !formData.contactInfo?.email?.trim() ||
+          !formData.contactInfo?.phone?.trim()
+        ) {
           console.error('[HiringContext_Analysis_Container] Validation failed:', {
             name: formData.contactInfo?.name,
             email: formData.contactInfo?.email,
-            phone: formData.contactInfo?.phone
+            phone: formData.contactInfo?.phone,
           });
           throw new Error(
             language === 'it'
@@ -103,12 +105,12 @@ const HiringContext_Analysis_Container = memo(function HiringContext_Analysis_Co
               : 'Please complete all contact information fields'
           );
         }
-  
+
         console.log('[HiringContext_Analysis_Container] Contact info validation passed');
-  
+
         // Safely access hiring context data
         const hiringContext = analysisResult?.hiring_context;
-        
+
         if (!hiringContext || !hiringContext.strategic_foundation) {
           console.error('[HiringContext_Analysis_Container] Missing hiring context:', analysisResult);
           throw new Error(
@@ -117,7 +119,7 @@ const HiringContext_Analysis_Container = memo(function HiringContext_Analysis_Co
               : 'No hiring context data available'
           );
         }
-  
+
         const submissionPayload = {
           questionnaireData: formatQuestionnaireData(answers),
           analysisData: {
@@ -151,19 +153,20 @@ const HiringContext_Analysis_Container = memo(function HiringContext_Analysis_Co
             userAgent: navigator.userAgent,
           },
         };
-  
-        console.log('[HiringContext_Analysis_Container] Final submission payload:', 
+
+        console.log(
+          '[HiringContext_Analysis_Container] Final submission payload:',
           JSON.stringify(submissionPayload, null, 2)
         );
-  
+
         const response = await sendContactEmail(submissionPayload);
         console.log('[HiringContext_Analysis_Container] Email service response:', response);
-        
+
         if (response.status === 'success') {
           setIsContactModalOpen(false);
           return true;
         }
-  
+
         throw new Error(
           response.message ||
             (language === 'it' ? 'Invio email fallito' : 'Failed to send email')
@@ -172,7 +175,7 @@ const HiringContext_Analysis_Container = memo(function HiringContext_Analysis_Co
         console.error('[HiringContext_Analysis_Container] Contact submission error:', {
           error: err.message,
           stack: err.stack,
-          formData: formData
+          formData,
         });
         alert(err.message);
         return false;
@@ -184,7 +187,7 @@ const HiringContext_Analysis_Container = memo(function HiringContext_Analysis_Co
   // Main content with the DescriptionBox up top
   const renderMainContent = () => (
     <div className="space-y-6">
-      {/* The top DescriptionBox (replicates your standard approach) */}
+      {/* The top DescriptionBox */}
       <DescriptionBox title={descriptionBox.title} text={descriptionBox.text} />
 
       <div className="grid grid-cols-12 gap-4 sm:gap-6">
@@ -205,11 +208,6 @@ const HiringContext_Analysis_Container = memo(function HiringContext_Analysis_Co
           />
         </div>
       </div>
-
-      {/*
-        We removed <ContactSection /> here, because now we'll rely on
-        a floating “Contact Us” button at the bottom.
-      */}
     </div>
   );
 
@@ -219,12 +217,13 @@ const HiringContext_Analysis_Container = memo(function HiringContext_Analysis_Co
         {/* Go Back Button */}
         <button
           onClick={onGoBack}
-          className="flex items-center gap-1 sm:gap-2 text-gray-600 hover:text-gray-900 mt-6 mb-6 sm:mb-12 text-sm sm:text-base">
+          className="flex items-center gap-1 sm:gap-2 text-gray-600 hover:text-gray-900 mt-6 mb-6 sm:mb-12 text-sm sm:text-base"
+        >
           <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" />
-          <span>{uiTranslations?.[language]?.navigation?.backToAssessment || 'Back to Assessment'}</span>
+          <span>{uiTranslations?.navigation?.backToAssessment || 'Back to Assessment'}</span>
         </button>
 
-        {/* If loading or error, show loader/error. Otherwise, show main content + floating button */}
+        {/* Loader or error display */}
         {isAnalyzing || error ? (
           <ErrorHandler
             isLoading={isAnalyzing}
@@ -236,7 +235,7 @@ const HiringContext_Analysis_Container = memo(function HiringContext_Analysis_Co
           <>
             {renderMainContent()}
 
-            {/* Floating Contact Button: same approach as in CandidatePersona */}
+            {/* Floating Contact Button */}
             <FloatingActionButton
               label={language === 'it' ? 'Contattaci' : 'Contact Us'}
               onClick={() => setIsContactModalOpen(true)}
@@ -244,7 +243,7 @@ const HiringContext_Analysis_Container = memo(function HiringContext_Analysis_Co
           </>
         )}
 
-        {/* The same Contact Modal you had before */}
+        {/* Contact Modal */}
         <ContactModal
           isOpen={isContactModalOpen}
           onClose={handleModalClose}

@@ -27,9 +27,7 @@ const HiringContextFormContainer = () => {
   const [error, setError] = useState(null);
   const [validationStates, setValidationStates] = useState({});
 
-  //============================================================
-  // 1. Handle user input for each question
-  //============================================================
+  // Handle user input for each question
   const handleAnswer = useCallback(
     (value, questionId) => {
       const question = questions.find((q) => q.id === questionId);
@@ -41,21 +39,17 @@ const HiringContextFormContainer = () => {
       }
 
       console.log(`Received Answer for Question ID ${questionId}: "${value}"`);
-
       setAnswers((prev) => ({ ...prev, [questionId]: value }));
       setError(null);
     },
     [questions]
   );
 
-  //============================================================
-  // 2. Validate a single question's answer
-  //============================================================
+  // Validate a single question's answer
   const validateQuestion = useCallback(
     (question, answer) => {
       if (!question.validation?.required) return null;
 
-      // URL validation
       if (question.type === 'url') {
         if (!answer) {
           return translations?.errors?.websiteRequired[language];
@@ -73,21 +67,18 @@ const HiringContextFormContainer = () => {
         }
       }
 
-      // Text/textarea validation
       if (['text', 'textarea'].includes(question.type)) {
         if (!answer?.trim() || answer.trim().length < (question.validation.minLength || 1)) {
           return translations?.errors?.fieldRequired[language];
         }
       }
 
-      // Multi-select validation
       if (question.type === 'multiselect') {
         if (!Array.isArray(answer) || answer.length === 0) {
           return translations?.errors?.selectOne[language];
         }
       }
 
-      // Single choice validation
       if (question.type === 'choice' && !answer) {
         return translations?.errors?.selectOption[language];
       }
@@ -97,23 +88,18 @@ const HiringContextFormContainer = () => {
     [language, translations]
   );
 
-  //============================================================
-  // 3. Handle navigation between steps
-  //============================================================
+  // Handle navigation between steps
   const handleNavigation = useCallback(
     (direction) => {
       const currentQuestion = questions[currentStep];
       const currentAnswer = answers[currentQuestion.id];
 
       if (direction === 'next') {
-        // Validate before moving forward
         const validationError = validateQuestion(currentQuestion, currentAnswer);
         if (validationError) {
           setError(validationError);
           return;
         }
-
-        // Clean URL if needed
         if (currentQuestion.type === 'url' && currentAnswer) {
           try {
             const cleanedUrl = cleanUrl(currentAnswer);
@@ -127,7 +113,6 @@ const HiringContextFormContainer = () => {
 
       setError(null);
       window.scrollTo({ top: 0, behavior: 'smooth' });
-
       setCurrentStep((prev) =>
         direction === 'next'
           ? Math.min(questions.length - 1, prev + 1)
@@ -137,12 +122,9 @@ const HiringContextFormContainer = () => {
     [answers, currentStep, questions, validateQuestion, language, translations]
   );
 
-  //============================================================
-  // 4. Final submission to the AI analysis
-  //============================================================
+  // Final submission to the AI analysis
   const handleSubmit = useCallback(async () => {
     try {
-      // Validate ALL required questions at once
       const requiredQuestions = questions.filter((q) => q.validation?.required);
       for (const question of requiredQuestions) {
         const err = validateQuestion(question, answers[question.id]);
@@ -154,8 +136,6 @@ const HiringContextFormContainer = () => {
 
       setIsAnalyzing(true);
       setError(null);
-
-      // NOTE: Must be named "session_id" to match the backend model
       const sessionIdFromStorage = localStorage.getItem('recruitment_session_id') || '';
       console.log('LocalStorage recruitment_session_id =', sessionIdFromStorage);
 
@@ -175,15 +155,12 @@ const HiringContextFormContainer = () => {
       };
 
       console.log('[HiringContextFormContainer] Submitting Form Data:', formData);
-
-      // Call your AI service
       const result = await hiringContextService.analyzeHiringContext(formData, language);
       console.log('[HiringContextFormContainer] Received Analysis Result:', result);
 
       if (!result || typeof result !== 'object') {
         throw new Error('Invalid response format from the analysis service.');
       }
-
       setAnalysisResult(result);
     } catch (e) {
       console.error('Submission Error:', e);
@@ -191,16 +168,14 @@ const HiringContextFormContainer = () => {
       setAnalysisResult({
         error: true,
         title: 'Analysis Failed',
-        summary: e.message || 'Analysis failed'
+        summary: e.message || 'Analysis failed',
       });
     } finally {
       setIsAnalyzing(false);
     }
   }, [answers, questions, language, validateQuestion]);
 
-  //============================================================
-  // 5. Reset form
-  //============================================================
+  // Reset form
   const handleReset = useCallback(() => {
     setCurrentStep(0);
     setAnswers({});
@@ -209,9 +184,7 @@ const HiringContextFormContainer = () => {
     setValidationStates({});
   }, []);
 
-  //============================================================
-  // 6. Return from results to the form
-  //============================================================
+  // Return from results to the form
   const handleGoBack = useCallback(() => {
     setAnalysisResult(null);
     setIsAnalyzing(false);
@@ -219,9 +192,7 @@ const HiringContextFormContainer = () => {
   }, []);
 
   // For your "Go Back" button text
-  const handleGoBack_Page = () => {
-    return language === 'it' ? 'Torna indietro' : 'Go Back';
-  };
+  const handleGoBack_Page = () => (language === 'it' ? 'Torna indietro' : 'Go Back');
 
   // Memoize the validation change callback so it doesn't trigger re-renders
   const currentQuestion = questions[currentStep];
@@ -253,16 +224,12 @@ const HiringContextFormContainer = () => {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth={2}
-                  d="M13 16h-1v-4h-1m1-4h.01
-                     M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9
-                     4.03-9 9-9 9 4.03 9 9z"
+                  d="M13 16h-1v-4h-1m1-4h.01 M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z"
                 />
               </svg>
             </div>
             <div className="ml-4">
-              <p className="text-sm text-gray-600 mt-1">
-                {translations.description}
-              </p>
+              <p className="text-sm text-gray-600 mt-1">{translations.description}</p>
             </div>
           </div>
         </div>
@@ -270,9 +237,7 @@ const HiringContextFormContainer = () => {
     </div>
   );
 
-  //============================================================
   // RENDER LOGIC
-  //============================================================
   if (isAnalyzing || analysisResult) {
     return (
       <HiringContext_Analysis_Container
