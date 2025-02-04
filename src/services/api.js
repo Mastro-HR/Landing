@@ -84,7 +84,7 @@ export const hiringContextService = {
 
       console.log('Transformed Request Body:', JSON.stringify(requestBody, null, 2));
       
-      const response = await fetch(`${API_BASE_URL}/api/hiring_context/analyze`, {
+      const response = await fetch(`${API_BASE_URL}/api/v1/hiring_context/analyze`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -139,7 +139,7 @@ export const hiringContextService = {
       const sessionId = localStorage.getItem('recruitment_session_id');
       if (!sessionId) return;
 
-      const response = await fetch(`${API_BASE_URL}/api/recruitment/clear/${sessionId}`, {
+      const response = await fetch(`${API_BASE_URL}/api/v1/recruitment/clear/${sessionId}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -193,7 +193,7 @@ export const candidatePersonaService = {
 
       console.log('Transformed Request Body:', JSON.stringify(requestBody, null, 2));
       
-      const response = await fetch(`${API_BASE_URL}/api/candidate_persona/analyze`, {
+      const response = await fetch(`${API_BASE_URL}/api/v1/candidate_persona/analyze`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -232,7 +232,7 @@ export const candidatePersonaService = {
       const sessionId = localStorage.getItem('recruitment_session_id');
       if (!sessionId) return;
 
-      const response = await fetch(`${API_BASE_URL}/api/recruitment/clear/${sessionId}`, {
+      const response = await fetch(`${API_BASE_URL}/api/v1/recruitment/clear/${sessionId}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -350,7 +350,7 @@ export const testAssessmentService = {
 
       console.log('Final request payload:', JSON.stringify(requestBody, null, 2));
       
-      const response = await fetch(`${API_BASE_URL}/api/test_assessment/analyze`, {
+      const response = await fetch(`${API_BASE_URL}/api/v1/test_assessment/analyze`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -446,7 +446,7 @@ export const sendContactEmail = async (data) => {
 
     console.log('[ContactService] Sending email request:', payload);
 
-    const response = await fetch(`${API_BASE_URL}/api/email/send-contact-email`, {
+    const response = await fetch(`${API_BASE_URL}/api/v1/email/send-contact-email`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
