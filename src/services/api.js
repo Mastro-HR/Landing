@@ -10,14 +10,14 @@ export const hiringContextService = {
       // Define validation for only questions 1 to 8
       const fieldValidations = {
         '1': { type: 'url', required: true },
-        '2': { type: 'array', required: true, minLength: 1, maxLength: 5 },
+        '2': { type: 'array', required: true, minLength: 1, maxLength: 3 },
         '3': { type: 'array', required: true, minLength: 1, maxLength: 3 },
         '4': { type: 'array', required: true, minLength: 1, maxLength: 4 },
-        '5': { type: 'array', required: true, minLength: 1, maxLength: 3 },
-        '6': { type: 'array', required: true, minLength: 1, maxLength: 5 },
-        '7': { type: 'string', required: true },
-        '8': { type: 'string', required: true }
-      };
+        '5': { type: 'array', required: true, minLength: 1, maxLength: 2 },
+        '6': { type: 'array', required: true, minLength: 1, maxLength: 3 },
+        '6': { type: 'array', required: true, minLength: 1, maxLength: 3 },
+        '6': { type: 'array', required: true, minLength: 1, maxLength: 3 },
+    };
 
       // Validate and transform answers
       const transformedAnswers = {};
@@ -275,8 +275,6 @@ export const testAssessmentService = {
         '5': { type: 'array', required: true, minLength: 1, maxLength: 3 },
         '6': { type: 'array', required: true, minLength: 1, maxLength: 3 },
         '7': { type: 'array', required: true, minLength: 1, maxLength: 3 },
-        '8': { type: 'array', required: true, minLength: 1, maxLength: 3 },
-        '9': { type: 'array', required: true, minLength: 1, maxLength: 4 }
       };
 
       // Handle website URL first, similar to hiringContextService
