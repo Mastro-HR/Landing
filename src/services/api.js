@@ -254,20 +254,17 @@ export const candidatePersonaService = {
   }
 };
 
-
 export const testAssessmentService = {
   analyzeTestAssessment: async (formData, language) => {
     console.groupCollapsed('[SERVICE] Test Assessment Analysis Request');
     
     try {
-      // Log incoming data
       console.log('Incoming formData:', {
         session_id: formData.session_id,
         websiteUrl: formData.answers['1'],
         answerKeys: Object.keys(formData.answers)
       });
 
-      // Field validations for the 7 questions
       const fieldValidations = {
         '1': { type: 'url', required: true },
         '2': { type: 'array', required: true, minLength: 1, maxLength: 3 },
@@ -278,7 +275,7 @@ export const testAssessmentService = {
         '7': { type: 'array', required: true, minLength: 1, maxLength: 3 },
       };
 
-      // Handle website URL first
+      // Process website URL (question 1)
       const websiteUrl = formData.answers['1'];
       console.log('Processing website URL:', websiteUrl);
       
@@ -287,10 +284,9 @@ export const testAssessmentService = {
         throw new Error('Company website is required');
       }
 
-      // Validate and transform answers
       const transformedAnswers = {};
-      
-      // Clean and save the URL answer (question 1)
+
+      // Clean URL answer
       try {
         const cleanedUrl = cleanUrl(websiteUrl);
         console.log('Cleaned URL:', cleanedUrl);
@@ -300,9 +296,9 @@ export const testAssessmentService = {
         throw new Error('Invalid website URL format');
       }
 
-      // Process the remaining answers based on validations
+      // Validate and transform the other answers
       for (const [key, validation] of Object.entries(fieldValidations)) {
-        if (key === '1') continue; // Skip URL as already handled
+        if (key === '1') continue;
         
         const value = formData.answers[key];
         console.log(`Processing answer ${key}:`, value);
@@ -386,6 +382,7 @@ export const testAssessmentService = {
     }
   }
 };
+
 
 
 // ----------- sendContactEmail ----------------------- //

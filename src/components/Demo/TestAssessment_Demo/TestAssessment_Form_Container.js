@@ -28,17 +28,14 @@ const TestAssessmentFormContainer = () => {
   const [error, setError] = useState(null);
   const [validationStates, setValidationStates] = useState({});
 
-  // 1. Handle user input
+  // 1. Handle user input for each question
   const handleAnswer = useCallback(
     (value, questionId) => {
       const question = questions.find((q) => q.id === questionId);
-
-      // Live URL validation if needed
       if (question?.type === 'url') {
         const isValid = value ? isValidUrl(value) : true;
         setValidationStates((prev) => ({ ...prev, [questionId]: isValid }));
       }
-
       console.log(`Received Answer for Question ID ${questionId}: "${value}"`);
       setAnswers((prev) => ({ ...prev, [questionId]: value }));
       setError(null);
@@ -96,13 +93,11 @@ const TestAssessmentFormContainer = () => {
       const currentAnswer = answers[currentQuestion.id];
 
       if (direction === 'next') {
-        // Validate before moving forward
         const validationError = validateQuestion(currentQuestion, currentAnswer);
         if (validationError) {
           setError(validationError);
           return;
         }
-        // Clean URL if needed
         if (currentQuestion.type === 'url' && currentAnswer) {
           try {
             const cleanedUrl = cleanUrl(currentAnswer);
@@ -128,7 +123,6 @@ const TestAssessmentFormContainer = () => {
   // 4. Final submission for analysis
   const handleSubmit = useCallback(async () => {
     try {
-      // Validate all required questions
       const requiredQuestions = questions.filter((q) => q.validation?.required);
       for (const question of requiredQuestions) {
         const err = validateQuestion(question, answers[question.id]);
@@ -141,11 +135,9 @@ const TestAssessmentFormContainer = () => {
       setIsAnalyzing(true);
       setError(null);
 
-      // Get session ID
       const sessionIdFromStorage = localStorage.getItem('assessment_session_id') || '';
       console.log('[TestAssessmentFormContainer] Session ID:', sessionIdFromStorage);
 
-      // Format answers properly
       const formattedAnswers = Object.entries(answers).reduce((acc, [key, value]) => {
         if (Array.isArray(value)) {
           acc[key] = value;
@@ -159,7 +151,7 @@ const TestAssessmentFormContainer = () => {
         return acc;
       }, {});
 
-      // Build questionnaire metadata using the correct keys:
+      // IMPORTANT: Map each question’s text into a property named "text" (not "question")
       const questionnaireData = {
         answers: formattedAnswers,
         metadata: {
@@ -174,8 +166,8 @@ const TestAssessmentFormContainer = () => {
         questions: questions.map(q => ({
           id: q.id,
           type: q.type,
-          question: q.question, // Use the correct key from your constants
-          options: q.options || undefined, // Options are already an array
+          text: q.question, // <-- change: use "text" because the backend expects it
+          options: q.options || undefined,
           validation: q.validation
         }))
       };
@@ -281,7 +273,6 @@ const TestAssessmentFormContainer = () => {
     [currentStep, questions]
   );
 
-  // When analyzing or after analysis, build the questionnaire data to pass along:
   if (isAnalyzing || analysisResult) {
     const analysisQuestionnaireData = {
       answers,
@@ -297,7 +288,7 @@ const TestAssessmentFormContainer = () => {
       questions: questions.map(q => ({
         id: q.id,
         type: q.type,
-        question: q.question, // Updated mapping
+        text: q.question, // <-- ensure we pass "text"
         options: q.options || undefined,
         validation: q.validation
       }))
@@ -343,7 +334,6 @@ const TestAssessmentFormContainer = () => {
 
         {renderDescriptionSection()}
 
-        {/* Form Container */}
         <div className="rounded-2xl p-8 bg-white shadow-lg border border-gray-200">
           <div className="mb-8">
             <TestAssessment_Form_ProgressBar
@@ -373,7 +363,6 @@ const TestAssessmentFormContainer = () => {
             )}
           </div>
 
-          {/* Navigation Buttons */}
           <div className="mt-8 pt-6 border-t border-gray-200 flex justify-between">
             <button
               onClick={() => handleNavigation('prev')}
