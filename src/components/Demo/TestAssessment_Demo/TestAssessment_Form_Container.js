@@ -28,14 +28,12 @@ const TestAssessmentFormContainer = () => {
   const [error, setError] = useState(null);
   const [validationStates, setValidationStates] = useState({});
 
-  // ============================================================
-  // 1. Handle user input for each question
-  // ============================================================
+  // 1. Handle user input
   const handleAnswer = useCallback(
     (value, questionId) => {
       const question = questions.find((q) => q.id === questionId);
 
-      // Live URL validation
+      // Live URL validation if needed
       if (question?.type === 'url') {
         const isValid = value ? isValidUrl(value) : true;
         setValidationStates((prev) => ({ ...prev, [questionId]: isValid }));
@@ -48,14 +46,11 @@ const TestAssessmentFormContainer = () => {
     [questions]
   );
 
-  // ============================================================
-  // 2. Validate a single question's answer
-  // ============================================================
+  // 2. Validate a single question’s answer
   const validateQuestion = useCallback(
     (question, answer) => {
       if (!question.validation?.required) return null;
 
-      // URL validation
       if (question.type === 'url') {
         if (!answer) {
           return translations?.errors?.websiteRequired[language];
@@ -73,21 +68,18 @@ const TestAssessmentFormContainer = () => {
         }
       }
 
-      // Text/textarea validation
       if (['text', 'textarea'].includes(question.type)) {
         if (!answer?.trim() || answer.trim().length < (question.validation.minLength || 1)) {
           return translations?.errors?.fieldRequired[language];
         }
       }
 
-      // Multi-select validation
       if (question.type === 'multiselect') {
         if (!Array.isArray(answer) || answer.length === 0) {
           return translations?.errors?.selectOne[language];
         }
       }
 
-      // Single choice validation
       if (question.type === 'choice' && !answer) {
         return translations?.errors?.selectOption[language];
       }
@@ -97,9 +89,7 @@ const TestAssessmentFormContainer = () => {
     [language, translations]
   );
 
-  // ============================================================
-  // 3. Handle navigation between steps
-  // ============================================================
+  // 3. Handle navigation between questions
   const handleNavigation = useCallback(
     (direction) => {
       const currentQuestion = questions[currentStep];
@@ -135,12 +125,10 @@ const TestAssessmentFormContainer = () => {
     [answers, currentStep, questions, validateQuestion, language, translations]
   );
 
-  // ============================================================
-  // 4. Final submission to the AI analysis
-  // ============================================================
+  // 4. Final submission for analysis
   const handleSubmit = useCallback(async () => {
     try {
-      // Validate ALL required questions
+      // Validate all required questions
       const requiredQuestions = questions.filter((q) => q.validation?.required);
       for (const question of requiredQuestions) {
         const err = validateQuestion(question, answers[question.id]);
@@ -171,7 +159,7 @@ const TestAssessmentFormContainer = () => {
         return acc;
       }, {});
 
-      // Create questionnaire data
+      // Build questionnaire metadata using the correct keys:
       const questionnaireData = {
         answers: formattedAnswers,
         metadata: {
@@ -183,12 +171,11 @@ const TestAssessmentFormContainer = () => {
           platform: navigator.platform,
           formType: 'test_assessment'
         },
-        // Safely handle question data
         questions: questions.map(q => ({
           id: q.id,
           type: q.type,
-          text: q.text ? (typeof q.text === 'object' ? q.text[language] : q.text) : '',
-          options: q.options ? q.options[language] : undefined,
+          question: q.question, // Use the correct key from your constants
+          options: q.options || undefined, // Options are already an array
           validation: q.validation
         }))
       };
@@ -211,7 +198,6 @@ const TestAssessmentFormContainer = () => {
         throw new Error('Invalid response format from the analysis service');
       }
 
-      // Set both the analysis result and questionnaire data
       setAnalysisResult({
         ...result,
         questionnaire: questionnaireData
@@ -233,9 +219,7 @@ const TestAssessmentFormContainer = () => {
     }
   }, [answers, questions, language, validateQuestion]);
 
-  // ============================================================
   // 5. Reset form
-  // ============================================================
   const handleReset = useCallback(() => {
     setCurrentStep(0);
     setAnswers({});
@@ -244,18 +228,14 @@ const TestAssessmentFormContainer = () => {
     setValidationStates({});
   }, []);
 
-  // ============================================================
   // 6. Return from results to the form
-  // ============================================================
   const handleGoBack = useCallback(() => {
     setAnalysisResult(null);
     setIsAnalyzing(false);
     setError(null);
   }, []);
 
-  const handleGoBack_Page = () => {
-    return language === 'it' ? 'Torna indietro' : 'Go Back';
-  };
+  const handleGoBack_Page = () => (language === 'it' ? 'Torna indietro' : 'Go Back');
 
   const renderDescriptionSection = () => (
     <div className="mb-12">
@@ -290,7 +270,6 @@ const TestAssessmentFormContainer = () => {
     </div>
   );
 
-  // --- Memoize onValidityChange to prevent infinite updates ---
   const handleValidityChange = useCallback(
     (isValid) => {
       if (!questions[currentStep]) return;
@@ -302,11 +281,8 @@ const TestAssessmentFormContainer = () => {
     [currentStep, questions]
   );
 
-// ============================================================
-  // RENDER LOGIC
-  // ============================================================
+  // When analyzing or after analysis, build the questionnaire data to pass along:
   if (isAnalyzing || analysisResult) {
-    // Create questionnaire data for the Analysis Container
     const analysisQuestionnaireData = {
       answers,
       metadata: {
@@ -321,8 +297,8 @@ const TestAssessmentFormContainer = () => {
       questions: questions.map(q => ({
         id: q.id,
         type: q.type,
-        text: q.text ? (typeof q.text === 'object' ? q.text[language] : q.text) : '',
-        options: q.options ? q.options[language] : undefined,
+        question: q.question, // Updated mapping
+        options: q.options || undefined,
         validation: q.validation
       }))
     };

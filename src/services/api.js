@@ -267,6 +267,7 @@ export const testAssessmentService = {
         answerKeys: Object.keys(formData.answers)
       });
 
+      // Field validations for the 7 questions
       const fieldValidations = {
         '1': { type: 'url', required: true },
         '2': { type: 'array', required: true, minLength: 1, maxLength: 3 },
@@ -277,7 +278,7 @@ export const testAssessmentService = {
         '7': { type: 'array', required: true, minLength: 1, maxLength: 3 },
       };
 
-      // Handle website URL first, similar to hiringContextService
+      // Handle website URL first
       const websiteUrl = formData.answers['1'];
       console.log('Processing website URL:', websiteUrl);
       
@@ -289,21 +290,19 @@ export const testAssessmentService = {
       // Validate and transform answers
       const transformedAnswers = {};
       
-      // Handle URL separately first
-      if (websiteUrl) {
-        try {
-          const cleanedUrl = cleanUrl(websiteUrl);
-          console.log('Cleaned URL:', cleanedUrl);
-          transformedAnswers['1'] = cleanedUrl;
-        } catch (error) {
-          console.error('URL cleaning error:', error);
-          throw new Error('Invalid website URL format');
-        }
+      // Clean and save the URL answer (question 1)
+      try {
+        const cleanedUrl = cleanUrl(websiteUrl);
+        console.log('Cleaned URL:', cleanedUrl);
+        transformedAnswers['1'] = cleanedUrl;
+      } catch (error) {
+        console.error('URL cleaning error:', error);
+        throw new Error('Invalid website URL format');
       }
 
-      // Handle other answers
+      // Process the remaining answers based on validations
       for (const [key, validation] of Object.entries(fieldValidations)) {
-        if (key === '1') continue; // Skip URL as it's already handled
+        if (key === '1') continue; // Skip URL as already handled
         
         const value = formData.answers[key];
         console.log(`Processing answer ${key}:`, value);
@@ -346,8 +345,6 @@ export const testAssessmentService = {
         JSON.stringify(requestBody, null, 2)
       );
 
-      console.log('Final request payload:', JSON.stringify(requestBody, null, 2));
-      
       const response = await fetch(`${API_BASE_URL}/api/v1/test_assessment/analyze`, {
         method: 'POST',
         headers: {
@@ -389,6 +386,7 @@ export const testAssessmentService = {
     }
   }
 };
+
 
 // ----------- sendContactEmail ----------------------- //
 
