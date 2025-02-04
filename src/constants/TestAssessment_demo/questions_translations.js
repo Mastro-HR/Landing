@@ -97,16 +97,16 @@ export const test_assessmentQuestionsTranslations = {
       },
       {
         id: '6',
-        section: "Performance Metrics",
-        question: "What key performance indicators (KPIs) will define success?",
+        section: "Assessment Scenario",
+        question: "What type of real scenario should the candidate be tested on?",
         type: "multiselect",
         multiSelectHint: true,
         options: [
-          { label: "Financial Growth Metrics", value: "financial_metrics" },
-          { label: "Operational Excellence KPIs", value: "operational_kpis" },
-          { label: "Team Development Goals", value: "team_goals" },
-          { label: "Market Position Indicators", value: "market_indicators" },
-          { label: "Innovation & Change Metrics", value: "innovation_metrics" },
+          { label: "Development of a new growth strategy", value: "growth_strategy" },
+          { label: "Solving a critical operational challenge", value: "operational_challenge" },
+          { label: "Launch of a new product or service", value: "product_launch" },
+          { label: "Expansion into a new market", value: "market_expansion" },
+          { label: "Optimization of organizational structure", value: "org_structure_optimization" },
           { label: "Other", value: "other" }
         ],
         maxSelection: 3,
@@ -117,60 +117,19 @@ export const test_assessmentQuestionsTranslations = {
       },
       {
         id: '7',
-        section: "Organizational Gaps",
-        question: "What are the current organizational gaps this role needs to address?",
+        section: "Test Success Indicators",
+        question: "Which aspects do you consider critical for evaluating the candidate through the test?",
         type: "multiselect",
         multiSelectHint: true,
         options: [
-          { label: "Strategic Leadership", value: "strategic_gap" },
-          { label: "Operational Excellence", value: "operational_gap" },
-          { label: "Innovation & Change Management", value: "innovation_gap" },
-          { label: "Team Development & Culture", value: "team_gap" },
-          { label: "Market & Customer Focus", value: "market_gap" },
+          { label: "Ability to analyze and define the problem", value: "problem_analysis" },
+          { label: "Proposal of concrete and feasible solutions", value: "feasible_solutions" },
+          { label: "Innovation and differentiating approach", value: "innovation_approach" },
+          { label: "Prioritization and execution capabilities", value: "execution_prioritization" },
+          { label: "Alignment with company values and culture", value: "culture_fit" },
           { label: "Other", value: "other" }
         ],
         maxSelection: 3,
-        maxLength: 150,
-        validation: {
-          required: true
-        }
-      },
-      {
-        id: '8',
-        section: "Decision Making",
-        question: "What type of decision-making approach is critical for this role?",
-        type: "multiselect",
-        multiSelectHint: true,
-        options: [
-          { label: "Data-Driven & Analytical", value: "data_driven" },
-          { label: "Strategic & Long-term Focused", value: "strategic_focus" },
-          { label: "Agile & Adaptive", value: "agile_adaptive" },
-          { label: "Collaborative & Inclusive", value: "collaborative" },
-          { label: "Risk-Balanced & Systematic", value: "risk_balanced" },
-          { label: "Other", value: "other" }
-        ],
-        maxSelection: 3,
-        maxLength: 150,
-        validation: {
-          required: true
-        }
-      },
-      {
-        id: '9',
-        section: "Current Capabilities",
-        question: "What relevant capabilities currently exist in your organization?",
-        type: "multiselect",
-        multiSelectHint: true,
-        options: [
-          { label: "Strong Leadership Team", value: "leadership_team" },
-          { label: "Established Processes", value: "established_processes" },
-          { label: "Technical Excellence", value: "technical_excellence" },
-          { label: "Market Presence", value: "market_presence" },
-          { label: "Innovation Culture", value: "innovation_culture" },
-          { label: "Other", value: "other" }
-        ],
-        maxSelection: 4,
-        maxLength: 150,
         validation: {
           required: true
         }
@@ -273,16 +232,16 @@ export const test_assessmentQuestionsTranslations = {
       },
       {
         id: '6',
-        section: "Metriche di Performance",
-        question: "Quali indicatori chiave di performance (KPI) definiranno il successo?",
+        section: "Scenario di Test",
+        question: "Su quale tipo di scenario reale il candidato dovrebbe essere messo alla prova?",
         type: "multiselect",
         multiSelectHint: true,
         options: [
-          { label: "Metriche di Crescita Finanziaria", value: "financial_metrics" },
-          { label: "KPI di Eccellenza Operativa", value: "operational_kpis" },
-          { label: "Obiettivi di Sviluppo del Team", value: "team_goals" },
-          { label: "Indicatori di Posizione di Mercato", value: "market_indicators" },
-          { label: "Metriche di Innovazione e Cambiamento", value: "innovation_metrics" },
+          { label: "Sviluppo di una nuova strategia di crescita", value: "growth_strategy" },
+          { label: "Risolvere una sfida operativa critica", value: "operational_challenge" },
+          { label: "Lancio di un nuovo prodotto o servizio", value: "product_launch" },
+          { label: "Espansione in un nuovo mercato", value: "market_expansion" },
+          { label: "Ottimizzazione della struttura organizzativa", value: "org_structure_optimization" },
           { label: "Altro", value: "other" }
         ],
         maxSelection: 3,
@@ -293,60 +252,19 @@ export const test_assessmentQuestionsTranslations = {
       },
       {
         id: '7',
-        section: "Gap Organizzativi",
-        question: "Quali sono gli attuali gap organizzativi che questo ruolo deve colmare?",
+        section: "Indicatori di Successo del Test",
+        question: "Quali aspetti consideri critici per valutare il candidato attraverso il test?",
         type: "multiselect",
         multiSelectHint: true,
         options: [
-          { label: "Leadership Strategica", value: "strategic_gap" },
-          { label: "Eccellenza Operativa", value: "operational_gap" },
-          { label: "Gestione dell'Innovazione e del Cambiamento", value: "innovation_gap" },
-          { label: "Sviluppo del Team e Cultura", value: "team_gap" },
-          { label: "Focus sul Mercato e sul Cliente", value: "market_gap" },
+          { label: "Capacità di analizzare e definire il problema", value: "problem_analysis" },
+          { label: "Proposta di soluzioni concrete e fattibili", value: "feasible_solutions" },
+          { label: "Innovazione e approccio differenziante", value: "innovation_approach" },
+          { label: "Capacità di prioritizzazione e execution", value: "execution_prioritization" },
+          { label: "Allineamento con i valori e la cultura aziendale", value: "culture_fit" },
           { label: "Altro", value: "other" }
         ],
         maxSelection: 3,
-        maxLength: 150,
-        validation: {
-          required: true
-        }
-      },
-      {
-        id: '8',
-        section: "Processo Decisionale",
-        question: "Quale tipo di approccio decisionale è fondamentale per questo ruolo?",
-        type: "multiselect",
-        multiSelectHint: true,
-        options: [
-          { label: "Basato sui Dati e Analitico", value: "data_driven" },
-          { label: "Strategico e Orientato al Lungo Termine", value: "strategic_focus" },
-          { label: "Agile e Adattivo", value: "agile_adaptive" },
-          { label: "Collaborativo e Inclusivo", value: "collaborative" },
-          { label: "Bilanciato sul Rischio e Sistematico", value: "risk_balanced" },
-          { label: "Altro", value: "other" }
-        ],
-        maxSelection: 3,
-        maxLength: 150,
-        validation: {
-          required: true
-        }
-      },
-      {
-        id: '9',
-        section: "Capacità Attuali",
-        question: "Quali capacità rilevanti esistono attualmente nella tua organizzazione?",
-        type: "multiselect",
-        multiSelectHint: true,
-        options: [
-          { label: "Team di Leadership Forte", value: "leadership_team" },
-          { label: "Processi Consolidati", value: "established_processes" },
-          { label: "Eccellenza Tecnica", value: "technical_excellence" },
-          { label: "Presenza sul Mercato", value: "market_presence" },
-          { label: "Cultura dell'Innovazione", value: "innovation_culture" },
-          { label: "Altro", value: "other" }
-        ],
-        maxSelection: 4,
-        maxLength: 150,
         validation: {
           required: true
         }

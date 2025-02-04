@@ -219,10 +219,9 @@ const HiringContext_Analysis_Container = memo(function HiringContext_Analysis_Co
         {/* Go Back Button */}
         <button
           onClick={onGoBack}
-          className="flex items-center gap-1 sm:gap-2 text-gray-600 hover:text-gray-900 mt-6 mb-6 sm:mb-12 text-sm sm:text-base"
-        >
+          className="flex items-center gap-1 sm:gap-2 text-gray-600 hover:text-gray-900 mt-6 mb-6 sm:mb-12 text-sm sm:text-base">
           <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" />
-          <span>{uiTranslations?.[language]?.backToAnalysis || 'Back to Analysis'}</span>
+          <span>{uiTranslations?.[language]?.navigation?.backToAnalysis || 'Back to Analysis'}</span>
         </button>
 
         {/* If loading or error, show loader/error. Otherwise, show main content + floating button */}

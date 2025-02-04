@@ -41,13 +41,13 @@ export const hiring_contextQuestionsTranslations = {
         type: "multiselect",
         multiSelectHint: true,
         options: [
-          { label: "Leadership and Strategy", value: "strategic_management" },
-          { label: "Hiring & Talent Management", value: "digital_transformation" },
-          { label: "Commercial and Business Growth", value: "leadership_development" },
-          { label: "Innovation and Technology", value: "innovation_technology" },
-          { label: "Marketing & Communication", value: "marketing_development" },
-          { label: "Operations & Processes", value: "operations_process" },
-          { label: "Finance & Scalability", value: "finance_scalability" },
+          { label: "Leadership and strategy", value: "strategic_management" },
+          { label: "Hiring and talent management", value: "digital_transformation" },
+          { label: "Commercial and business growth", value: "leadership_development" },
+          { label: "Innovation and technology", value: "innovation_technology" },
+          { label: "Marketing and communication", value: "marketing_development" },
+          { label: "Operations and processes", value: "operations_process" },
+          { label: "Finance and scalability", value: "finance_scalability" },
           { label: "Other", value: "other" }
         ],
         maxSelection: 3,
@@ -63,14 +63,14 @@ export const hiring_contextQuestionsTranslations = {
         type: "multiselect",
         multiSelectHint: true,
         options: [
-          { label: "Internal Structure and Processes", value: "structure_issues" },
-          { label: "Market Position Consolidation", value: "market_positioning" },
-          { label: "Growth and Expansion", value: "growth_expansion" },
-          { label: "Technology & Automation", value: "technology_products" },
-          { label: "Recruiting & Talent Management", value: "talent_management" },
-          { label: "Company Culture & Engagement", value: "cultural_issues" },
-          { label: "Client Acquisition", value: "client_acquisition" },
-          { label: "Cost Optimization", value: "cost_optimization" },
+          { label: "Internal structure and processes", value: "structure_issues" },
+          { label: "Market position consolidation", value: "market_positioning" },
+          { label: "Growth and expansion", value: "growth_expansion" },
+          { label: "Technology and automation", value: "technology_products" },
+          { label: "Recruiting and talent management", value: "talent_management" },
+          { label: "Company culture", value: "cultural_issues" },
+          { label: "Client acquisition", value: "client_acquisition" },
+          { label: "Cost optimization", value: "cost_optimization" },
           { label: "Other", value: "other" }
         ],
         maxSelection: 4,
@@ -87,10 +87,10 @@ export const hiring_contextQuestionsTranslations = {
         multiSelectHint: true,
         options: [
           { label: "We look for results-oriented managers", value: "results_oriented" },
-          { label: "We have an innovation-oriented mindset", value: "innovation_culture" },
-          { label: "The team has a collaborative culture", value: "collaborative_culture" },
-          { label: "I need a manager who is a change agent", value: "change_agent" },
-          { label: "I need someone to strengthen the current culture", value: "strengthen_culture" }
+          { label: "We look for innovation-oriented mindsets", value: "innovation_culture" },
+          { label: "We look for people with a collaborative culture", value: "collaborative_culture" },
+          { label: "We look for a manager who is a change agent", value: "change_agent" },
+          { label: "We look for someone to strengthen our current culture", value: "strengthen_culture" }
         ],
         maxSelection: 2,
         validation: {
@@ -146,7 +146,7 @@ export const hiring_contextQuestionsTranslations = {
           { label: "Speed up the selection process without losing effectiveness", value: "faster_hiring_process" },
           { label: "Improve evaluation of soft skills and cultural fit", value: "soft_skills_evaluation" },
           { label: "Make the company more attractive to top talent", value: "stronger_employer_branding" },
-          { label: "Integrate tools and automation to optimize recruiting", value: "recruitment_automation" },
+          { label: "Integrate software to optimize our recruiting processes", value: "recruitment_automation" },
           { label: "Other", value: "other" }
         ],
         maxSelection: 3,
@@ -181,7 +181,7 @@ export const hiring_contextQuestionsTranslations = {
           { label: "Espansione in nuovi mercati", value: "expand_new_markets" },
           { label: "Incremento dei ricavi ricorrenti", value: "increase_revenue" },
           { label: "Miglioramento dell'efficienza operativa", value: "improve_efficiency" },
-          { label: "Aumento della visibilità del marchio", value: "increase_brand_awareness" },
+          { label: "Aumento della visibilità del nostro brand", value: "increase_brand_awareness" },
           { label: "Sviluppo di nuovi prodotti", value: "engineer_products" },
           { label: "Ottimizzazione dei margini", value: "optimize_margins" }
         ],
@@ -197,13 +197,13 @@ export const hiring_contextQuestionsTranslations = {
         type: "multiselect",
         multiSelectHint: true,
         options: [
-          { label: "Leadership e Strategia", value: "strategic_management" },
-          { label: "Hiring & Talent Management", value: "digital_transformation" },
-          { label: "Commerciale e crescita del Business", value: "leadership_development" },
-          { label: "Innovazione e Technologia", value: "innovation_technology" },
-          { label: "Marketing & Comunicazione", value: "marketing_development" },
-          { label: "Operations & Processi", value: "operations_process" },
-          { label: "Finanza & Scalabilità", value: "finance_scalability" },
+          { label: "Leadership e strategia", value: "strategic_management" },
+          { label: "Hiring e talent management", value: "digital_transformation" },
+          { label: "Commerciale e vendite", value: "leadership_development" },
+          { label: "Innovazione e tecnologia", value: "innovation_technology" },
+          { label: "Marketing e comunicazione", value: "marketing_development" },
+          { label: "Operations e processi", value: "operations_process" },
+          { label: "Finanza e scalabilità", value: "finance_scalability" },
           { label: "Altro", value: "other" }
         ],
         maxSelection: 3,
@@ -219,12 +219,12 @@ export const hiring_contextQuestionsTranslations = {
         type: "multiselect",
         multiSelectHint: true,
         options: [
-          { label: "Struttura e Processi Interni", value: "structure_issues" },
+          { label: "Struttura e processi interni", value: "structure_issues" },
           { label: "Consolidamento del posizionamento di mercato", value: "market_positioning" },
-          { label: "Crescita e Espansione", value: "growth_expansion" },
-          { label: "Tecnologia & Automazione", value: "technology_products" },
-          { label: "Recruiting & Gestione del talento", value: "talent_management" },
-          { label: "Cultura aziendale & engagement", value: "cultural_issues" },
+          { label: "Crescita ed espansione", value: "growth_expansion" },
+          { label: "Tecnologia e automazione", value: "technology_products" },
+          { label: "Recruiting e gestione del talento", value: "talent_management" },
+          { label: "Cultura aziendale", value: "cultural_issues" },
           { label: "Acquisizione clienti", value: "client_acquisition" },
           { label: "Ottimizzazione costi", value: "cost_optimization" },
           { label: "Altro", value: "other" }
@@ -243,10 +243,10 @@ export const hiring_contextQuestionsTranslations = {
         multiSelectHint: true,
         options: [
           { label: "Cerchiamo manager orientati ai risultati", value: "results_oriented" },
-          { label: "Abbiamo una mentalità orientata all'innovazione", value: "innovation_culture" },
-          { label: "Il team ha una cultura collaborativa", value: "collaborative_culture" },
-          { label: "Cerco un manager che sia agente del cambiamento", value: "change_agent" },
-          { label: "Cerco qualcuno che rafforzi la cultura attuale", value: "strengthen_culture" }
+          { label: "Cerchiamo un manager con mentalità orientata all'innovazione", value: "innovation_culture" },
+          { label: "Cerchiamo un leader con una cultura collaborativa", value: "collaborative_culture" },
+          { label: "Cerchiamo un agente del cambiamento", value: "change_agent" },
+          { label: "Cerchiamo qualcuno che rafforzi la cultura attuale", value: "strengthen_culture" }
         ],
         maxSelection: 2,
         validation: {
@@ -300,9 +300,9 @@ export const hiring_contextQuestionsTranslations = {
         options: [
           { label: "Aumentare la qualità dei candidati in ingresso", value: "better_candidate_quality" },
           { label: "Velocizzare il processo di selezione senza perdere efficacia", value: "faster_hiring_process" },
-          { label: "Migliorare la capacità di valutare le soft skills e il fit culturale", value: "soft_skills_evaluation" },
-          { label: "Rendere più attraente l’azienda per i talenti migliori", value: "stronger_employer_branding" },
-          { label: "Integrare strumenti e automazioni per ottimizzare il recruiting", value: "recruitment_automation" },
+          { label: "Migliorare la capacità di valutazione di soft skills e fit culturale", value: "soft_skills_evaluation" },
+          { label: "Rendere più attraente l’azienda per i migliori talenti", value: "stronger_employer_branding" },
+          { label: "Integrare software per ottimizzare il recruiting", value: "recruitment_automation" },
           { label: "Altro", value: "other" }
         ],
         maxSelection: 3,
