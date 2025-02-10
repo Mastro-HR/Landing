@@ -56,7 +56,7 @@ const ProcessQuadrant = ({ title, description, number, onClick, position }) => (
         flex items-center space-x-2 opacity-0 group-hover:opacity-100 
         translate-x-4 group-hover:translate-x-0 transition-all duration-300"
       >
-        <span className="text-accent-500 font-medium text-sm sm:text-base">Learn More</span>
+        <span className="text-accent-500 font-medium text-sm sm:text-base"></span>
         <svg
           className="w-4 h-4 sm:w-5 sm:h-5 text-accent-500"
           fill="none"
