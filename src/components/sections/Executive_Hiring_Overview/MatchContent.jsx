@@ -11,28 +11,26 @@ const CandidateFlow = () => {
 
   const content = {
     left: {
-      title: isItalian ? "50.000+ Candidati" : "50,000+ Candidates",
+      title: isItalian ? "10.000+ Candidati" : "10,000+ Candidates",
       desc: isItalian
         ? "Accesso istantaneo a un vasto bacino di talenti globali qualificati"
         : "Instant access to a vast pool of qualified global talent",
       stat: isItalian ? "Candidati Analizzati" : "Candidates Analyzed"
     },
     center: {
-      title: isItalian ? "Algoritmo IA Avanzato" : "Advanced AI Algorithm",
+      title: isItalian ? "Analisi AI" : "AI Analysis",
       features: isItalian
         ? [
-            "Analisi profonda delle competenze",
-            "Valutazione della compatibilità culturale",
-            "Previsione del successo lavorativo",
-            "Matching in tempo reale"
+            "Analisi delle competenze tecniche",
+            "Valutazione del fit culturale",
+            "Matching con esperti del settore"
           ]
         : [
-            "Deep skill analysis",
+            "Hard-skill analysis",
             "Cultural fit assessment",
-            "Work success prediction",
-            "Real-time matching"
+            "Matching with industry-experts"
           ],
-      stat: isItalian ? "Parametri Valutati" : "Parameters Evaluated"
+      stat: isItalian ? "Parametri Analizzati" : "Parameters Analyzed"
     },
     right: {
       title: isItalian ? "I 3 Migliori Match" : "Top 3 Perfect Matches",
@@ -100,7 +98,7 @@ const CandidateFlow = () => {
             {content.left.desc}
           </p>
           <div className="mt-auto pt-4 border-t border-gray-800 w-full">
-            <div className="text-3xl font-bold text-blue-400">50K+</div>
+            <div className="text-3xl font-bold text-blue-400">10K+</div>
             <div className="text-sm text-gray-400">{content.left.stat}</div>
           </div>
         </motion.div>
@@ -125,7 +123,7 @@ const CandidateFlow = () => {
             ))}
           </ul>
           <div className="mt-auto pt-4 border-t border-gray-800 w-full">
-            <div className="text-3xl font-bold text-accent-500">250+</div>
+            <div className="text-3xl font-bold text-accent-500">150+</div>
             <div className="text-sm text-gray-400">{content.center.stat}</div>
           </div>
         </motion.div>
@@ -145,7 +143,7 @@ const CandidateFlow = () => {
             {content.right.desc}
           </p>
           <div className="mt-auto pt-4 border-t border-gray-800 w-full">
-            <div className="text-3xl font-bold text-green-400">99.8%</div>
+            <div className="text-3xl font-bold text-green-400">90.5%</div>
             <div className="text-sm text-gray-400">{content.right.stat}</div>
           </div>
         </motion.div>
