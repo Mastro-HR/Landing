@@ -1,44 +1,26 @@
-import React, { useState } from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
+import React, { useState, memo } from 'react';
+import { motion } from 'framer-motion';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { useLanguage } from '@/context/LanguageContext';
 import { translations } from '@/pages/static_translation';
 
-const partnerOrganizations = [
+const PARTNERS = [
   { src: '/images/OFP.png', alt: 'OFP' },
   { src: '/images/TP.png', alt: 'Together Price' },
   { src: '/images/CMOS.png', alt: 'CMOS' },
   { src: '/images/MB.png', alt: 'MB' },
-  { src: '/images/TG.png', alt: 'Traction' },
-  { src: '/images/AA.png', alt: 'Aziende Agricole' }
 ];
 
-const usePartnerDisplay = () => {
-  const isMobile = useMediaQuery('(max-width: 640px)');
-  const isTablet = useMediaQuery('(max-width: 1024px)');
-  const isLargeScreen = useMediaQuery('(min-width: 1536px)');
-  const prefersReducedMotion = useReducedMotion();
-
-  return {
-    logoSize: isMobile 
-      ? { width: 80, height: 50 } 
-      : isTablet 
-      ? { width: 100, height: 65 }
-      : isLargeScreen
-      ? { width: 140, height: 95 }
-      : { width: 120, height: 80 },
-    gapSize: isMobile ? 16 : isTablet ? 20 : 24,
-    shouldReduceMotion: prefersReducedMotion,
-    scrollDuration: isMobile ? 25 : isTablet ? 35 : 40
-  };
+const getLogoSize = (isMobile, isTablet, isLargeScreen) => {
+  if (isMobile) return { width: 80, height: 50 };
+  if (isTablet) return { width: 100, height: 65 };
+  if (isLargeScreen) return { width: 140, height: 95 };
+  return { width: 120, height: 80 };
 };
 
-const PartnerLogo = ({ src, alt }) => {
-  const { logoSize } = usePartnerDisplay();
+const PartnerLogo = memo(({ src, alt, logoSize, t }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
-  const { language } = useLanguage();
-  const t = translations[language].trustedPartners;
 
   return (
     <motion.div
@@ -54,11 +36,7 @@ const PartnerLogo = ({ src, alt }) => {
               onLoad={() => setIsLoaded(true)}
               onError={() => setImageError(true)}
               animate={{ opacity: isLoaded ? 1 : 0 }}
-              style={{
-                width: logoSize.width,
-                height: logoSize.height,
-                objectFit: 'contain'
-              }}
+              style={{ ...logoSize, objectFit: 'contain' }}
               className="transition-all duration-300"
             />
           ) : (
@@ -70,13 +48,20 @@ const PartnerLogo = ({ src, alt }) => {
       </div>
     </motion.div>
   );
-};
+});
+
+PartnerLogo.displayName = 'PartnerLogo';
 
 const TrustedPartners = () => {
-  const { scrollDuration, shouldReduceMotion } = usePartnerDisplay();
+  const isMobile = useMediaQuery('(max-width: 640px)');
+  const isTablet = useMediaQuery('(max-width: 1024px)');
+  const isLargeScreen = useMediaQuery('(min-width: 1536px)');
   const { language } = useLanguage();
   const t = translations[language].trustedPartners;
   
+  const logoSize = getLogoSize(isMobile, isTablet, isLargeScreen);
+  const scrollDuration = isMobile ? 25 : isTablet ? 35 : 40;
+
   return (
     <section className="py-6 xs:py-8 sm:py-12 lg:py-16 bg-white">
       <div className="max-w-7xl mx-auto px-3 xs:px-4 sm:px-6 lg:px-8">
@@ -96,19 +81,17 @@ const TrustedPartners = () => {
         <div className="relative">
           <div className="overflow-hidden mx-auto">
             <div className="flex logo-scroll">
-              <div 
-                className="flex animate-scroll gap-x-3 xs:gap-x-4 sm:gap-x-6 md:gap-x-8"
-                style={{ 
-                  animationPlayState: shouldReduceMotion ? 'paused' : 'running' 
-                }}>
+              <div className={`flex gap-x-3 xs:gap-x-4 sm:gap-x-6 md:gap-x-8 animate-partner-scroll`}>
                 {[...Array(2)].map((_, setIndex) => (
                   <div
                     key={setIndex}
                     className="flex items-center gap-3 xs:gap-4 sm:gap-6 md:gap-8">
-                    {partnerOrganizations.map((partner, index) => (
+                    {PARTNERS.map((partner, index) => (
                       <PartnerLogo
                         key={`set${setIndex}-${index}`}
                         {...partner}
+                        logoSize={logoSize}
+                        t={t}
                       />
                     ))}
                   </div>
@@ -123,44 +106,30 @@ const TrustedPartners = () => {
       </div>
 
       <style>{`
-        .continuous-scroll-wrapper {
-          mask: linear-gradient(
-            to right,
-            transparent,
-            black 10%,
-            black 90%,
-            transparent
-          );
-        }
-
-        .animate-scroll {
-          animation: continuous-scroll ${scrollDuration}s linear infinite;
+        .animate-partner-scroll {
+          animation: partner-scroll ${scrollDuration}s linear infinite;
         }
 
         @media (hover: hover) {
-          .logo-scroll:hover .animate-scroll {
+          .logo-scroll:hover .animate-partner-scroll {
             animation-play-state: paused;
           }
         }
 
-        @keyframes continuous-scroll {
-          from {
-            transform: translateX(0);
-          }
-          to {
-            transform: translateX(calc(-50% - 8px));
-          }
-        }
-
         @media (prefers-reduced-motion: reduce) {
-          .animate-scroll {
+          .animate-partner-scroll {
             animation: none;
             transform: translateX(0);
           }
+        }
+
+        @keyframes partner-scroll {
+          from { transform: translateX(0); }
+          to { transform: translateX(calc(-50% - 8px)); }
         }
       `}</style>
     </section>
   );
 };
 
-export default TrustedPartners;
+export default memo(TrustedPartners);

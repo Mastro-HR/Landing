@@ -49,12 +49,12 @@ const SolutionCard = memo(({
       `}
       onClick={() => position !== 'center' && setActiveStep(stepNumber - 1)}>
       <div className={`
-        bg-white rounded-xl p-4 sm:p-6 border cursor-pointer
+        bg-white rounded-lg p-4 sm:p-6 border cursor-pointer
         transform transition-all duration-200
         ${isActive ? 'border-accent-500 shadow-lg sm:shadow-xl' : 'border-gray-200 shadow-sm'}
         ${position === 'center' ? 'h-full' : 'h-[90%] mt-2'}
       `}>
-        <div className="absolute -top-3 left-4 bg-accent-500 text-white px-2 py-1 rounded-full text-xs sm:text-sm font-medium">
+        <div className="absolute -top-3 left-4 bg-accent-500 text-white px-2 py-1 rounded-lg text-xs sm:text-sm font-medium">
           {t.buttons.step} {stepNumber}
         </div>
         
@@ -87,7 +87,7 @@ const SolutionCard = memo(({
         {isActive && (
           <button
             onClick={(e) => handleButtonClick(e, id === 'matchExpert' ? '/contact-sales' : undefined)}
-            className="mt-4 sm:mt-6 w-full flex items-center justify-center px-4 sm:px-6 py-2 sm:py-3 rounded-full bg-accent-500 text-white font-medium hover:bg-accent-600 transform transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] text-sm sm:text-base">
+            className="mt-4 sm:mt-6 w-full flex items-center justify-center px-4 sm:px-6 py-2 sm:py-3 rounded-lg bg-accent-500 text-white font-medium hover:bg-accent-600 transform transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] text-sm sm:text-base">
             <span>{getButtonText()}</span>
             <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 ml-2" />
           </button>

@@ -24,7 +24,7 @@ const FeatureCard = memo(({ feature, index, isActive, onToggle, minHeight }) => 
   return (
     <div
       className={`
-        relative bg-white/90 backdrop-blur-md rounded-2xl
+        relative bg-white/90 backdrop-blur-md rounded-lg
         transition-all duration-300 ease-in-out border border-primary-100
         hover:border-primary-200
         ${isActive ? 'shadow-xl border-primary-300' : 'shadow-sm'}
@@ -108,7 +108,7 @@ const FeatureCard = memo(({ feature, index, isActive, onToggle, minHeight }) => 
                     }}
                     className="flex items-start gap-2 text-primary-600"
                   >
-                    <div className="w-1.5 h-1.5 rounded-full bg-accent-500 mt-2.5 flex-shrink-0" />
+                    <div className="w-1.5 h-1.5 rounded-lg bg-accent-500 mt-2.5 flex-shrink-0" />
                     <span className="text-sm sm:text-base">{detail}</span>
                   </motion.div>
                 ))}

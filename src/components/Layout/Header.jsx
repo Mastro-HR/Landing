@@ -1,16 +1,37 @@
 import React from 'react';
 import ReactGA from 'react-ga4';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { Menu, X, ChevronRight } from 'lucide-react';
+import { Menu, X, Sparkles } from 'lucide-react'; // Notice Sparkles is imported here
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '@/context/LanguageContext';
 import { translations } from '@/pages/static_translation';
 import LanguageSelector from '../LanguageToogle/LanguageSelector';
 
+// ==========================
+// 1) Enhanced TryUsButton
+// ==========================
+const TryUsButton = ({ onClick, label }) => (
+  <motion.button
+    onClick={onClick}
+    className="group relative flex items-center gap-2 px-4 py-2 rounded-lg 
+               bg-gradient-to-r from-accent-600 to-accent-500 text-gray-200 font-secondary font-medium
+               transition-all duration-300 ease-in-out
+               hover:from-accent-600 hover:to-accent-400 hover:shadow-lg hover:shadow-accent-500/50"
+    whileHover={{ scale: 1.02 }}
+    whileTap={{ scale: 0.98 }}
+  >
+    <Sparkles className="w-4 h-4 transition-transform group-hover:rotate-12" />
+    <span>{label}</span>
+  </motion.button>
+);
+
+// ==========================
+// 2) Styled NavLink
+// ==========================
 const StyledNavLink = ({ to, children, onClick }) => {
   const location = useLocation();
   const isActive = location.pathname === to;
-  
+
   return (
     <Link
       to={to}
@@ -36,66 +57,107 @@ const StyledNavLink = ({ to, children, onClick }) => {
   );
 };
 
-const MobileMenu = ({ isOpen, onClose, onDemoClick, onLanguageChange, translations }) => {
-  if (!isOpen) return null;
+// ==========================
+// 3) Mobile Menu Animations
+// ==========================
+const menuVariants = {
+  hidden: { opacity: 0, y: -20, scale: 0.95 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.2, ease: 'easeOut' },
+  },
+  exit: {
+    opacity: 0,
+    y: -20,
+    scale: 0.95,
+    transition: { duration: 0.16, ease: 'easeIn' },
+  },
+};
 
+// ==========================
+// 4) Mobile Menu
+// ==========================
+const MobileMenu = ({ isOpen, onClose, onDemoClick, onLanguageChange, translations }) => {
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.2 }}
-      className="fixed inset-0 z-40 bg-black bg-opacity-90"
-      role="dialog"
-      aria-modal="true"
-    >
-      <div className="flex items-center justify-between px-4 h-16 border-b border-primary-50/10">
-        <Link
-          to="/"
-          className="text-xl font-semibold text-primary-50 hover:text-accent-500 transition-colors"
-          onClick={onClose}
+    <AnimatePresence>
+      {isOpen && (
+        // Semi-transparent backdrop
+        <motion.div
+          className="fixed inset-0 z-40 bg-black/90 backdrop-blur-sm"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
+          role="dialog"
+          aria-modal="true"
         >
-          MASTRO
-        </Link>
-        <button
-          onClick={onClose}
-          className="w-10 h-10 flex items-center justify-center rounded-full bg-primary-900/50 text-primary-50"
-        >
-          <X className="w-5 h-5" />
-        </button>
-      </div>
-      <div className="h-[calc(100vh-4rem)] overflow-y-auto px-4 py-6">
-        <nav className="flex flex-col space-y-4">
-          <StyledNavLink to="/contact-sales" onClick={onClose}>
-            {translations.contactSales}
-          </StyledNavLink>
-          <motion.button
-            onClick={onDemoClick}
-            className="flex items-center justify-between w-full px-4 py-3 rounded-lg bg-primary-800/20 text-primary-50"
-            whileTap={{ scale: 0.98 }}
+          {/* Slide + fade container */}
+          <motion.div
+            className="relative flex flex-col w-full h-full"
+            variants={menuVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
           >
-            <span className="text-lg font-medium">{translations.Demo}</span>
-            <ChevronRight className="w-5 h-5" />
-          </motion.button>
-          <div className="mt-4">
-            <LanguageSelector
-              isMobile
-              onLanguageChange={onLanguageChange}
-              className="w-full"
-            />
-          </div>
-        </nav>
-      </div>
-    </motion.div>
+            {/* Top Bar */}
+            <div className="flex items-center justify-between px-4 h-16 border-b border-primary-50/10">
+              <Link
+                to="/"
+                className="text-2xl font-primary text-primary-50 hover:text-accent-500 transition-colors"
+                onClick={onClose}
+              >
+                MASTRO
+              </Link>
+              <button
+                onClick={onClose}
+                className="w-10 h-10 flex items-center justify-center rounded-full 
+                           bg-primary-900/50 text-primary-50 hover:bg-primary-800/50 
+                           transition-colors duration-200"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Menu Content */}
+            <div className="h-[calc(100vh-4rem)] overflow-y-auto px-4 py-6">
+              <nav className="flex flex-col space-y-4">
+                {/* Example Nav Link */}
+                <StyledNavLink to="/contact-sales" onClick={onClose}>
+                  {translations.contactSales}
+                </StyledNavLink>
+
+                {/* Enhanced TryUs Button for Demo */}
+                <TryUsButton onClick={onDemoClick} label={translations.Demo} />
+
+                {/* Language Selector */}
+                <div className="mt-4">
+                  <LanguageSelector
+                    isMobile
+                    onLanguageChange={onLanguageChange}
+                    className="w-full"
+                  />
+                </div>
+              </nav>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };
 
+// ==========================
+// 5) Header
+// ==========================
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const navigate = useNavigate();
   const { language, changeLanguage } = useLanguage();
   const t = translations[language].nav;
 
+  // Prevent body scroll when mobile menu is open
   React.useEffect(() => {
     if (isMenuOpen) {
       document.body.style.overflow = 'hidden';
@@ -105,66 +167,72 @@ const Header = () => {
     }
   }, [isMenuOpen]);
 
-  const trackAndNavigate = React.useCallback((path, label) => {
-    ReactGA.event({
-      category: 'Navigation',
-      action: 'Click',
-      label: label || path,
-    });
-    navigate(path);
-  }, [navigate]);
+  const trackAndNavigate = React.useCallback(
+    (path, label) => {
+      ReactGA.event({
+        category: 'Navigation',
+        action: 'Click',
+        label: label || path,
+      });
+      navigate(path);
+    },
+    [navigate]
+  );
 
   const handleDemoClick = React.useCallback(() => {
     trackAndNavigate('/ai_form', 'demo_button');
     setIsMenuOpen(false);
   }, [trackAndNavigate]);
 
-  const handleLanguageChange = React.useCallback((newLang) => {
-    ReactGA.event({
-      category: 'Language',
-      action: 'Change',
-      label: newLang,
-    });
-    changeLanguage(newLang);
-    setIsMenuOpen(false);
-  }, [changeLanguage]);
+  const handleLanguageChange = React.useCallback(
+    (newLang) => {
+      ReactGA.event({
+        category: 'Language',
+        action: 'Change',
+        label: newLang,
+      });
+      changeLanguage(newLang);
+      setIsMenuOpen(false);
+    },
+    [changeLanguage]
+  );
 
   return (
     <>
-      <header className="fixed top-0 w-full z-50 bg-black/95 backdrop-blur-md border-b border-primary-50/10">
+      {/* Header Bar */}
+      <header
+        className="fixed top-0 w-full z-50 border-b border-primary-50/10 
+                   bg-black/95 md:bg-gradient-to-r md:from-black/90 md:via-black/80 md:to-black/90
+                   backdrop-blur-md shadow-lg"
+      >
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
+            {/* Logo */}
             <Link
               to="/"
-              className="text-xl font-semibold text-primary-50 hover:text-accent-500 transition-colors"
+              className="font-primary text-2xl text-primary-50 hover:text-accent-500 transition-colors"
               onClick={() => trackAndNavigate('/', 'Logo_Home')}
             >
               <span className="sr-only">MASTRO Home</span>
               MASTRO
             </Link>
 
-            <div className="hidden md:flex items-center gap-4">
-              <StyledNavLink to="/contact-sales">
-                {t.contactSales}
-              </StyledNavLink>
-              <motion.button
-                onClick={handleDemoClick}
-                className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary-50/5 border border-primary-50/10 text-primary-50"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <span>{t.Demo}</span>
-                <ChevronRight className="w-4 h-4" />
-              </motion.button>
-              <LanguageSelector 
-                className="ml-2" 
+            {/* Desktop Nav */}
+            <div className="hidden md:flex items-center gap-6">
+              <StyledNavLink to="/contact-sales">{t.contactSales}</StyledNavLink>
+              <TryUsButton onClick={handleDemoClick} label={t.Demo} />
+              <LanguageSelector
+                className="ml-2"
                 onLanguageChange={handleLanguageChange}
               />
             </div>
 
+            {/* Mobile Toggle */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="md:hidden w-10 h-10 flex items-center justify-center rounded-full bg-primary-900/50 text-primary-50"
+              className="md:hidden w-10 h-10 flex items-center justify-center
+                         rounded-full bg-primary-900/50 text-primary-50
+                         hover:bg-primary-800/50 transition-colors duration-200"
             >
               {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
@@ -172,15 +240,14 @@ const Header = () => {
         </nav>
       </header>
 
-      <AnimatePresence mode="wait">
-        <MobileMenu
-          isOpen={isMenuOpen}
-          onClose={() => setIsMenuOpen(false)}
-          onDemoClick={handleDemoClick}
-          onLanguageChange={handleLanguageChange}
-          translations={t}
-        />
-      </AnimatePresence>
+      {/* Mobile Menu */}
+      <MobileMenu
+        isOpen={isMenuOpen}
+        onClose={() => setIsMenuOpen(false)}
+        onDemoClick={handleDemoClick}
+        onLanguageChange={handleLanguageChange}
+        translations={t}
+      />
     </>
   );
 };

@@ -263,7 +263,7 @@ const HiringContextFormContainer = () => {
         <div className="mb-8">
           <button
             onClick={() => navigate('/ai_form')}
-            className="group flex items-left rounded-full bg-white"
+            className="group flex items-left rounded-lg bg-white"
           >
             <div className="flex items-center justify-left space-x-1">
               <span className="flex items-center justify-center w-8 h-8">
@@ -279,7 +279,7 @@ const HiringContextFormContainer = () => {
         {renderDescriptionSection()}
 
         {/* Form Container */}
-        <div className="rounded-2xl p-8 bg-white shadow-lg border border-gray-200">
+        <div className="rounded-lg p-8 bg-white shadow-lg border border-gray-200">
           <div className="mb-8">
             <HiringContext_Form_ProgressBar
               currentStep={currentStep}
@@ -313,7 +313,7 @@ const HiringContextFormContainer = () => {
             <button
               onClick={() => handleNavigation('prev')}
               disabled={currentStep === 0 || isAnalyzing}
-              className="flex items-center px-6 py-3 rounded-full text-primary-900 disabled:opacity-50 transition-all hover:scale-[1.02]"
+              className="flex items-center px-6 py-3 rounded-lg text-primary-900 disabled:opacity-50 transition-all hover:scale-[1.02]"
             >
               <ChevronLeft className="w-5 h-5 mr-2" />
               {translations?.navigation?.previous}
@@ -323,7 +323,7 @@ const HiringContextFormContainer = () => {
               <button
                 onClick={handleSubmit}
                 disabled={isAnalyzing || !isCurrentValid}
-                className="flex items-center px-6 py-3 rounded-full bg-accent-500 hover:bg-accent-600 text-white disabled:opacity-50 transition-transform hover:scale-[1.02]"
+                className="flex items-center px-6 py-3 rounded-lg bg-accent-500 hover:bg-accent-600 text-white disabled:opacity-50 transition-transform hover:scale-[1.02]"
               >
                 {isAnalyzing ? <AnimatedLoader /> : translations?.analysis?.button}
               </button>
@@ -331,7 +331,7 @@ const HiringContextFormContainer = () => {
               <button
                 onClick={() => handleNavigation('next')}
                 disabled={!isCurrentAnswered}
-                className="flex items-center px-6 py-3 rounded-full bg-accent-500 hover:bg-accent-600 text-white disabled:opacity-50 transition-transform hover:scale-[1.02]"
+                className="flex items-center px-6 py-3 rounded-lg bg-accent-500 hover:bg-accent-600 text-white disabled:opacity-50 transition-transform hover:scale-[1.02]"
               >
                 {translations?.navigation?.next}
                 <ChevronRight className="w-5 h-5 ml-2" />

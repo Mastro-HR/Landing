@@ -52,7 +52,7 @@ const AccordionSection = ({ section, isActive, onToggle, index, language }) => {
   return (
     <div
       className={`
-        bg-white/90 backdrop-blur-md rounded-2xl overflow-hidden
+        bg-white/90 backdrop-blur-md rounded-lg overflow-hidden
         transition-all duration-500 ease-in-out
         ${isActive ? 'shadow-lg border-primary-300' : 'border-primary-100'}
         border hover:border-primary-200

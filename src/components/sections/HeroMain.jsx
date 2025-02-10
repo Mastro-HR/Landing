@@ -4,19 +4,12 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { ChevronRight } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
 import { translations } from '@/pages/static_translation';
-import BackgroundEffects from '@/components/ui/background_effects';
 
 const HeroMain = () => {
   const { scrollY } = useScroll();
   const parallaxY = useTransform(scrollY, [0, 500], [0, -50]);
   const { language } = useLanguage();
   const t = translations[language].hero;
-
-  const profiles = [
-    { id: 1, image: "/images/manager4.jpg" },
-    { id: 2, image: "/images/manager2.jpg" },
-    { id: 3, image: "/images/manager3.jpg" }
-  ];
 
   const titleVariants = {
     hidden: { opacity: 0, y: 30 },
@@ -30,15 +23,36 @@ const HeroMain = () => {
     }
   };
 
+  const StepCard = ({ number, title, description }) => (
+    <div className="flex-1">
+      <motion.div
+        className="h-full p-6 sm:p-8 rounded-lg bg-primary-50/5 backdrop-blur-xl border border-primary-50/10 relative"
+        whileHover={{ borderColor: 'rgba(var(--accent-500), 0.5)', transition: { duration: 0.2 } }}>
+        <h3 className="text-xl sm:text-2xl font-bold text-primary-50 mb-4 mt-2">
+          {title}
+        </h3>
+        <p className="text-primary-100/80 text-base sm:text-lg leading-relaxed">
+          {description}
+        </p>
+      </motion.div>
+    </div>
+  );
+
+  const Operator = ({ type }) => (
+    <div className="flex items-center justify-center h-16 md:h-auto md:w-16">
+      <span className="text-4xl md:text-5xl text-accent-500 font-light">
+        {type}
+      </span>
+    </div>
+  );
+
   return (
-    <section className="relative min-h-[100svh] overflow-hidden bg-gradient-to-b from-teal-500 to-black">
-      <BackgroundEffects />
-      
+    <section className="relative min-h-[100svh] overflow-hidden bg-black">      
       <motion.div 
         className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
         style={{ y: parallaxY }}>
         <div className="min-h-[100svh] flex flex-col justify-center pt-24 pb-16">
-          <div className="w-full lg:w-3/4 xl:w-3/5">
+          <div className="w-full max-w-5xl mx-auto text-center">
             <motion.div
               className="space-y-8 sm:space-y-10"
               initial="hidden"
@@ -48,50 +62,83 @@ const HeroMain = () => {
                   transition: { staggerChildren: 0.15 }
                 }
               }}>
+              {/* Badge */}
               <motion.div
-                className="inline-flex items-center px-5 py-2.5 rounded-full bg-primary-50/5 backdrop-blur-xl border border-primary-50/10 shadow-lg shadow-accent-500/20"
+                className="flex justify-center"
                 variants={titleVariants}>
-                <span className="w-2 h-2 rounded-full bg-accent-500 mr-3 animate-pulse" />
-                <span className="text-primary-50 font-medium text-base sm:text-lg">{t.badge}</span>
+                <div className="inline-flex items-center px-5 py-2.5 rounded-full bg-primary-50/5 backdrop-blur-xl border border-primary-50/10 shadow-lg shadow-accent-500/20">
+                  <span className="w-2 h-2 rounded-full bg-accent-500 mr-3 animate-pulse" />
+                  <span className="text-primary-50 font-medium text-base sm:text-lg">{t.badge}</span>
+                </div>
               </motion.div>
 
+              {/* Title Section */}
               <div className="space-y-8">
                 <motion.h1 className="space-y-4">
                   <motion.span
-                    className="block text-3xl sm:text-4xl lg:text-6xl xl:text-7xl font-bold text-primary-50 leading-tight tracking-tight"
+                    className="block text-4xl sm:text-5xl lg:text-7xl xl:text-8xl font-bold text-primary-50 leading-tight tracking-tight"
                     variants={titleVariants}>
                     {t.titleLine1}
                   </motion.span>
                   <motion.div variants={titleVariants}>
-                    <span className="block text-3xl sm:text-4xl lg:text-6xl xl:text-7xl font-bold bg-gradient-to-r from-accent-500 to-accent-400 text-transparent bg-clip-text">
+                    <span className="block text-4xl sm:text-5xl lg:text-7xl xl:text-8xl font-bold bg-gradient-to-r from-accent-500 to-accent-500 text-transparent bg-clip-text">
                       {t.titleLine2}
                     </span>
                   </motion.div>
                 </motion.h1>
                 
                 <motion.p
-                  className="text-base sm:text-lg lg:text-xl text-primary-100/80 max-w-2xl leading-relaxed"
+                  className="text-lg sm:text-xl lg:text-2xl text-primary-100/80 max-w-3xl mx-auto leading-relaxed"
                   variants={titleVariants}>
                   {t.description}
                 </motion.p>
               </div>
 
+              {/* CTAs */}
               <motion.div
-                className="flex flex-col sm:flex-row gap-8 sm:items-center"
+                className="flex flex-col sm:flex-row justify-center items-stretch gap-4 max-w-xl mx-auto"
                 variants={titleVariants}>
                 <Link
                   to="/contact-sales"
-                  className="group relative overflow-hidden px-6 py-3.5 rounded-full bg-primary-50 text-teal-800 font-medium text-base sm:text-lg hover:shadow-xl hover:shadow-accent-500/20 transition-all duration-500 flex items-center gap-2 w-fit">
+                  className="group relative overflow-hidden px-4 py-2 rounded-lg bg-primary-50 text-black font-medium text-base sm:text-lg hover:shadow-xl hover:shadow-accent-500/20 transition-all duration-300 flex items-center justify-center gap-2 flex-1">
                   <span className="relative z-10 whitespace-nowrap">{t.cta}</span>
                   <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform flex-shrink-0" />
                   <div className="absolute inset-0 bg-gradient-to-r from-accent-500/90 to-accent-400/90 opacity-0 group-hover:opacity-10 transition-opacity duration-300" />
                 </Link>
 
-                <div className="flex items-center space-x-4">
-                  <span className="text-primary-100/80 font-medium text-sm sm:text-base">
-                    {t.trust}
-                  </span>
-                </div>
+                <Link
+                  to="/ai_form"
+                  className="group px-4 py-2 rounded-lg border border-primary-50/20 text-primary-50 font-medium text-base sm:text-lg hover:bg-primary-50/5 transition-colors flex items-center justify-center gap-2 flex-1">
+                  <span>{t.secondaryCta}</span>
+                  <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </motion.div>
+
+              {/* Process Steps */}
+              <motion.div 
+                className="flex flex-col md:flex-row items-stretch gap-6 md:gap-4 mt-24"
+                variants={titleVariants}>
+                <StepCard 
+                  number="1"
+                  title="WE ASSESS"
+                  description="Our experts conduct strategic discovery sessions to understand your unique needs and requirements"
+                />
+                
+                <Operator type="+" />
+                
+                <StepCard 
+                  number="2"
+                  title="AI POWERS"
+                  description="Our AI platform searches, screens, and evaluates millions of candidates using 50+ technical metrics"
+                />
+                
+                <Operator type="=" />
+                
+                <StepCard 
+                  number="3"
+                  title="YOU DECIDE"
+                  description="Select your ideal candidate from a curated shortlist of exceptional, validated talent"
+                />
               </motion.div>
             </motion.div>
           </div>

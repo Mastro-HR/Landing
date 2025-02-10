@@ -8,15 +8,30 @@ export const translations = {
         careers: 'Careers'
       },
       hero: {
-        badge: 'AI-Powered HR Technology',
+        badge: 'AI-Powered Executive Search',
         titleLine1: 'Hire Right.',
         titleLine2: 'Grow Faster.',
-        description: 'Revolutionize your talent acquisition with our adaptive AI process that evolves with your organization needs.',
+        description: 'Identify the right executive. 10x faster. 10x cheaper.',
         cta: 'Book a Demo',
-        trust: 'Trusted by 500+ managers & executives',
+        secondaryCta: 'Try Us',
+        trust: 'Trusted by Fortune 500 executives and industry leaders',
         altText: {
           profile: 'Profile'
-        }
+        },
+        steps: [
+          {
+            title: 'WE ASSESS',
+            description: 'Our experts conduct strategic discovery sessions to understand your unique needs and requirements'
+          },
+          {
+            title: 'AI POWERS',
+            description: 'Our AI platform searches, screens, and evaluates millions of candidates using 50+ technical metrics'
+          },
+          {
+            title: 'YOU DECIDE',
+            description: 'Select your ideal candidate from a curated shortlist of exceptional, validated talent'
+          }
+        ]
       },
       trustedPartners: {
         title: 'Trusted by Industry Leaders',
@@ -44,19 +59,57 @@ export const translations = {
         features: {
           workflow: {
             title: 'Intelligent Workflow Orchestration',
-            description: 'Our AI orchestrates end-to-end hiring processes, dynamically adapting to your organization\'s needs and candidate interactions.'
+            description: 'Our AI orchestrates end-to-end hiring processes, dynamically adapting to your organization\'s needs and candidate interactions.',
+            icon: 'Workflow',
+            label: 'Smart Process Management'
           },
           matching: {
             title: 'Neural Talent Matching',
-            description: 'Advanced neural networks analyze multidimensional candidate profiles to identify optimal role and culture alignment.'
+            description: 'Advanced neural networks analyze multidimensional candidate profiles to identify optimal role and culture alignment.',
+            icon: 'Network',
+            label: 'AI-Powered Matching'
           },
           security: {
             title: 'Enterprise-Grade Security',
-            description: 'Bank-level encryption and compliance frameworks ensure your sensitive recruitment data remains protected.'
+            description: 'Bank-level encryption and compliance frameworks ensure your sensitive recruitment data remains protected.',
+            icon: 'Shield',
+            label: 'Maximum Security'
           },
           analytics: {
             title: 'Predictive Analytics',
-            description: 'Machine learning models forecast candidate success potential and provide actionable hiring insights.'
+            description: 'Machine learning models forecast candidate success potential and provide actionable hiring insights.',
+            icon: 'Chart',
+            label: 'Data-Driven Insights'
+          }
+        },
+        sections: {
+          process: {
+            title: 'Streamlined Interview Process',
+            description: 'Experience a seamless end-to-end interview workflow powered by AI',
+            steps: {
+              preparation: 'Interview Preparation',
+              assessment: 'Skills Assessment',
+              evaluation: 'AI-Powered Evaluation'
+            }
+          },
+          benefits: {
+            title: 'Key Platform Benefits',
+            items: {
+              efficiency: 'Reduce time-to-hire by 60%',
+              quality: 'Improve candidate quality by 45%',
+              consistency: 'Ensure 100% consistent evaluation',
+              scalability: 'Scale hiring processes effortlessly'
+            }
+          },
+          testimonials: {
+            title: 'What Our Clients Say',
+            subtitle: 'Trusted by leading companies worldwide'
+          },
+          callToAction: {
+            title: 'Ready to Transform Your Hiring?',
+            subtitle: 'Join the next generation of intelligent recruitment',
+            primaryButton: 'Get Started Now',
+            secondaryButton: 'Schedule Demo'
           }
         }
       },

@@ -3,13 +3,12 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { Users, TrendingUp, Clock } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
 import { translations } from '@/pages/static_translation';
-import BackgroundEffects from '@/components/ui/background_effects';
 
 const LanguageTransition = ({ children, language }) => {
   const [isVisible, setIsVisible] = useState(true);
   const [content, setContent] = useState(children);
   const previousLanguageRef = useRef(language);
-  
+
   useEffect(() => {
     if (previousLanguageRef.current !== language) {
       setIsVisible(false);
@@ -36,8 +35,8 @@ const LanguageTransition = ({ children, language }) => {
 
 const StatIcons = {
   Timer: memo(({ className }) => (
-    <svg 
-      viewBox="0 0 24 24" 
+    <svg
+      viewBox="0 0 24 24"
       className={className}
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -53,20 +52,20 @@ const StatIcons = {
 
 const StatCard = memo(({ icon: Icon, value, label, language }) => (
   <div className="relative group h-full">
-    <div className="bg-primary-50/5 backdrop-blur-xl border border-primary-50/10 rounded-2xl p-6 transition-all duration-300 hover:border-accent-500/20 h-full flex flex-col">
+    <div className="bg-primary-50/5 backdrop-blur-xl border border-primary-50/10 rounded-lg p-6 transition-all duration-300 hover:border-accent-500/20 h-full flex flex-col">
       <div className="flex flex-col items-center text-center flex-1 justify-between">
         <div className="absolute -top-4 left-1/2 -translate-x-1/2 rounded-full p-3 bg-[#1C1C1C] border border-accent-500/20 transition-all duration-300 group-hover:border-accent-500/40">
           <Icon className="w-6 h-6 text-accent-500" />
         </div>
-        
+
         <LanguageTransition language={language}>
-          <div 
+          <div
             className="mt-6 font-bold bg-gradient-to-r from-accent-500 to-accent-400 text-transparent bg-clip-text"
             style={{ fontSize: 'clamp(1.875rem, 4vw, 3rem)' }}
           >
             {value}
           </div>
-          
+
           <p className="text-primary-100/80 text-sm sm:text-base mt-3 max-w-[200px] leading-relaxed">
             {label}
           </p>
@@ -83,28 +82,16 @@ const PowerSection = () => {
   const t = translations[language].powerSection;
 
   const stats = [
-    {
-      icon: StatIcons.Timer,
-      ...t.stats.timeToFill
-    },
-    {
-      icon: StatIcons.Users,
-      ...t.stats.internalHires
-    },
-    {
-      icon: StatIcons.TrendingUp,
-      ...t.stats.spending
-    },
-    {
-      icon: StatIcons.Clock,
-      ...t.stats.timeSaved
-    }
+    { icon: StatIcons.Timer, ...t.stats.timeToFill },
+    { icon: StatIcons.Users, ...t.stats.internalHires },
+    { icon: StatIcons.TrendingUp, ...t.stats.spending },
+    { icon: StatIcons.Clock, ...t.stats.timeSaved }
   ];
 
   return (
     <section className="relative py-24 overflow-hidden bg-gradient-to-b from-teal-500 to-black">
-      <div 
-        className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" 
+      <div
+        className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
         style={{ transform: `translateY(${parallaxY}px)` }}
       >
         <LanguageTransition language={language}>
@@ -121,7 +108,7 @@ const PowerSection = () => {
                 </React.Fragment>
               ))}
             </h2>
-            
+
             <p className="text-primary-100/80 max-w-2xl mx-auto text-lg sm:text-xl leading-relaxed">
               {t.subtitle}
             </p>

@@ -37,20 +37,6 @@ const LanguageTransition = memo(({ children, language }) => {
   );
 });
 
-const BackgroundEffect = memo(({ y, opacity }) => (
-  <motion.div 
-    className="absolute inset-0 -z-10"
-    style={{ y, opacity }}>
-    <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0),rgba(255,255,255,1))]" />
-    <svg className="absolute w-full h-full opacity-[0.15]" viewBox="0 0 100 100">
-      <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
-        <path d="M 10 0 L 0 0 0 10" fill="none" stroke="currentColor" strokeWidth="0.5" />
-      </pattern>
-      <rect width="100" height="100" fill="url(#grid)" />
-    </svg>
-  </motion.div>
-));
-
 const SectionHeader = memo(({ badge, title, description, language }) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
@@ -58,11 +44,6 @@ const SectionHeader = memo(({ badge, title, description, language }) => (
     viewport={{ once: true }}
     className="text-center mb-20">
     <LanguageTransition language={language}>
-      <motion.span
-        className="inline-block px-4 py-2 rounded-full bg-accent-500/10 text-accent-600 mb-6">
-        <Brain className="w-4 h-4 inline-block mr-2" />
-        {badge}
-      </motion.span>
     </LanguageTransition>
     
     <LanguageTransition language={language}>
@@ -187,9 +168,8 @@ const HowItWorks = () => {
 
   return (
     <div className="relative min-h-screen bg-gradient-to-b from-primary-50 to-white overflow-hidden">
-      <BackgroundEffect y={backgroundY} opacity={opacity} />
       
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <SectionHeader
           badge={t.badge}
           title={t.title}
@@ -219,7 +199,7 @@ const HowItWorks = () => {
             className="text-center mt-20">
             <a
               href="/ai_form"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-accent-500 text-white font-medium hover:bg-accent-600 transition-colors">
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-lg bg-accent-500 text-white font-medium hover:bg-accent-600 transition-colors">
               {tPillars.cta}
               <ArrowRight size={20} />
             </a>

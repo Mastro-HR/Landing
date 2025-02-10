@@ -24,16 +24,16 @@ module.exports = {
         
         // Accent colors for highlighting and call-to-action elements
         accent: {
-          50: '#FFF5F2',  // Lightest accent for subtle highlights
-          100: '#FFE9E5', // Light accent for hover states
-          200: '#FFD4CC', // Light accent for active states
-          300: '#FFBFB3', // Medium accent for borders
-          400: '#FF9B8C', // Medium accent for secondary elements
-          500: '#DC3D2B', // Primary accent color - Mars red
-          600: '#C83525', // Deep accent for hover states
-          700: '#B42E1F', // Deep accent for active states
-          800: '#A02719', // Very deep accent for contrast
-          900: '#8C2013', // Darkest accent for special emphasis
+          50: '#FFF5F2',
+          100: '#FFE8E0',
+          200: '#FFCBB3',
+          300: '#FFA585',
+          400: '#FF8A66',
+          500: '#F33F0E',
+          600: '#DB3A0D',
+          700: '#BF3309',
+          800: '#A32C08',
+          900: '#862406',
         },
         
         // Teal variations for background depth
@@ -60,6 +60,11 @@ module.exports = {
           default: '#151821', // Main surface color
           dark: '#0F1218',    // Deep surface color
         }
+      },
+      
+      fontFamily: {
+        'primary': ['Bebas Neue', 'sans-serif'],
+        'secondary': ['system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
       },
       
       // Background Gradients
