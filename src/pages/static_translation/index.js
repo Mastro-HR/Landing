@@ -24,7 +24,7 @@ export const translations = {
           },
           {
             title: 'AI POWERS',
-            description: 'Our AI platform searches, and evaluates top candidate profiles in a fast and focused process'
+            description: 'Our AI agent searches, and evaluates top candidate profiles in a fast and focused process'
           },
           {
             title: 'YOU DECIDE',
@@ -53,7 +53,7 @@ export const translations = {
           line1: 'Elevate Your Hiring',
           line2: 'with AI Intelligence'
         },
-        description: 'Transform your recruitment process with our advanced AI platform that learns, adapts, and continuously optimizes to deliver exceptional hiring outcomes.',
+        description: 'Transform your recruitment process with our advanced AI agent that learns, adapts, and continuously optimizes to deliver exceptional hiring outcomes.',
         cta: 'Experience the Future',
         features: {
           workflow: {
@@ -178,7 +178,7 @@ export const translations = {
       technologyPillars: {
         badge: 'Executive AI Technology',
         title: 'Next-Generation Leadership Assessment',
-        subtitle: 'Our advanced AI platform revolutionizes executive recruitment through sophisticated analysis and intelligent decision support.',
+        subtitle: 'Our advanced AI agent revolutionizes executive recruitment through sophisticated analysis and intelligent decision support.',
         cta: 'Try Us',
         features: {
           leadership: {
