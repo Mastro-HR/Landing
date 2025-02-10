@@ -179,7 +179,7 @@ export const translations = {
         badge: 'Executive AI Technology',
         title: 'Next-Generation Leadership Assessment',
         subtitle: 'Our advanced AI agent revolutionizes executive recruitment through sophisticated analysis and intelligent decision support.',
-        cta: 'Try Us',
+        cta: 'Try Demo',
         features: {
           leadership: {
             title: 'Advanced Leadership Assessment',

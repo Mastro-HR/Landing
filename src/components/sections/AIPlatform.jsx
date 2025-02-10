@@ -18,7 +18,7 @@ const AIPlatform = () => {
         return {
           title: "Do you want to know more?",
           contact: "Contact Us",
-          try: "Try Us",
+          try: "Try Demo",
         };
     }
   };
