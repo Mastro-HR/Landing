@@ -4,7 +4,7 @@ export const translations = {
     email: {
       title: 'Define Your Ideal Executive',
       from: 'Mastro Executive Search',
-      description: "Finding the right executive starts with clarity. Our Leadership Assessment guides you through key questions to define the ideal candidate for your organization. In just 45-60 minutes, we’ll craft a precise executive profile and tailored search parameters—ensuring a perfect fit for your leadership needs",
+      description: "Our Leadership Assessment guides you through key questions to define the ideal candidate for your organization. We will craft a precise profile and tailored search parametres to find a perfect fit for you",
       details: {
         time: '45-60 minutes',
         validity: 'Valid for 7 days',
@@ -16,24 +16,24 @@ export const translations = {
     },
     header: {
       title: 'Supercharge Your Executive Hiring',
-      subtitle: 'Find your next executive with our Executive-Search workflow'
+      subtitle: 'Find your next executive within 30 days'
     },
     steps: {
       step1: {
-        title: 'WE LISTEN TO YOUR EXECUTIVE NEEDS',
-        description: 'Your vision drives our search. Through an in-depth consultation with our expert team, we help you define your ideal executive profile and create a tailored search strategy.'
+        title: 'WE LISTEN TO YOUR HIRING NEEDS',
+        description: 'Through an in-depth consultation with our expert team, we define your ideal candidate profile'
       },
       step2: {
-        title: 'AI-POWERED PRECISION ASSESSMENT',
-        description: 'Our advanced AI technology creates customized evaluation frameworks and screening assessments unique to your requirements, identifying exceptional talent that matches your needs.'
+        title: 'AI-POWERED C-SUITE TEST',
+        description: 'Our agent creates customized evaluation frameworks and screening assessments unique to your requirements'
       },
       step3: {
-        title: 'EXPERT VALIDATION & DEEP INSIGHTS',
-        description: 'Our technical experts conduct thorough evaluations of AI-selected candidates, analyzing their performance, leadership potential, and cultural fit.'
+        title: 'EXPERT VALIDATION',
+        description: 'Our experts conduct thorough technical evaluations of selected candidates'
       },
       step4: {
-        title: 'DATA-DRIVEN SELECTION & MATCHING',
-        description: 'Make confident hiring decisions with our detailed executive matching reports, validated by both AI analysis and expert assessment.'
+        title: 'FINAL SELECTION & MATCHING',
+        description: 'Make confident hiring decisions with our curated hiring reports'
       }
     },
     candidateAssessment: {
@@ -102,7 +102,7 @@ export const translations = {
   },
   it: {
     email: {
-      title: 'Valutazione Leadership Esecutiva',
+      title: 'Definisci il tuo manager ideale',
       from: 'Mastro Executive Search',
       description: "Grazie per aver considerato una posizione executive con Mastro. Abbiamo preparato una valutazione completa della leadership per valutare la tua visione strategica e le tue capacità esecutive. Iniziamo programmando una consulenza per discutere le tue esigenze.",
       details: {
@@ -115,8 +115,8 @@ export const translations = {
       }
     },
     header: {
-      title: 'Trova il tuo prossimo Leader Esecutivo',
-      subtitle: 'Ottimizza il processo di selezione dei dirigenti con le nostre funzionalità basate su AI'
+      title: 'Trova il tuo prossimo Leader',
+      subtitle: 'Trova il match perfetto in 30 giorni'
     },
     steps: {
       step1: {

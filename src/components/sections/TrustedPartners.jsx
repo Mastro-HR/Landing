@@ -80,7 +80,20 @@ const TrustedPartners = () => {
         <div className="relative">
           <div className="overflow-hidden mx-auto">
             <div className="flex logo-scroll">
-              <div className={`flex gap-x-3 xs:gap-x-4 sm:gap-x-6 md:gap-x-8 animate-partner-scroll`}>
+              <div 
+                className="flex gap-x-3 xs:gap-x-4 sm:gap-x-6 md:gap-x-8"
+                style={{
+                  animation: `continuous-scroll ${scrollDuration}s linear infinite`,
+                  '@media (hover: hover)': {
+                    '&:hover': {
+                      animationPlayState: 'paused'
+                    }
+                  },
+                  '@media (prefers-reduced-motion: reduce)': {
+                    animation: 'none',
+                    transform: 'translateX(0)'
+                  }
+                }}>
                 {[...Array(2)].map((_, setIndex) => (
                   <div
                     key={setIndex}
@@ -105,24 +118,7 @@ const TrustedPartners = () => {
       </div>
 
       <style>{`
-        .animate-partner-scroll {
-          animation: partner-scroll ${scrollDuration}s linear infinite;
-        }
-
-        @media (hover: hover) {
-          .logo-scroll:hover .animate-partner-scroll {
-            animation-play-state: paused;
-          }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-          .animate-partner-scroll {
-            animation: none;
-            transform: translateX(0);
-          }
-        }
-
-        @keyframes partner-scroll {
+        @keyframes continuous-scroll {
           from { transform: translateX(0); }
           to { transform: translateX(calc(-50% - 8px)); }
         }

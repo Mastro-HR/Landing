@@ -23,7 +23,7 @@ export const StepHeader = memo(({
         {/* Clickable button to expand/collapse */}
         <button
           onClick={() => setIsExpanded(prev => !prev)}
-          className="w-full text-left focus:outline-none focus:ring-2 focus:ring-accent-500"
+          className="w-full text-left focus:outline-none"
           aria-expanded={isExpanded}
         >
           <div className="flex items-center justify-between p-3 sm:p-4 gap-6">

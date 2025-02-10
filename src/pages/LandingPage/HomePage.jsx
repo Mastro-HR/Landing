@@ -12,8 +12,6 @@ const HomePage = () => {
       <HeroMain />
       <TrustedPartners />
       <ExperienceOverview />
-      <HowItWorks />
-      <PowerSection />
       <AIPlatform />
     </main>
   );

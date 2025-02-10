@@ -17,16 +17,16 @@ import { useLanguage } from '@/context/LanguageContext';
 const TRANSLATIONS = {
   en: {
     header: {
-      title: 'Advanced Executive Assessment',
+      title: 'Technical Assessment',
       subtitle:
-        'A 90-minute challenge focusing on real-world execution, scaling, and strategic thinking. Deliver actual results rather than relying on theory to prove your leadership skills.',
+        'A test focused on real-world execution, scaling, and strategic thinking. Deliver actual results rather than relying on theory to prove your leadership skills.',
       deadline: 'To be completed within 7 days',
     },
     modules: [
       {
         icon: Target,
         title: 'Execution Mastery',
-        timeframe: '25 min',
+        timeframe: '35 min',
         scenarios: [
           {
             problem:
@@ -95,7 +95,7 @@ const TRANSLATIONS = {
     },
     lockedOverlay: {
       heading: 'Contact Us',
-      message: 'For more information on unlocking these metrics, please contact us.',
+      message: 'For more information, contact us.',
       button: 'Get in Touch',
     },
     metrics: [
@@ -122,16 +122,16 @@ const TRANSLATIONS = {
 
   it: {
     header: {
-      title: 'Valutazione Avanzata Esecutiva',
+      title: 'Test Assunzione Manager',
       subtitle:
-        'Una sfida di 90 minuti incentrata sull’esecuzione pratica, la scalabilità e il pensiero strategico. Dimostra risultati reali invece di affidarti solo alla teoria per confermare le tue capacità di leadership.',
+        'Un test di esecuzione pratica, la scalabilità e il pensiero strategico. Dimostra risultati reali invece di affidarti solo alla teoria per confermare le tue capacità di leader.',
       deadline: 'A completarsi entro 7 giorni',
     },
     modules: [
       {
         icon: Target,
-        title: 'Padronanza dell’Esecuzione',
-        timeframe: '25 min',
+        title: 'Esecuzione Operativa',
+        timeframe: '35 min',
         scenarios: [
           {
             problem:
@@ -200,7 +200,7 @@ const TRANSLATIONS = {
     },
     lockedOverlay: {
       heading: 'Contattaci',
-      message: 'Per maggiori informazioni su come sbloccare queste metriche, contattaci pure.',
+      message: 'Per maggiori informazioni, contattaci pure.',
       button: 'Scrivici',
     },
     metrics: [
@@ -269,93 +269,6 @@ const ModuleCard = ({ icon: Icon, title, timeframe, description, scenarios }) =>
 /* ----------------------------------------
  * 3) MAIN SECTIONS
  * ---------------------------------------- */
-const PerformanceScorecard = ({ language }) => {
-  // Destructure the proper content (including metrics) from the translations.
-  const { lockedOverlay, scorecard, metrics } =
-    TRANSLATIONS[language] || TRANSLATIONS.en;
-
-  return (
-    <div className="mt-12">
-      <Card className="bg-gray-900/30 backdrop-blur-sm border-gray-800 rounded-none">
-        <CardHeader>
-          <div className="flex items-center gap-3">
-            <div className="p-2 bg-accent-500/10 rounded-lg">
-              <Award className="w-5 h-5 text-accent-500" />
-            </div>
-            <CardTitle className="text-xl text-white">
-              {scorecard.title}
-            </CardTitle>
-          </div>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-8">
-            {/* Visible Metrics */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {metrics.slice(0, 2).map((metric, index) => (
-                <div key={index} className="space-y-2">
-                  <div className="flex items-center gap-2">
-                    <metric.icon className="w-4 h-4 text-accent-500" />
-                    <h3 className="text-white font-medium">{metric.title}</h3>
-                  </div>
-                  <p className="text-2xl font-bold text-accent-500">
-                    {metric.score}
-                  </p>
-                  <p className="text-sm text-gray-400">{metric.feedback}</p>
-                </div>
-              ))}
-            </div>
-            {/* Locked (Blurred) Section */}
-            <div className="relative">
-              <div className="blur-sm pointer-events-none">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  {metrics.slice(2).map((metric, index) => (
-                    <div key={index} className="space-y-2">
-                      <div className="flex items-center gap-2">
-                        <metric.icon className="w-4 h-4 text-accent-500" />
-                        <h3 className="text-white font-medium">
-                          {metric.title}
-                        </h3>
-                      </div>
-                      <p className="text-2xl font-bold text-accent-500">
-                        {metric.score}
-                      </p>
-                      <p className="text-sm text-gray-400">
-                        {metric.feedback}
-                      </p>
-                    </div>
-                  ))}
-                  <div className="space-y-2">
-                    <h3 className="text-white font-medium">
-                      {scorecard.additionalMetrics}
-                    </h3>
-                    <div className="h-20 bg-gray-800/50 rounded-lg" />
-                  </div>
-                </div>
-              </div>
-              {/* Centered overlay prompting contact */}
-              <div className="pointer-events-auto absolute inset-0 flex items-center justify-center z-10">
-                <div className="bg-gray-800/90 rounded-lg p-4 shadow-lg max-w-xs text-center">
-                  <h2 className="text-white text-lg font-bold mb-2">
-                    {lockedOverlay.heading}
-                  </h2>
-                  <p className="text-gray-300 text-sm mb-4">
-                    {lockedOverlay.message}
-                  </p>
-                  <a
-                    href="/contact-sales"
-                    className="bg-accent-500 text-white py-1 px-3 rounded-md hover:bg-accent-400 transition-colors text-sm"
-                  >
-                    {lockedOverlay.button}
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-    </div>
-  );
-};
 
 const AssessmentModules = ({ modules }) => (
   <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
@@ -392,8 +305,6 @@ const ExecutiveAssessment = () => {
       </div>
       {/* Modules Section */}
       <AssessmentModules modules={content.modules} />
-      {/* Scorecard Section */}
-      <PerformanceScorecard language={language} />
     </div>
   );
 };
