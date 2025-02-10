@@ -288,7 +288,7 @@ const ContactPage = () => {
               
               <div className="pt-12">
                 <InlineWidget 
-                  url="https://calendly.com/michelepavone-info/30min"
+                  url="https://calendly.com/mastrohr"
                   styles={{
                     height: '600px',
                     width: '100%'

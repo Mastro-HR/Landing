@@ -7,7 +7,6 @@ import { translations } from '@/pages/static_translation';
 const PARTNERS = [
   { src: '/images/OFP.png', alt: 'OFP' },
   { src: '/images/TP.png', alt: 'Together Price' },
-  { src: '/images/CMOS.png', alt: 'CMOS' },
   { src: '/images/MB.png', alt: 'MB' },
 ];
 
