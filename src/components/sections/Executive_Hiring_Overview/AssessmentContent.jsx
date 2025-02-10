@@ -122,7 +122,7 @@ const TRANSLATIONS = {
 
   it: {
     header: {
-      title: 'Test Assunzione Manager',
+      title: 'Test Assunzione Leadership e Managers',
       subtitle:
         'Un test di esecuzione pratica, la scalabilità e il pensiero strategico. Dimostra risultati reali invece di affidarti solo alla teoria per confermare le tue capacità di leader.',
       deadline: 'E.G. A completarsi entro 7 giorni',

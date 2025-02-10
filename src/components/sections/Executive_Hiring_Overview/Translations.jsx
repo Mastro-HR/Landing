@@ -2,7 +2,7 @@
 export const translations = {
   en: {
     email: {
-      title: 'Define Your Ideal Executive',
+      title: 'Define Your Ideal Candidate',
       from: 'Mastro Executive Search',
       description: "Our team guides you through key questions that will define the ideal candidate for your business. We will craft a precise profile and search parametres to find a perfect fit for you",
       details: {
@@ -28,7 +28,7 @@ export const translations = {
         description: 'Our agent creates customized evaluation frameworks and screening assessments unique to your requirements'
       },
       step3: {
-        title: 'EXPERT VALIDATION',
+        title: 'INTERVIEW WITH INDUSTRY EXPERTS',
         description: 'Our experts conduct thorough technical evaluations of selected candidates'
       },
       step4: {
@@ -102,7 +102,7 @@ export const translations = {
   },
   it: {
     "email": {
-      "title": "Definisci il Tuo Executive Ideale",
+      "title": "Definisci il Tuo Candidato Ideale",
       "from": "Mastro Executive Search",
       "description": "Il nostro team ti guida attraverso domande chiave per definire il candidato ideale per la tua azienda. Creeremo un profilo preciso e parametri di ricerca per trovare la persona perfetta",
       "details": {
@@ -115,8 +115,8 @@ export const translations = {
       }
     },
     "header": {
-      "title": "Potenzia la Tua Ricerca Executive",
-      "subtitle": "Trova il tuo prossimo executive entro 30 giorni"
+      "title": "Potenzia la Tua Ricerca Dirigenti",
+      "subtitle": "Trova il tuo prossimo leader entro 30 giorni"
     },
     "steps": {
       "step1": {
@@ -124,15 +124,15 @@ export const translations = {
         "description": "Attraverso una consulenza approfondita con il nostro team di esperti, definiamo il profilo del candidato ideale"
       },
       "step2": {
-        "title": "VALUTAZIONE C-SUITE BASATA SU IA",
+        "title": "VALUTAZIONE TEST C-SUITE CON AI",
         "description": "Il nostro sistema crea framework di valutazione e screening personalizzati in base alle tue esigenze"
       },
       "step3": {
-        "title": "VALIDAZIONE ESPERTA",
+        "title": "COLLOQUIO CON ESPERTI",
         "description": "I nostri esperti conducono valutazioni tecniche approfondite dei candidati selezionati"
       },
       "step4": {
-        "title": "SELEZIONE FINALE E MATCHING",
+        "title": "SELEZIONE FINALE E MATCH",
         "description": "Prendi decisioni di assunzione sicure con i nostri report dettagliati"
       }
     },
@@ -208,7 +208,7 @@ export const translations = {
 export const assessmentTranslations = {
   en: {
     pipeline: {
-      title: "Executive Technical Assessment Pipeline",
+      title: "Technical Assessment Pipeline",
       description: "A systematic three-phase technical evaluation process combining AI-powered initial screening, expert validation, and in-depth technical interviews",
       processSteps: "Assessment Process",
       phaseLabel: "Phase",

@@ -21,19 +21,19 @@ const CandidateFlow = () => {
       title: isItalian ? "Analisi AI" : "AI Analysis",
       features: isItalian
         ? [
-            "Analisi delle competenze tecniche",
-            "Valutazione del fit culturale",
-            "Matching con esperti del settore"
+            "Analisi competenze tecniche",
+            "Valutazione fit culturale",
+            "Match con esperti del settore"
           ]
         : [
             "Hard-skill analysis",
             "Cultural fit assessment",
-            "Matching with industry-experts"
+            "Match with industry-experts"
           ],
       stat: isItalian ? "Parametri Analizzati" : "Parameters Analyzed"
     },
     right: {
-      title: isItalian ? "I 3 Migliori Match" : "Top 3 Perfect Matches",
+      title: isItalian ? "Assumi il meglio" : "Hire the Best",
       desc: isItalian
         ? "Selezione garantita dei candidati più qualificati e compatibili"
         : "Guaranteed selection of the most qualified and compatible candidates",

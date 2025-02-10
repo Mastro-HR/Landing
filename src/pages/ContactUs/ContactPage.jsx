@@ -128,7 +128,7 @@ const ContactPage = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-teal-500 via-teal-600 to-black overflow-hidden">
+    <div className="min-h-screen bg-black overflow-hidden">
       <div className="absolute inset-0 bg-grid opacity-20" />
       <div className="absolute inset-0 bg-flow opacity-30" />
       

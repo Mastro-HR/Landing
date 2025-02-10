@@ -34,7 +34,7 @@ export const translations = {
       },
       trustedPartners: {
         title: 'Trusted by Industry Leaders',
-        subtitle: 'We help small to medium businesses scale their teams at an unprecedented rate',
+        subtitle: 'We help businesses scale their executive teams',
         categories: {
           financialServices: 'Financial Services',
           technologySolutions: 'Technology Solutions',
@@ -504,7 +504,7 @@ export const translations = {
       },
       trustedPartners: {
           title: 'I Nostri Partners',
-          subtitle: 'Aiutiamo le piccole e medie imprese a far crescere i loro team a un ritmo senza precedenti',
+          subtitle: 'Aiutiamo aziende a crescere il loro team esecutivo',
           categories: {
               financialServices: 'Servizi Finanziari',
               technologySolutions: 'Soluzioni Tecnologiche',
