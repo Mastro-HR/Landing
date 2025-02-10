@@ -13,7 +13,7 @@ import LanguageSelector from '../LanguageToogle/LanguageSelector';
 const TryUsButton = ({ onClick, label }) => (
   <motion.button
     onClick={onClick}
-    className="group relative flex items-center gap-2 px-4 py-2 rounded-lg 
+    className="group relative flex items-center gap-2 px-4 py-2 rounded 
                bg-gradient-to-r from-accent-600 to-accent-500 text-gray-200 font-secondary font-medium
                transition-all duration-300 ease-in-out
                hover:from-accent-600 hover:to-accent-400 hover:shadow-lg hover:shadow-accent-500/50"
