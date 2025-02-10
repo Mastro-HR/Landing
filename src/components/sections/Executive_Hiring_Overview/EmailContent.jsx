@@ -61,7 +61,7 @@ const EmailContent = memo(() => {
           <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 pt-2 w-full">
             <Link
               to="/contact-sales"
-              className="w-full sm:w-auto border border-accent-500/40 hover:bg-accent-500/10 text-accent-500 px-4 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base rounded-lg font-medium transition-colors duration-200 flex items-center justify-center gap-2"
+              className="w-full sm:w-auto border border-gray-500/40 hover:bg-gray-500/10 text-white px-4 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base rounded-lg font-medium transition-colors duration-200 flex items-center justify-center gap-2"
             >
               <motion.div
                 whileHover={{ scale: 1.02 }}

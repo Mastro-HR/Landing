@@ -43,8 +43,8 @@ const CandidateFlow = () => {
     },
     contact: {
       text: isItalian
-        ? "Se vuoi trovare l'executive giusto per la tua azienda"
-        : "If you want to find the right executive for your business",
+        ? "Stai cercando l'executive giusto per la tua azienda?"
+        : "Are you looking for the right executive to join your business?",
       button: isItalian ? "Contattaci" : "Contact Us"
     }
   };
@@ -164,8 +164,8 @@ const CandidateFlow = () => {
           </p>
           <Link 
             to="/contact-sales"
-            className="inline-block px-8 py-3 bg-accent-500 text-white rounded-lg hover:bg-accent-600 transition-colors duration-200 font-medium"
-          >
+            className="w-full sm:w-auto border border-gray-500/40 hover:bg-gray-500/10 text-white px-4 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base rounded-lg font-medium transition-colors duration-200 flex items-center justify-center gap-2"
+            >
             {content.contact.button}
           </Link>
         </motion.div>

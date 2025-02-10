@@ -33,8 +33,7 @@ const ProcessQuadrant = ({ title, description, number, onClick, position }) => (
           <div className="h-px flex-grow bg-primary-50/10 group-hover:bg-accent-500/20 transition-colors" />
         </div>
         
-        <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-white mb-2 sm:mb-4 
-          group-hover:text-accent-500 transition-colors"
+        <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-white mb-2 sm:mb-4"
         >
           {title}
         </h3>
