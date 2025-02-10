@@ -239,7 +239,7 @@ const ScenarioItem = ({ problem, task }) => (
 );
 
 const ModuleCard = ({ icon: Icon, title, timeframe, description, scenarios }) => (
-  <Card className="bg-gray-900/30 backdrop-blur-sm rounded-none border-gray-800 hover:border-accent-500/50 transition-all duration-200">
+  <Card className="bg-gray-900/30 backdrop-blur-sm rounded-none border-gray-800 hover:border-gray-500/50 transition-all duration-200">
     <CardHeader className="space-y-4">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
