@@ -19,8 +19,8 @@ const TRANSLATIONS = {
     header: {
       title: 'Technical Assessment',
       subtitle:
-        'A test focused on real-world execution, scaling, and strategic thinking. Deliver actual results rather than relying on theory to prove your leadership skills.',
-      deadline: 'To be completed within 7 days',
+        'Our AI craft a series of tests focused on real-world execution, scaling, and strategic thinking. Deliver actual results rather than relying on theory to prove your leadership skills.',
+      deadline: 'E.G. To be completed within 7 days',
     },
     modules: [
       {
@@ -125,7 +125,7 @@ const TRANSLATIONS = {
       title: 'Test Assunzione Manager',
       subtitle:
         'Un test di esecuzione pratica, la scalabilità e il pensiero strategico. Dimostra risultati reali invece di affidarti solo alla teoria per confermare le tue capacità di leader.',
-      deadline: 'A completarsi entro 7 giorni',
+      deadline: 'E.G. A completarsi entro 7 giorni',
     },
     modules: [
       {
@@ -286,11 +286,11 @@ const ExecutiveAssessment = () => {
   const content = TRANSLATIONS[language] || TRANSLATIONS.en;
 
   return (
-    <div className="max-w-5xl border border-gray-500/40 mx-auto px-4 sm:px-6 py-8 sm:py-12">
+    <div className="max-w-5xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
       {/* Deadline Banner */}
-      <div className="bg-accent-500/10 rounded-lg p-4 mb-8 flex items-center gap-3">
-        <Calendar className="w-5 h-5 text-accent-500 flex-shrink-0" />
-        <p className="text-sm text-accent-500 font-medium">
+      <div className="bg-orange-500/10 rounded-lg p-4 mb-8 flex items-center gap-3">
+        <Calendar className="w-5 h-5 text-orange-500 flex-shrink-0" />
+        <p className="text-sm text-orange-500 font-medium">
           {content.header.deadline}
         </p>
       </div>

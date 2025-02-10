@@ -4,7 +4,7 @@ export const translations = {
     email: {
       title: 'Define Your Ideal Executive',
       from: 'Mastro Executive Search',
-      description: "Our Leadership Assessment guides you through key questions to define the ideal candidate for your organization. We will craft a precise profile and tailored search parametres to find a perfect fit for you",
+      description: "Our team guides you through key questions that will define the ideal candidate for your business. We will craft a precise profile and search parametres to find a perfect fit for you",
       details: {
         time: '45-60 minutes',
         validity: 'Valid for 7 days',
@@ -20,11 +20,11 @@ export const translations = {
     },
     steps: {
       step1: {
-        title: 'WE LISTEN TO YOUR HIRING NEEDS',
+        title: 'WE ASSESS YOUR HIRING NEEDS',
         description: 'Through an in-depth consultation with our expert team, we define your ideal candidate profile'
       },
       step2: {
-        title: 'AI-POWERED C-SUITE TEST',
+        title: 'AI-POWERED C-SUITE ASSESSMENT',
         description: 'Our agent creates customized evaluation frameworks and screening assessments unique to your requirements'
       },
       step3: {

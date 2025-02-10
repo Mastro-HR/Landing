@@ -1,276 +1,177 @@
-// CandidateAssessment.jsx
-import React, { useState } from "react";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { FileText, Brain, Star, ChevronDown, ChevronUp } from "lucide-react";
-import { useLanguage } from "@/context/LanguageContext"; // Import your language context
+import React, { memo, useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import { Users, Medal, Brain } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
-const CandidateAssessment = () => {
-  const { language } = useLanguage(); // Grab current language from context
-  const [expandedId, setExpandedId] = useState(null);
+const CandidateFlow = () => {
+  const { language } = useLanguage();
+  const isItalian = language === "it";
+  const [counter, setCounter] = useState(0);
 
-  // Define your candidates in both English and Italian
-  const candidateData = {
-    en: [
-      {
-        id: 1,
-        name: "Sarah Chen",
-        role: "Chief Product Officer",
-        currentCompany: "FinTech Innovation Labs",
-        match: 92,
-        executiveAssessment: {
-          score: 94,
-          strengths: "Exceptional strategic thinking and execution capabilities",
-          highlights: "Successfully led complex digital transformation projects",
-          areas:
-            "Communication is direct and effective. Shows strong ability to navigate ambiguous situations.",
-        },
-        technicalAssessment: {
-          score: 90,
-          notes: "Deep understanding of distributed systems and scalable architecture",
-          expertise: "Product scaling, Technical architecture, Data-driven decisions",
-          recommendation:
-            "Strong technical background with proven ability to lead engineering teams",
-        },
-      },
-      {
-        id: 2,
-        name: "Michael Torres",
-        role: "VP of Engineering",
-        currentCompany: "Global Tech Solutions",
-        match: 88,
-        executiveAssessment: {
-          score: 86,
-          strengths: "Strong analytical mindset with focus on operational excellence",
-          highlights: "Track record of successful product launches and team scaling",
-          areas: "Demonstrated ability to align technical decisions with business goals",
-        },
-        technicalAssessment: {
-          score: 92,
-          notes: "Excellent system design skills and modern tech stack knowledge",
-          expertise: "Cloud architecture, Team scaling, Technical strategy",
-          recommendation:
-            "Highly capable technical leader with strong engineering principles",
-        },
-      },
-      {
-        id: 3,
-        name: "Emma Patel",
-        role: "Head of Product & Engineering",
-        currentCompany: "Innovation Works",
-        match: 87,
-        executiveAssessment: {
-          score: 89,
-          strengths: "Innovative problem-solver with strong leadership presence",
-          highlights: "Proven track record in high-growth environments",
-          areas: "Excellent at balancing technical debt with business needs",
-        },
-        technicalAssessment: {
-          score: 88,
-          notes: "Strong focus on scalable architecture and engineering practices",
-          expertise: "System design, Engineering processes, Technical leadership",
-          recommendation: "Well-rounded technical leader with strong product sense",
-        },
-      },
-    ],
-    it: [
-      {
-        id: 1,
-        name: "Sarah Chen",
-        role: "Direttore del Prodotto",
-        currentCompany: "FinTech Innovation Labs",
-        match: 92,
-        executiveAssessment: {
-          score: 94,
-          strengths: "Eccezionale capacità di pensiero strategico ed esecuzione",
-          highlights: "Ha guidato con successo progetti di trasformazione digitale complessi",
-          areas:
-            "La comunicazione è diretta ed efficace. Mostra una forte capacità di navigare in situazioni ambigue.",
-        },
-        technicalAssessment: {
-          score: 90,
-          notes: "Comprensione profonda dei sistemi distribuiti e dell’architettura scalabile",
-          expertise: "Scalabilità dei prodotti, Architettura tecnica, Decisioni basate sui dati",
-          recommendation:
-            "Solida preparazione tecnica con comprovata capacità di guidare i team di ingegneria",
-        },
-      },
-      {
-        id: 2,
-        name: "Michael Torres",
-        role: "VP di Ingegneria",
-        currentCompany: "Global Tech Solutions",
-        match: 88,
-        executiveAssessment: {
-          score: 86,
-          strengths: "Forte mentalità analitica con attenzione all'eccellenza operativa",
-          highlights: "Successi nei lanci di prodotti e nell'espansione del team",
-          areas: "Capacità dimostrata di allineare le decisioni tecniche con gli obiettivi aziendali",
-        },
-        technicalAssessment: {
-          score: 92,
-          notes: "Eccellenti competenze di progettazione di sistemi e tecnologie moderne",
-          expertise: "Architettura Cloud, Espansione del team, Strategia tecnica",
-          recommendation:
-            "Leader tecnico altamente capace con solidi principi di ingegneria",
-        },
-      },
-      {
-        id: 3,
-        name: "Emma Patel",
-        role: "Responsabile di Prodotto e Ingegneria",
-        currentCompany: "Innovation Works",
-        match: 87,
-        executiveAssessment: {
-          score: 89,
-          strengths: "Innovativa risolutrice di problemi con forte leadership",
-          highlights: "Dimostrata esperienza in ambienti ad alta crescita",
-          areas: "Eccellente nel bilanciare il debito tecnico con le esigenze aziendali",
-        },
-        technicalAssessment: {
-          score: 88,
-          notes: "Forte attenzione all'architettura scalabile e alle pratiche di ingegneria",
-          expertise: "Progettazione di sistemi, Processi di ingegneria, Leadership tecnica",
-          recommendation:
-            "Leader tecnico completo con un forte senso del prodotto",
-        },
-      },
-    ],
+  const content = {
+    left: {
+      title: isItalian ? "50.000+ Candidati" : "50,000+ Candidates",
+      desc: isItalian
+        ? "Accesso istantaneo a un vasto bacino di talenti globali qualificati"
+        : "Instant access to a vast pool of qualified global talent",
+      stat: isItalian ? "Candidati Analizzati" : "Candidates Analyzed"
+    },
+    center: {
+      title: isItalian ? "Algoritmo IA Avanzato" : "Advanced AI Algorithm",
+      features: isItalian
+        ? [
+            "Analisi profonda delle competenze",
+            "Valutazione della compatibilità culturale",
+            "Previsione del successo lavorativo",
+            "Matching in tempo reale"
+          ]
+        : [
+            "Deep skill analysis",
+            "Cultural fit assessment",
+            "Work success prediction",
+            "Real-time matching"
+          ],
+      stat: isItalian ? "Parametri Valutati" : "Parameters Evaluated"
+    },
+    right: {
+      title: isItalian ? "I 3 Migliori Match" : "Top 3 Perfect Matches",
+      desc: isItalian
+        ? "Selezione garantita dei candidati più qualificati e compatibili"
+        : "Guaranteed selection of the most qualified and compatible candidates",
+      stat: isItalian ? "Precisione del Match" : "Match Accuracy"
+    },
+    contact: {
+      text: isItalian
+        ? "Se vuoi trovare l'executive giusto per la tua azienda"
+        : "If you want to find the right executive for your business",
+      button: isItalian ? "Contattaci" : "Contact Us"
+    }
   };
 
-  // Pick the data based on the current language. Defaults to English if not found.
-  const candidates = candidateData[language] || candidateData.en;
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCounter((prev) => (prev + 1) % 100);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
 
-  const toggleExpand = (id) => {
-    setExpandedId((prev) => (prev === id ? null : id));
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
   };
 
-  const handleProfileClick = (e) => {
-    e.preventDefault();
-    // Placeholder - the link is for display only
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6
+      }
+    }
   };
 
   return (
-    <div className="w-full max-w-4xl border border-gray-500/40 mx-auto px-4 sm:px-6 py-6 sm:py-8">
-      {/* Heading */}
-      <header className="mb-6 sm:mb-8">
-        <h1 className="text-xl sm:text-2xl font-bold text-white mb-2">
-          {language === "it" ? "I 3 Migliori Candidati Pre-Selezionati" : "Top 3 Pre-Screened Candidates"}
-        </h1>
-        <p className="text-sm sm:text-base text-gray-400">
-          {language === "it"
-            ? "Risultati completi della valutazione per la selezione finale"
-            : "Comprehensive assessment results for final selection"}
-        </p>
-      </header>
+    <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 py-16">
+      <motion.div 
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="flex flex-col md:flex-row items-stretch justify-between md:divide-x divide-gray-800 gap-8"
+      >
+        {/* Large Candidate Pool */}
+        <motion.div
+          variants={itemVariants}
+          className="flex flex-col items-center text-center md:w-1/3 p-6 md:px-8 first:md:pr-12 last:md:pl-12"
+        >
+          <div className="mb-6 p-4 bg-blue-500/10 rounded-full">
+            <Users className="w-10 h-10 text-blue-400" />
+          </div>
+          <h2 className="text-xl sm:text-3xl font-bold text-white mb-4">
+            {content.left.title}
+          </h2>
+          <p className="text-sm sm:text-base text-gray-300 mb-6">
+            {content.left.desc}
+          </p>
+          <div className="mt-auto pt-4 border-t border-gray-800 w-full">
+            <div className="text-3xl font-bold text-blue-400">50K+</div>
+            <div className="text-sm text-gray-400">{content.left.stat}</div>
+          </div>
+        </motion.div>
 
-      {/* Candidate Cards */}
-      <div className="space-y-4">
-        {candidates.map((candidate) => {
-          const isExpanded = expandedId === candidate.id;
-          return (
-            <Card
-              key={candidate.id}
-              className="border-gray-800/40 rounded-none"
-            >
-              <CardHeader className="p-0">
-                <button
-                  type="button"
-                  onClick={() => toggleExpand(candidate.id)}
-                  aria-expanded={isExpanded}
-                  className="w-full flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4 p-4 sm:p-6 text-left bg-transparent"
-                >
-                  <div className="space-y-1 flex-1">
-                    <CardTitle className="text-base sm:text-lg text-white">
-                      {candidate.name}
-                    </CardTitle>
-                    <p className="text-xs sm:text-sm text-gray-400">
-                      {candidate.role} • {candidate.currentCompany}
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-3 sm:gap-4">
-                    <Badge className="bg-accent-500/10 text-accent-500 text-xs sm:text-sm">
-                      {candidate.match}% {language === "it" ? "Corrispondenza" : "Match"}
-                    </Badge>
-                    {isExpanded ? (
-                      <ChevronUp className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400" />
-                    ) : (
-                      <ChevronDown className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400" />
-                    )}
-                  </div>
-                </button>
-              </CardHeader>
+        {/* AI Algorithm */}
+        <motion.div
+          variants={itemVariants}
+          className="flex flex-col items-center text-center md:w-1/3 p-6 relative"
+        >
+          <div className="mb-6 p-4 bg-accent-500/10 rounded-full">
+            <Brain className="w-10 h-10 text-accent-500" />
+          </div>
+          <h2 className="text-xl sm:text-3xl font-bold text-white mb-4">
+            {content.center.title}
+          </h2>
+          <ul className="space-y-2 text-left mb-6">
+            {content.center.features.map((feature, idx) => (
+              <li key={idx} className="flex items-center text-sm sm:text-base text-gray-300">
+                <div className="w-2 h-2 bg-accent-500 rounded-full mr-2" />
+                {feature}
+              </li>
+            ))}
+          </ul>
+          <div className="mt-auto pt-4 border-t border-gray-800 w-full">
+            <div className="text-3xl font-bold text-accent-500">250+</div>
+            <div className="text-sm text-gray-400">{content.center.stat}</div>
+          </div>
+        </motion.div>
 
-              {isExpanded && (
-                <CardContent className="px-4 sm:px-6 pb-4 sm:pb-6">
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
-                    {/* Executive Assessment */}
-                    <section className="flex flex-col h-full">
-                      <div className="flex items-center gap-2 mb-3">
-                        <Brain className="w-4 h-4 sm:w-5 sm:h-5 text-accent-500" />
-                        <h3 className="text-white font-medium text-sm sm:text-base">
-                          {language === "it" ? "Valutazione Esecutiva" : "Executive Assessment"}
-                        </h3>
-                      </div>
-                      <div className="bg-gray-800/30 rounded-lg p-4 space-y-3 flex flex-col flex-1">
-                        <div className="flex items-center justify-between">
-                          <span className="text-gray-300 text-sm">
-                            {language === "it" ? "Punteggio di Valutazione" : "Assessment Score"}
-                          </span>
-                          <Badge className="bg-accent-500/10 text-accent-500 text-xs sm:text-sm">
-                            {candidate.executiveAssessment.score}/100
-                          </Badge>
-                        </div>
-                        <div className="space-y-2 text-sm text-gray-300">
-                          <p>{candidate.executiveAssessment.strengths}</p>
-                          <p>{candidate.executiveAssessment.areas}</p>
-                        </div>
-                      </div>
-                    </section>
+        {/* Top 3 Matches */}
+        <motion.div
+          variants={itemVariants}
+          className="flex flex-col items-center text-center md:w-1/3 p-6"
+        >
+          <div className="mb-6 p-4 bg-green-500/10 rounded-full">
+            <Medal className="w-10 h-10 text-green-400" />
+          </div>
+          <h2 className="text-xl sm:text-3xl font-bold text-white mb-4">
+            {content.right.title}
+          </h2>
+          <p className="text-sm sm:text-base text-gray-300 mb-6">
+            {content.right.desc}
+          </p>
+          <div className="mt-auto pt-4 border-t border-gray-800 w-full">
+            <div className="text-3xl font-bold text-green-400">99.8%</div>
+            <div className="text-sm text-gray-400">{content.right.stat}</div>
+          </div>
+        </motion.div>
+      </motion.div>
 
-                    {/* Technical Assessment */}
-                    <section className="flex flex-col h-full">
-                      <div className="flex items-center gap-2 mb-3">
-                        <Star className="w-4 h-4 sm:w-5 sm:h-5 text-accent-500" />
-                        <h3 className="text-white font-medium text-sm sm:text-base">
-                          {language === "it" ? "Revisione Tecnica" : "Technical Review"}
-                        </h3>
-                      </div>
-                      <div className="bg-gray-800/30 rounded-lg p-4 space-y-3 flex flex-col flex-1">
-                        <div className="flex items-center justify-between">
-                          <span className="text-gray-300 text-sm">
-                            {language === "it" ? "Punteggio Tecnico" : "Technical Score"}
-                          </span>
-                          <Badge className="bg-accent-500/10 text-accent-500 text-xs sm:text-sm">
-                            {candidate.technicalAssessment.score}/100
-                          </Badge>
-                        </div>
-                        <div className="space-y-2 text-sm text-gray-300">
-                          <p>{candidate.technicalAssessment.notes}</p>
-                          <p>{candidate.technicalAssessment.recommendation}</p>
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-
-                  {/* Profile Link */}
-                  <div className="mt-6 pt-4 border-t border-gray-800">
-                    <button
-                      onClick={handleProfileClick}
-                      className="inline-flex items-center gap-2 text-accent-500 hover:text-accent-400 transition-colors text-sm"
-                    >
-                      <FileText className="w-4 h-4" />
-                      {language === "it" ? "Visualizza Profilo Completo del Candidato" : "View Complete Candidate Profile"}
-                    </button>
-                  </div>
-                </CardContent>
-              )}
-            </Card>
-          );
-        })}
-      </div>
+      {/* Contact Section */}
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="mt-16 text-center"
+      >
+        <motion.div variants={itemVariants} className="space-y-6">
+          <p className="text-lg sm:text-xl text-gray-300">
+            {content.contact.text}
+          </p>
+          <Link 
+            to="/contact-sales"
+            className="inline-block px-8 py-3 bg-accent-500 text-white rounded-lg hover:bg-accent-600 transition-colors duration-200 font-medium"
+          >
+            {content.contact.button}
+          </Link>
+        </motion.div>
+      </motion.div>
     </div>
   );
 };
 
-export default CandidateAssessment;
+export default memo(CandidateFlow);

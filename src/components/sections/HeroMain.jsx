@@ -23,16 +23,15 @@ const HeroMain = () => {
     }
   };
 
-  const StepCard = ({ number, title, description }) => (
+  const StepCard = ({ step }) => (
     <div className="flex-1">
       <motion.div
-        className="h-full p-6 sm:p-8 rounded-lg bg-primary-50/5 backdrop-blur-xl border border-primary-50/10 relative"
-        whileHover={{ borderColor: 'rgba(var(--accent-500), 0.5)', transition: { duration: 0.2 } }}>
-        <h3 className="text-xl sm:text-2xl font-bold text-primary-50 mb-4 mt-2">
-          {title}
+        className="h-full p-6 sm:p-8 rounded-lg backdrop-blur-xl border border-primary-50/10 relative">
+          <h3 className="text-xl sm:text-2xl font-bold text-primary-50 mb-4 mt-2">
+          {step.title}
         </h3>
         <p className="text-primary-100/80 text-base sm:text-lg leading-relaxed">
-          {description}
+          {step.description}
         </p>
       </motion.div>
     </div>
@@ -118,27 +117,11 @@ const HeroMain = () => {
               <motion.div 
                 className="flex flex-col md:flex-row items-stretch gap-6 md:gap-4 mt-24"
                 variants={titleVariants}>
-                <StepCard 
-                  number="1"
-                  title="WE ASSESS"
-                  description="Our experts conduct strategic discovery sessions to understand your unique needs and requirements"
-                />
-                
+                <StepCard step={t.steps[0]} />
                 <Operator type="+" />
-                
-                <StepCard 
-                  number="2"
-                  title="AI POWERS"
-                  description="Our AI platform searches, screens, and evaluates millions of candidates using 50+ technical metrics"
-                />
-                
+                <StepCard step={t.steps[1]} />
                 <Operator type="=" />
-                
-                <StepCard 
-                  number="3"
-                  title="YOU DECIDE"
-                  description="Select your ideal candidate from a curated shortlist of exceptional, validated talent"
-                />
+                <StepCard step={t.steps[2]} />
               </motion.div>
             </motion.div>
           </div>

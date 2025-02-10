@@ -2,34 +2,33 @@ export const translations = {
     en: {
       nav: {
         aboutUs: 'About Us',
-        contactSales: 'Contact Sales',
-        Demo: 'Try Us',
+        contactSales: 'Contact Us',
+        Demo: 'Try Demo',
         ourNetwork: "Our Network",
         careers: 'Careers'
       },
       hero: {
         badge: 'AI-Powered Executive Search',
-        titleLine1: 'Hire Right.',
-        titleLine2: 'Grow Faster.',
-        description: 'Identify the right executive. 10x faster. 10x cheaper.',
-        cta: 'Book a Demo',
-        secondaryCta: 'Try Us',
-        trust: 'Trusted by Fortune 500 executives and industry leaders',
+        titleLine1: 'Find the right Executive',
+        titleLine2: 'In 30 Days',
+        description: 'Hire the right leader. 10x faster. 10x cheaper.',
+        cta: 'Contact Us',
+        secondaryCta: 'Try Demo',
         altText: {
           profile: 'Profile'
         },
         steps: [
           {
             title: 'WE ASSESS',
-            description: 'Our experts conduct strategic discovery sessions to understand your unique needs and requirements'
+            description: 'Our experts conduct strategic discovery sessions to understand your unique requirements'
           },
           {
             title: 'AI POWERS',
-            description: 'Our AI platform searches, screens, and evaluates millions of candidates using 50+ technical metrics'
+            description: 'Our AI platform searches, and evaluates top candidate profiles in a fast and focused process'
           },
           {
             title: 'YOU DECIDE',
-            description: 'Select your ideal candidate from a curated shortlist of exceptional, validated talent'
+            description: 'Receive a shortlist of curated candidates and select the ideal match for your team'
           }
         ]
       },
@@ -479,20 +478,34 @@ export const translations = {
         careers: 'Lavora con Noi',
       },
       hero: {
-        badge: 'Tecnologia HR con AI',
-        titleLine1: 'Hire Right.',
-        titleLine2: 'Grow Faster.',
-        description: 'Rivoluziona il modo di assumere, trovando gli executives giusti per far crescere la tua impresa.',
-        cta: 'Prenota una Demo',
-        trust: 'Suggerito da 500+ managers & executives',
+        badge: 'AI-Powered Executive Search',
+        titleLine1: 'Trova il giusto Executive',
+        titleLine2: 'In 30 giorni',
+        description: 'Assumi il giusto leader con la nostra piattaforma AI. Veloce. Efficace',
+        cta: 'Contattaci',
+        secondaryCta: 'Prova Demo',
         altText: {
-          profile: 'Profilo'
-        }
+          profile: 'Profile'
         },
-        trustedPartners: {
-            title: 'I Nostri Partners',
-            subtitle: 'Aiutiamo le piccole e medie imprese a far crescere i loro team a un ritmo senza precedenti',
-            categories: {
+        steps: [
+          {
+            title: 'NOI ANALIZZIAMO',
+            description: 'I nostri esperti conducono sessioni strategiche per comprendere a fondo le tue esigenze e requisiti'
+          },
+          {
+            title: 'AI OTTIMIZZA',
+            description: ' La nostra AI ricerca e testa competenze candidati in un processo rapido e mirato'
+          },
+          {
+            title: 'TU DECIDI',
+            description: 'Ricevi una shortlist e seleziona il candidato ideale per il tuo team'
+          }
+        ]
+      },
+      trustedPartners: {
+          title: 'I Nostri Partners',
+          subtitle: 'Aiutiamo le piccole e medie imprese a far crescere i loro team a un ritmo senza precedenti',
+          categories: {
               financialServices: 'Servizi Finanziari',
               technologySolutions: 'Soluzioni Tecnologiche',
               enterpriseSolutions: 'Soluzioni Aziendali',
