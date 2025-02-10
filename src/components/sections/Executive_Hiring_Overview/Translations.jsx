@@ -101,104 +101,104 @@ export const translations = {
     }
   },
   it: {
-    email: {
-      title: 'Definisci il tuo manager ideale',
-      from: 'Mastro Executive Search',
-      description: "Grazie per aver considerato una posizione executive con Mastro. Abbiamo preparato una valutazione completa della leadership per valutare la tua visione strategica e le tue capacità esecutive. Iniziamo programmando una consulenza per discutere le tue esigenze.",
-      details: {
-        time: '45-60 minuti',
-        validity: 'Valido per 7 giorni',
-        location: 'Valutazione Executive Remota'
+    "email": {
+      "title": "Definisci il Tuo Executive Ideale",
+      "from": "Mastro Executive Search",
+      "description": "Il nostro team ti guida attraverso domande chiave per definire il candidato ideale per la tua azienda. Creeremo un profilo preciso e parametri di ricerca per trovare la persona perfetta",
+      "details": {
+        "time": "45-60 minuti",
+        "validity": "Valido per 7 giorni",
+        "location": "Da remoto"
       },
-      cta: {
-        schedule: 'Programma Consulenza'
+      "cta": {
+        "schedule": "Prenota Consulenza"
       }
     },
-    header: {
-      title: 'Trova il tuo prossimo Leader',
-      subtitle: 'Trova il match perfetto in 30 giorni'
+    "header": {
+      "title": "Potenzia la Tua Ricerca Executive",
+      "subtitle": "Trova il tuo prossimo executive entro 30 giorni"
     },
-    steps: {
-      step1: {
-        title: 'ASCOLTIAMO LE TUE ESIGENZE EXECUTIVE',
-        description: 'La tua visione guida la nostra ricerca. Attraverso una consulenza approfondita con il nostro team di esperti, ti aiutiamo a definire il profilo executive ideale e creare una strategia di ricerca personalizzata.'
+    "steps": {
+      "step1": {
+        "title": "ASCOLTIAMO LE TUE ESIGENZE",
+        "description": "Attraverso una consulenza approfondita con il nostro team di esperti, definiamo il profilo del candidato ideale"
       },
-      step2: {
-        title: 'VALUTAZIONE DI PRECISIONE BASATA SU AI',
-        description: 'La nostra tecnologia AI avanzata crea framework di valutazione e test di screening personalizzati in base alle tue esigenze, identificando talenti eccezionali che corrispondono alle tue necessità.'
+      "step2": {
+        "title": "VALUTAZIONE C-SUITE BASATA SU IA",
+        "description": "Il nostro sistema crea framework di valutazione e screening personalizzati in base alle tue esigenze"
       },
-      step3: {
-        title: 'VALIDAZIONE ESPERTA & APPROFONDIMENTI',
-        description: 'I nostri esperti tecnici conducono valutazioni approfondite dei candidati selezionati da AI, analizzando le loro prestazioni, il potenziale di leadership e la compatibilità culturale.'
+      "step3": {
+        "title": "VALIDAZIONE ESPERTA",
+        "description": "I nostri esperti conducono valutazioni tecniche approfondite dei candidati selezionati"
       },
-      step4: {
-        title: 'SELEZIONE E MATCHING BASATI SUI DATI',
-        description: 'Prendi decisioni di assunzione sicure con i nostri dettagliati report di matching executive, validati sia da analisi AI che dalla valutazione degli esperti.'
+      "step4": {
+        "title": "SELEZIONE FINALE E MATCHING",
+        "description": "Prendi decisioni di assunzione sicure con i nostri report dettagliati"
       }
     },
-    candidateAssessment: {
-      title: "Top 3 Candidati Preselezionati",
-      subtitle: "Risultati completi della valutazione per la selezione finale",
-      match: "Compatibilità",
-      executiveAssessment: "Valutazione Dirigenziale",
-      technicalReview: "Revisione Tecnica",
-      assessmentScore: "Punteggio Valutazione",
-      technicalScore: "Punteggio Tecnico",
-      viewProfile: "Visualizza Profilo Completo del Candidato",
-      candidates: [
+    "candidateAssessment": {
+      "title": "Top 3 Candidati Pre-Selezionati",
+      "subtitle": "Risultati completi della valutazione per la selezione finale",
+      "match": "Compatibilità",
+      "executiveAssessment": "Valutazione Executive",
+      "technicalReview": "Revisione Tecnica",
+      "assessmentScore": "Punteggio Valutazione",
+      "technicalScore": "Punteggio Tecnico",
+      "viewProfile": "Visualizza Profilo Completo",
+      "candidates": [
         {
-          id: 1,
-          name: "Alexandra Chen",
-          role: "VP of Product",
-          currentCompany: "TechVision Solutions",
-          match: 95,
-          executiveAssessment: {
-            score: 96,
-            strengths: "Eccezionale visione del prodotto e capacità di pianificazione strategica",
-            areas: "Forte esperienza nell'innovazione di prodotto e nell'espansione del mercato. Dimostra eccellente gestione degli stakeholder e leadership del team.",
+          "id": 1,
+          "name": "Alexandra Chen",
+          "role": "VP of Product",
+          "currentCompany": "TechVision Solutions",
+          "match": 95,
+          "executiveAssessment": {
+            "score": 96,
+            "strengths": "Eccezionale visione del prodotto e capacità di pianificazione strategica",
+            "areas": "Ottimi risultati nell'innovazione di prodotto ed espansione del mercato. Dimostra eccellente gestione degli stakeholder e leadership del team"
           },
-          technicalAssessment: {
-            score: 94,
-            notes: "Profonda comprensione dello sviluppo prodotto e delle metodologie agili",
-            recommendation: "Leader di prodotto eccezionale con successo dimostrato nel scaling di prodotti globali"
+          "technicalAssessment": {
+            "score": 94,
+            "notes": "Profonda comprensione dello sviluppo prodotto e metodologie agili",
+            "recommendation": "Leader di prodotto eccezionale con successo dimostrato nel scaling di prodotti globali"
           }
         },
         {
-          id: 2,
-          name: "Michael Rivera",
-          role: "VP of Product",
-          currentCompany: "Innovation Works",
-          match: 92,
-          executiveAssessment: {
-            score: 93,
-            strengths: "Forte focus sulle decisioni basate sui dati e sul design incentrato sull'utente",
-            areas: "Eccellente pensiero strategico con comprovata capacità di guidare iniziative di crescita basate sul prodotto.",
+          "id": 2,
+          "name": "Michael Rivera",
+          "role": "VP of Product",
+          "currentCompany": "Innovation Works",
+          "match": 92,
+          "executiveAssessment": {
+            "score": 93,
+            "strengths": "Forte focus sulle decisioni basate sui dati e design centrato sull'utente",
+            "areas": "Eccellente pensiero strategico con capacità dimostrata di guidare iniziative di crescita basate sul prodotto"
           },
-          technicalAssessment: {
-            score: 91,
-            notes: "Vasta esperienza in analisi di prodotto e sperimentazione",
-            recommendation: "Leader di prodotto altamente analitico con solido background tecnico"
+          "technicalAssessment": {
+            "score": 91,
+            "notes": "Vasta esperienza in analisi di prodotto e sperimentazione",
+            "recommendation": "Leader di prodotto altamente analitico con solido background tecnico"
           }
         },
         {
-          id: 3,
-          name: "Sarah Bennett",
-          role: "VP of Product",
-          currentCompany: "Digital Frontier",
-          match: 90,
-          executiveAssessment: {
-            score: 92,
-            strengths: "Eccezionale capacità di allineare la strategia di prodotto con gli obiettivi aziendali",
-            areas: "Successo dimostrato nella costruzione e scaling di organizzazioni di prodotto in ambienti ad alta crescita.",
+          "id": 3,
+          "name": "Sarah Bennett",
+          "role": "VP of Product",
+          "currentCompany": "Digital Frontier",
+          "match": 90,
+          "executiveAssessment": {
+            "score": 92,
+            "strengths": "Eccezionale capacità di allineare la strategia di prodotto con gli obiettivi aziendali",
+            "areas": "Successo dimostrato nella costruzione e scaling di organizzazioni di prodotto in ambienti ad alta crescita"
           },
-          technicalAssessment: {
-            score: 89,
-            notes: "Solida base tecnica con focus sull'architettura di prodotto scalabile",
-            recommendation: "Executive di prodotto esperto con comprovata esperienza nell'espansione del mercato"
+          "technicalAssessment": {
+            "score": 89,
+            "notes": "Solida base tecnica con focus sull'architettura di prodotto scalabile",
+            "recommendation": "Executive di prodotto esperto con comprovata esperienza nell'espansione del mercato"
           }
         }
       ]
-    },
+    }
   }
 };
 
