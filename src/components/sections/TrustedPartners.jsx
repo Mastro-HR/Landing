@@ -59,7 +59,6 @@ const TrustedPartners = () => {
   const t = translations[language].trustedPartners;
   
   const logoSize = getLogoSize(isMobile, isTablet, isLargeScreen);
-  const scrollDuration = isMobile ? 25 : isTablet ? 35 : 40;
 
   return (
     <section className="py-6 xs:py-8 sm:py-12 lg:py-16 bg-white">
@@ -77,52 +76,19 @@ const TrustedPartners = () => {
           </p>
         </motion.header>
 
-        <div className="relative">
-          <div className="overflow-hidden mx-auto">
-            <div className="flex logo-scroll">
-              <div 
-                className="flex gap-x-3 xs:gap-x-4 sm:gap-x-6 md:gap-x-8"
-                style={{
-                  animation: `continuous-scroll ${scrollDuration}s linear infinite`,
-                  '@media (hover: hover)': {
-                    '&:hover': {
-                      animationPlayState: 'paused'
-                    }
-                  },
-                  '@media (prefers-reduced-motion: reduce)': {
-                    animation: 'none',
-                    transform: 'translateX(0)'
-                  }
-                }}>
-                {[...Array(2)].map((_, setIndex) => (
-                  <div
-                    key={setIndex}
-                    className="flex items-center gap-3 xs:gap-4 sm:gap-6 md:gap-8">
-                    {PARTNERS.map((partner, index) => (
-                      <PartnerLogo
-                        key={`set${setIndex}-${index}`}
-                        {...partner}
-                        logoSize={logoSize}
-                        t={t}
-                      />
-                    ))}
-                  </div>
-                ))}
-              </div>
-            </div>
+        <div className="flex justify-center">
+          <div className="flex items-center gap-3 xs:gap-4 sm:gap-6 md:gap-8">
+            {PARTNERS.map((partner, index) => (
+              <PartnerLogo
+                key={index}
+                {...partner}
+                logoSize={logoSize}
+                t={t}
+              />
+            ))}
           </div>
-          
-          <div className="absolute inset-y-0 left-0 w-8 xs:w-12 sm:w-24 lg:w-32 bg-gradient-to-r from-white via-white/90 to-transparent pointer-events-none" />
-          <div className="absolute inset-y-0 right-0 w-8 xs:w-12 sm:w-24 lg:w-32 bg-gradient-to-l from-white via-white/90 to-transparent pointer-events-none" />
         </div>
       </div>
-
-      <style>{`
-        @keyframes continuous-scroll {
-          from { transform: translateX(0); }
-          to { transform: translateX(calc(-50% - 8px)); }
-        }
-      `}</style>
     </section>
   );
 };
