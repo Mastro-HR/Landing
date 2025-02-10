@@ -233,7 +233,7 @@ const InterviewProcess = () => {
                   overflow-auto
                   p-0 
                   text-white 
-                  bg-black/40 
+                  bg-black/80 
                   backdrop-blur-sm 
                   border-primary-50/10 
                   rounded-lg
