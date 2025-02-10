@@ -26,7 +26,7 @@ const HeroMain = () => {
   const StepCard = ({ step }) => (
     <div className="flex-1">
       <motion.div
-        className="h-full p-6 sm:p-8 rounded-lg backdrop-blur-xl border border-primary-50/10 relative">
+        className="h-full p-6 sm:p-8 rounded backdrop-blur-xl border border-primary-50/10 relative">
           <h3 className="text-xl sm:text-2xl font-bold text-primary-50 mb-4 mt-2">
           {step.title}
         </h3>
