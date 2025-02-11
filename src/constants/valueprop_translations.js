@@ -5,7 +5,7 @@ export const valuePropositionTranslations = {
       line1: "Transform Your",
       line2: "Executive Hiring Process"
     },
-    subtitle: "Our workflow helps you hire top talent through four key steps: defining your needs, shaping the ideal role, creating a tailored assessment, and connecting you with expert support",
+    subtitle: "Our workflow helps you hire top talent through four key steps",
     buttons: {
       try_now: "Try",
       step: "Step",
@@ -40,7 +40,7 @@ export const valuePropositionTranslations = {
       line1: "Trasforma il Tuo",
       line2: "Processo di Assunzione Dirigenziale"
     },
-    subtitle: "Il nostro workflow ti aiuta a trovare i migliori talenti in quattro step chiave: definire le tue esigenze, strutturare il ruolo ideale, creare un test su misura e offrirti il supporto di esperti",
+    subtitle: "Il nostro workflow ti aiuta a trovare i migliori talenti in quattro step chiave",
     buttons: {
       try_now: "Prova",
       step: "Step",
