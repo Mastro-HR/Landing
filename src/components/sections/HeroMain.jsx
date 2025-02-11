@@ -65,7 +65,7 @@ const HeroMain = () => {
               <motion.div
                 className="flex justify-center"
                 variants={titleVariants}>
-                <div className="inline-flex items-center px-5 py-2.5 rounded-full bg-primary-50/5 backdrop-blur-xl border border-primary-50/10 shadow-lg shadow-accent-500/20">
+                <div className="inline-flex items-center px-5 py-2.5 rounded bg-black backdrop-blur-xl border border-primary-50/10 shadow-lg shadow-accent-500/20">
                   <span className="w-2 h-2 rounded-full bg-accent-500 mr-3 animate-pulse" />
                   <span className="text-primary-50 font-medium text-base sm:text-lg">{t.badge}</span>
                 </div>
@@ -99,7 +99,7 @@ const HeroMain = () => {
                 variants={titleVariants}>
                 <Link
                   to="/contact-sales"
-                  className="group relative overflow-hidden px-4 py-2 rounded-lg bg-primary-50 text-black font-medium text-base sm:text-lg hover:shadow-xl hover:shadow-accent-500/20 transition-all duration-300 flex items-center justify-center gap-2 flex-1">
+                  className="group relative overflow-hidden px-4 py-2 rounded bg-primary-50 text-black font-medium text-base sm:text-lg hover:shadow-xl hover:shadow-accent-500/20 transition-all duration-300 flex items-center justify-center gap-2 flex-1">
                   <span className="relative z-10 whitespace-nowrap">{t.cta}</span>
                   <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform flex-shrink-0" />
                   <div className="absolute inset-0 bg-gradient-to-r from-accent-500/90 to-accent-400/90 opacity-0 group-hover:opacity-10 transition-opacity duration-300" />
@@ -107,7 +107,7 @@ const HeroMain = () => {
 
                 <Link
                   to="/ai_form"
-                  className="group px-4 py-2 rounded-lg border border-primary-50/20 text-primary-50 font-medium text-base sm:text-lg hover:bg-primary-50/5 transition-colors flex items-center justify-center gap-2 flex-1">
+                  className="group px-4 py-2 rounded border border-primary-50/20 text-primary-50 font-medium text-base sm:text-lg hover:bg-primary-50/5 transition-colors flex items-center justify-center gap-2 flex-1">
                   <span>{t.secondaryCta}</span>
                   <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Link>

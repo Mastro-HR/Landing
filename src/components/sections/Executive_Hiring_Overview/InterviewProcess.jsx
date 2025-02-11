@@ -197,7 +197,7 @@ const InterviewProcess = () => {
 
         {/* Quadrants */}
         <div
-          className="mt-12 sm:mt-16 md:mt-24 rounded-2xl overflow-hidden border border-primary-50/10
+          className="mt-12 sm:mt-16 md:mt-24 rounded-lg overflow-hidden border border-primary-50/10
             shadow-2xl backdrop-blur-sm bg-black/40"
         >
           <div className="grid grid-cols-1 md:grid-cols-2">
