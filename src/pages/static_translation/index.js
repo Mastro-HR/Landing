@@ -504,7 +504,7 @@ export const translations = {
       },
       trustedPartners: {
           title: 'I Nostri Partners',
-          subtitle: 'Aiutiamo aziende a crescere il loro team esecutivo',
+          subtitle: 'Aiutiamo aziende a trovare il giusto manager',
           categories: {
               financialServices: 'Servizi Finanziari',
               technologySolutions: 'Soluzioni Tecnologiche',
