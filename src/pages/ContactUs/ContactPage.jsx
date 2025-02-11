@@ -139,7 +139,7 @@ const ContactPage = () => {
         animate="visible">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-24">
           <motion.h1 
-            className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-primary-50 leading-tight tracking-tighter mb-8"
+            className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-primary-50 mb-8"
             variants={itemVariants}
             dangerouslySetInnerHTML={{ __html: t.hero.title.replace(/\n/g, '<br/>') }}
           />
