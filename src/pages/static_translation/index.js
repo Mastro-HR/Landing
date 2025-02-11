@@ -494,7 +494,7 @@ export const translations = {
           },
           {
             title: 'AI OTTIMIZZA',
-            description: ' La nostra AI ricerca e testa competenze candidati in un processo rapido e mirato'
+            description: ' La nostra AI seleziona le competenze dei candidati con un processo rapido e mirato'
           },
           {
             title: 'TU DECIDI',
