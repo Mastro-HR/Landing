@@ -133,7 +133,7 @@ export const candidate_personaQuestionsTranslations = {
        {
         id: '10',
         section: "Performance Objectives",
-        question: "What are the key performance indicators (KPIs) for this role?",
+        question: "have you defined the key performance indicators (KPIs) for this role?",
         description: "Detail the specific measurable objectives and expected outcomes",
         type: "choice",
         options: [
