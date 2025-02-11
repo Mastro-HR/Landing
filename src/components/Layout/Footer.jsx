@@ -20,13 +20,6 @@ const Footer = () => (
             className="text-primary-50 hover:text-primary-100 transition-colors">
             <FaLinkedin size={24} />
           </a>
-          <a
-            href="https://www.instagram.com/mastrohr/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-primary-50 hover:text-primary-100 transition-colors">
-            <FaInstagram size={24} />
-          </a>
         </div>
       </div>
       <div className="border-t border-primary-50/10 pt-6">
