@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { CheckCircle2, AlertCircle } from 'lucide-react';
 import PropTypes from 'prop-types';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
+import { useLanguage } from '@/context/LanguageContext';
 
 const CONFIG = {
   TIMING: {
@@ -81,9 +82,9 @@ const EnhancedLoader = ({
   className = '',
   errorMessage,
   retryEnabled = true,
-  customSteps,
-  language = 'en'
+  customSteps
 }) => {
+  const { language } = useLanguage();
   const [currentStep, setCurrentStep] = useState(0);
   const [progress, setProgress] = useState(0);
   const [status, setStatus] = useState('loading');
@@ -276,8 +277,7 @@ EnhancedLoader.propTypes = {
       id: PropTypes.string.isRequired,
       message: PropTypes.string.isRequired,
     })
-  ),
-  language: PropTypes.oneOf(['en', 'it'])
+  )
 };
 
 export default React.memo(EnhancedLoader);
