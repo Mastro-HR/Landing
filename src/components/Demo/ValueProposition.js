@@ -1,4 +1,5 @@
-import React, { memo, useState, useMemo, useEffect, useCallback } from 'react';
+// ValueProposition/index.jsx
+import React, { memo, useState, useMemo, useEffect, useCallback, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   FileText, UserCheck, ClipboardCheck, Target, ArrowRight, ChevronLeft, ChevronRight
@@ -49,7 +50,7 @@ const SolutionCard = memo(({
       `}
       onClick={() => position !== 'center' && setActiveStep(stepNumber - 1)}>
       <div className={`
-        bg-white rounded-lg p-4 sm:p-6 border cursor-pointer
+        bg-white rounded p-4 sm:p-6 border cursor-pointer
         transform transition-all duration-200
         ${isActive ? 'border-accent-500 shadow-lg sm:shadow-xl' : 'border-gray-200 shadow-sm'}
         ${position === 'center' ? 'h-full' : 'h-[90%] mt-2'}
@@ -60,7 +61,7 @@ const SolutionCard = memo(({
         
         <div className="flex items-start gap-3 sm:gap-4 mb-4 sm:mb-6 mt-1 sm:mt-3">
           <div className={`
-            p-2 sm:p-3 rounded-lg flex-shrink-0
+            p-2 sm:p-3 rounded flex-shrink-0
             ${isActive ? 'bg-accent-100' : 'bg-accent-50'}
           `}>
             <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-accent-600" />
@@ -97,7 +98,6 @@ const SolutionCard = memo(({
   );
 });
 
-
 const getCardPosition = (index, activeStep, totalSteps) => {
   let relativePosition = index - activeStep;
   
@@ -133,7 +133,8 @@ const SolutionSteps = () => {
   const { language } = useLanguage();
   const [activeStep, setActiveStep] = useState(0);
   const [isAutoRotating, setIsAutoRotating] = useState(true);
-  const [touchStartX, setTouchStartX] = useState(0);
+  const touchRef = useRef({ startX: 0, startY: 0 });
+  const carouselRef = useRef(null);
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const t = useMemo(() => valuePropositionTranslations[language], [language]);
 
@@ -179,17 +180,38 @@ const SolutionSteps = () => {
     setIsAutoRotating(false);
   }, [steps.length]);
 
-  const handleTouchStart = (e) => {
-    setTouchStartX(e.touches[0].clientX);
-  };
+  const handleTouchStart = useCallback((e) => {
+    touchRef.current = {
+      startX: e.touches[0].clientX,
+      startY: e.touches[0].clientY
+    };
+  }, []);
 
-  const handleTouchEnd = (e) => {
-    const touchEndX = e.changedTouches[0].clientX;
-    const deltaX = touchStartX - touchEndX;
-    if (Math.abs(deltaX) > 30) {
+  const handleTouchMove = useCallback((e) => {
+    if (!touchRef.current.startX || !touchRef.current.startY) return;
+
+    const deltaX = touchRef.current.startX - e.touches[0].clientX;
+    const deltaY = Math.abs(touchRef.current.startY - e.touches[0].clientY);
+
+    // If horizontal swipe is detected, prevent vertical scroll
+    if (Math.abs(deltaX) > deltaY && Math.abs(deltaX) > 10) {
+      e.preventDefault();
+    }
+  }, []);
+
+  const handleTouchEnd = useCallback((e) => {
+    if (!touchRef.current.startX) return;
+
+    const deltaX = touchRef.current.startX - e.changedTouches[0].clientX;
+    const deltaY = Math.abs(touchRef.current.startY - e.changedTouches[0].clientY);
+
+    // Ensure the swipe was more horizontal than vertical and long enough
+    if (Math.abs(deltaX) > deltaY && Math.abs(deltaX) > 50) {
       deltaX > 0 ? handleNext() : handlePrev();
     }
-  };
+
+    touchRef.current = { startX: 0, startY: 0 };
+  }, [handleNext, handlePrev]);
 
   useEffect(() => {
     let intervalId;
@@ -199,13 +221,28 @@ const SolutionSteps = () => {
     return () => intervalId && clearInterval(intervalId);
   }, [isAutoRotating, handleNext, isMobile]);
 
+  // Prevent unwanted scrolling when interacting with the carousel
+  useEffect(() => {
+    const carousel = carouselRef.current;
+    if (!carousel) return;
+
+    const handleWheel = (e) => {
+      if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+        e.preventDefault();
+      }
+    };
+
+    carousel.addEventListener('wheel', handleWheel, { passive: false });
+    return () => carousel.removeEventListener('wheel', handleWheel);
+  }, []);
+
   return (
-    <div className="h-screen bg-gradient-to-b from-white to-accent-100 py-24 sm:py-16 overflow-x-hidden">
+    <div className="h-screen bg-white py-14 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-16">
         <div className="text-center mb-2 sm:mb-6">
           <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary-900 mb-4 sm:mb-6">
             {t.title.line1}
-            <span className="block bg-gradient-to-r from-accent-600 to-accent-400 bg-clip-text text-transparent">
+            <span className="block bg-accent-500 bg-clip-text text-transparent">
               {t.title.line2}
             </span>
           </h1>
@@ -214,10 +251,11 @@ const SolutionSteps = () => {
           </p>
         </div>
 
-        <div className="relative h-[500px] sm:h-[600px] overflow-x-hidden">
+        <div className="relative h-[500px] sm:h-[600px]" ref={carouselRef}>
           <div 
-            className="relative h-full flex items-center justify-center"
+            className="relative h-full flex items-center justify-center touch-pan-y"
             onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}>
             {steps.map((step, index) => {
               const position = getCardPosition(index, activeStep, steps.length);

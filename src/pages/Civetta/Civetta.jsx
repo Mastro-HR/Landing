@@ -3,10 +3,12 @@ import ValueProposition from '@/components/Demo/ValueProposition';
 
 const Civetta = () => {
   return (
-    <div className="min-h-screen w-full flex flex-col">
-      <div className="fixed inset-0 ">
+    // Remove fixed height constraints, use flex-grow instead
+    <div className="w-full flex flex-col min-h-[100dvh]">
+      <div className="absolute inset-0">
+        {/* Background content */}
       </div>
-      <main className="relative flex-1 z-10">
+      <main className="relative flex-1 z-10 overflow-hidden">
         <ValueProposition />
       </main>
     </div>

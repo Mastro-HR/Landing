@@ -13,26 +13,26 @@ export const valuePropositionTranslations = {
     },
     sections: {
       hiring_context: {
-        title: "Is your hiring truly future-proof?",
-        problem: "68% of companies experience critical errors in executive hiring, with 37% of these issues stemming from job descriptions that fail to accurately define necessary skills and objectives.",
-        improvement: "Our AI-powered platform enhances job description precision by 75%, ensuring alignment with strategic business goals."
+        title: "Define What You Actually Need",
+        problem: "Most companies can't articulate what they're really hiring for",
+        improvement: "We help you ask the right questions to determine exact skills, responsibilities and success metrics needed"
       },
       candidateProfile: {
-        title: "Who is the ideal candidate for your team?",
-        problem: "58% of executive hires fail due to a mismatch between experience and required skills, with an average hiring mistake costing approximately 1.5 million euros per company.",
-        improvement: "Optimize your selection process with up to 82% more accurate candidate-role matching, significantly reducing financial and strategic risks."
-      },    
+        title: "Build Your Ideal Candidate Profile",
+        problem: "Over half of executive hires fail because companies hire for the wrong things",
+        improvement: "Our AI crafts precise job descriptions that map to your specific needs and context"
+      },
       hiringAssessment: {
-        title: "Create hiring tests for optimal accuracy",
-        problem: "Traditional assessment methods miss approximately 42% of critical leadership traits, often leading to performance gaps post-hire.",
-        improvement: "Our AI-driven assessments identify 95% of key leadership indicators, providing an 87% accuracy rate in predicting job success."
-      },    
+        title: "Test What Matters",
+        problem: "Standard assessments miss the key predictors of executive performance",
+        improvement: "Our AI creates tailored assessments that measure actual leadership capabilities and potential"
+      },
       matchExpert: {
-        title: "Connect with our network of industry experts",
-        problem: "Manual candidate matching overlooks 53% of top talent and can extend recruitment timelines up to four times longer, leading to missed opportunities and higher costs.",
-        improvement: "Our expert-driven AI matching process reduces time-to-hire by 65% and increases successful placements by 74%, ensuring you find the right fit faster with the guidance of our specialized team."
-      },    
-    },
+        title: "Expert Technical Assessment",
+        problem: "Traditional hiring lets great candidates slip through and bad ones get hired",
+        improvement: "Access our network of industry experts who conduct focused technical interviews"
+      },
+     } 
   },
   it: {
     badge: "Ricerca Dirigenti Potenziata dall'IA",
@@ -49,23 +49,23 @@ export const valuePropositionTranslations = {
     sections: {
       hiring_context: {
         title: "Il tuo hiring è davvero a prova di futuro? ",
-        problem: "68% delle aziende commette errori critici nell'assunzione di manager e dirigenti, di cui 37% sono dovuti ad una incorretta analisi del proprio contesto aziendale.",
-        improvement: "Aumenta la precisione di analisi aziendale del 75%, garantendo un perfetto allineamento con gli obiettivi strategici aziendali."
+        problem: "La maggior parte delle aziende non riesce ad articolare le proprie reali esigenze di assunzione",
+        improvement: "Ti aiutiamo a porti le domande giuste per determinare competenze, responsabilità e metriche di successo necessarie"
       },
       candidateProfile: {
         title: "Chi è il candidato ideale per il tuo team?",
-        problem: "Il 58% delle assunzioni dirigenziali fallisce a causa di una discrepanza tra esperienza e competenze richieste, con un costo medio di errore di circa 1,5 milioni di euro per azienda.",
-        improvement: "Ottimizza la selezione con un matching candidato-ruolo fino all'82% più preciso, riducendo drasticamente rischi finanziari e strategici."
+        problem: "Oltre la metà delle assunzioni executive fallisce perché le aziende selezionano per criteri sbagliati",
+        improvement: "La nostra AI elabora descrizioni delle posizioni precise e allineate alle tue specifiche esigenze"
       },
       hiringAssessment: {
         title: "Crea test di selezione personalizzati",
-        problem: "I metodi di valutazione tradizionali non identificano circa il 42% delle competenze chiave di leadership, causando spesso gap di performance dopo l'assunzione.",
-        improvement: "Le nostre valutazioni basate sull'IA rilevano il 95% degli indicatori di leadership essenziali, garantendo un'accuratezza dell'87% nella previsione del successo lavorativo."
+        problem: "I metodi di valutazione tradizionali non identificano i veri indicatori della performance executive",
+        improvement: "La nostra AI crea valutazioni personalizzate che misurano le reali capacità di leadership"
       },    
       matchExpert: {
         title: "Connettiti con il nostro network di esperti",
-        problem: "La selezione manuale dei candidati ignora il 53% dei migliori talenti e può prolungare i tempi di reclutamento fino a quattro volte, causando opportunità perse e costi più elevati.",
-        improvement: "Il nostro processo di matching basato su IA e supportato da esperti riduce tempi di assunzione del 65% e aumenta il tasso di inserimenti di successo del 74%."
+        problem: "Senza un esperto del settore, i colloqui tecnici rischiano di valutare male le reali competenze dei candidati",
+        improvement: "Accedi al nostro network di esperti del settore per colloqui tecnici mirati"
       },    
     }
   }
