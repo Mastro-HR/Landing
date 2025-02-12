@@ -6,24 +6,27 @@ import { useMediaQuery } from '@/hooks/useMediaQuery';
 
 const CONFIG = {
   TIMING: {
-    TOTAL_DURATION: 20000, // 16 seconds total
-    STEP_DURATION: 5000,   // 4 seconds per step
-    COMPLETION_DELAY: 300, // Delay before showing completion
+    TOTAL_DURATION: 20000,
+    STEP_DURATION: 5000,
+    COMPLETION_DELAY: 300,
     ANIMATION_DURATION: 0.8,
   },
   DIMENSIONS: {
     DESKTOP: { CIRCLE_SIZE: 120, STROKE_WIDTH: 6, ICON_SIZE: 32 },
     TABLET: { CIRCLE_SIZE: 100, STROKE_WIDTH: 5, ICON_SIZE: 28 },
-    MOBILE: { CIRCLE_SIZE: 50, STROKE_WIDTH: 3, ICON_SIZE: 24 },
+    MOBILE: { CIRCLE_SIZE: 80, STROKE_WIDTH: 4, ICON_SIZE: 26 },
   },
   COLORS: {
     accent: 'text-accent-500',
     success: 'text-green-500',
     error: 'text-red-500',
-    background: 'bg-white dark:bg-gray-900',
     text: 'text-gray-700 dark:text-gray-200',
     subtext: 'text-gray-500 dark:text-gray-400',
   },
+  BACKDROP: {
+    light: 'bg-white/95',
+    dark: 'dark:bg-gray-900/95',
+  }
 };
 
 const TRANSLATIONS = {
@@ -51,10 +54,27 @@ const TRANSLATIONS = {
   }
 };
 
-const useLoaderDimensions = () => {
+const useResponsiveConfig = () => {
   const isTablet = useMediaQuery('(max-width: 1024px)');
   const isMobile = useMediaQuery('(max-width: 640px)');
-  return isMobile ? CONFIG.DIMENSIONS.MOBILE : isTablet ? CONFIG.DIMENSIONS.TABLET : CONFIG.DIMENSIONS.DESKTOP;
+  
+  return useMemo(() => ({
+    dimensions: isMobile 
+      ? CONFIG.DIMENSIONS.MOBILE 
+      : isTablet 
+      ? CONFIG.DIMENSIONS.TABLET 
+      : CONFIG.DIMENSIONS.DESKTOP,
+    isMobile,
+    spacing: isMobile ? {
+      containerPadding: 'p-4',
+      contentSpacing: 'space-y-4',
+      margin: 'mx-3'
+    } : {
+      containerPadding: 'p-6',
+      contentSpacing: 'space-y-6',
+      margin: 'mx-4'
+    }
+  }), [isMobile, isTablet]);
 };
 
 const EnhancedLoader = ({
@@ -71,53 +91,43 @@ const EnhancedLoader = ({
   const startTimeRef = useRef(Date.now());
   const progressRef = useRef(null);
   const completionTimeout = useRef(null);
-  const dimensions = useLoaderDimensions();
+  const { dimensions, spacing, isMobile } = useResponsiveConfig();
   
   const translations = TRANSLATIONS[language] || TRANSLATIONS.en;
   const steps = customSteps || translations.steps;
 
-  const radius = useMemo(
-    () => (dimensions.CIRCLE_SIZE - dimensions.STROKE_WIDTH) / 2,
-    [dimensions]
-  );
-  const circumference = useMemo(() => 2 * Math.PI * radius, [radius]);
+  const radius = (dimensions.CIRCLE_SIZE - dimensions.STROKE_WIDTH) / 2;
+  const circumference = 2 * Math.PI * radius;
   const strokeDashoffset = circumference * (1 - progress);
 
   const handleCompletion = useCallback(() => {
-    // Ensure we reach 100% before completing
     setProgress(1);
-    // Wait for the progress animation to finish
     completionTimeout.current = setTimeout(() => {
       setStatus('complete');
       onComplete?.();
-    }, 400); // Short delay to ensure circle completes
+    }, CONFIG.TIMING.COMPLETION_DELAY);
   }, [onComplete]);
 
   const calculateProgress = useCallback(() => {
     const currentTime = Date.now();
     const elapsedTime = currentTime - startTimeRef.current;
     
-    // Calculate step progress
     const currentStepIndex = Math.min(
       Math.floor(elapsedTime / CONFIG.TIMING.STEP_DURATION),
       steps.length - 1
     );
     
-    // Calculate progress within current step
     const stepProgress = (elapsedTime % CONFIG.TIMING.STEP_DURATION) / CONFIG.TIMING.STEP_DURATION;
-    
-    // Calculate overall progress ensuring we reach exactly 1 at completion
-    let overallProgress;
-    if (currentStepIndex >= steps.length - 1) {
-      overallProgress = Math.min(1, (currentStepIndex + stepProgress) / steps.length);
-    } else {
-      overallProgress = currentStepIndex / steps.length + (stepProgress / steps.length);
-    }
+    const overallProgress = Math.min(
+      1,
+      currentStepIndex >= steps.length - 1
+        ? (currentStepIndex + stepProgress) / steps.length
+        : currentStepIndex / steps.length + (stepProgress / steps.length)
+    );
 
     setCurrentStep(currentStepIndex);
     setProgress(overallProgress);
 
-    // Handle completion
     if (elapsedTime >= CONFIG.TIMING.TOTAL_DURATION) {
       handleCompletion();
       return;
@@ -153,21 +163,29 @@ const EnhancedLoader = ({
   }, [status, calculateProgress]);
 
   return (
-    <motion.div
-      className={`fixed inset-0 z-50 flex items-center justify-center ${CONFIG.COLORS.background} bg-opacity-95 dark:bg-opacity-95 backdrop-blur-sm ${className}`}
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={{
-        opacity: 1,
-        scale: 1,
-        transition: { type: 'spring', stiffness: 300, damping: 30 },
-      }}
-      exit={{ opacity: 0, scale: 0.95 }}
-      role="alert"
-      aria-live="polite"
-    >
-      <div className="flex flex-col items-center p-6 bg-white max-w-md w-full mx-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center">
+      <motion.div 
+        className={`absolute inset-0 ${CONFIG.BACKDROP.light} ${CONFIG.BACKDROP.dark} backdrop-blur-md`}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+      />
+      
+      <motion.div
+        className={`relative flex flex-col items-center ${spacing.containerPadding} ${spacing.margin} 
+          bg-white dark:bg-gray-800 max-w-md w-full rounded-lg shadow-xl ${spacing.contentSpacing} ${className}`}
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{
+          opacity: 1,
+          scale: 1,
+          transition: { type: 'spring', stiffness: 300, damping: 30 },
+        }}
+        exit={{ opacity: 0, scale: 0.95 }}
+        role="alert"
+        aria-live="polite"
+      >
         <div
-          className="relative"
+          className="relative flex items-center justify-center"
           style={{ width: dimensions.CIRCLE_SIZE, height: dimensions.CIRCLE_SIZE }}
         >
           <svg
@@ -228,12 +246,12 @@ const EnhancedLoader = ({
         <AnimatePresence mode="wait">
           <motion.div
             key={`${status}-${currentStep}`}
-            className="mt-6 text-center"
+            className="text-center"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
           >
-            <p className={`text-base font-medium ${CONFIG.COLORS.text}`}>
+            <p className={`${isMobile ? 'text-sm' : 'text-base'} font-medium ${CONFIG.COLORS.text}`}>
               {status === 'complete'
                 ? translations.complete
                 : status === 'error'
@@ -241,14 +259,16 @@ const EnhancedLoader = ({
                 : steps[currentStep].message}
             </p>
             {status === 'loading' && (
-              <p className={`mt-2 text-sm font-medium ${CONFIG.COLORS.subtext}`}>
+              <p className={`mt-2 ${isMobile ? 'text-xs' : 'text-sm'} font-medium ${CONFIG.COLORS.subtext}`}>
                 {Math.round(progress * 100)}%
               </p>
             )}
             {status === 'error' && retryEnabled && (
               <button
                 onClick={handleRetry}
-                className="mt-4 px-4 py-2 text-sm font-medium text-white bg-accent-500 rounded-md hover:bg-accent-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-500 transition-colors"
+                className="mt-4 px-4 py-2 text-sm font-medium text-white bg-accent-500 rounded-md 
+                  hover:bg-accent-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-500 
+                  transition-colors"
                 aria-label="Retry loading"
               >
                 {translations.retry}
@@ -256,8 +276,8 @@ const EnhancedLoader = ({
             )}
           </motion.div>
         </AnimatePresence>
-      </div>
-    </motion.div>
+      </motion.div>
+    </div>
   );
 };
 
