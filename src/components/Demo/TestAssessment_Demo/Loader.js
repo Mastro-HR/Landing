@@ -6,10 +6,9 @@ import { useMediaQuery } from '@/hooks/useMediaQuery';
 
 const CONFIG = {
   TIMING: {
-    TOTAL_DURATION: 2400,
     STEP_DURATION: 6000,
-    COMPLETION_DELAY: 1000,
     ANIMATION_DURATION: 0.8,
+    STEP_OVERLAP: 200, // Overlap between steps for smooth transition
   },
   DIMENSIONS: {
     DESKTOP: { CIRCLE_SIZE: 120, STROKE_WIDTH: 6, ICON_SIZE: 32 },
@@ -28,10 +27,10 @@ const CONFIG = {
 const TRANSLATIONS = {
   en: {
     steps: [
-      { id: 'preparation', message: 'Retrieving company data...' },
-      { id: 'analysis', message: 'Analyzing data...' },
-      { id: 'processing', message: 'Creating executive test assessment...' },
-      { id: 'finalizing', message: 'Finalizing assessment...' }
+      { id: 'preparation', message: 'Retrieving company data...', duration: 6000 },
+      { id: 'analysis', message: 'Analyzing data...', duration: 6000 },
+      { id: 'processing', message: 'Creating executive test assessment...', duration: 6000 },
+      { id: 'finalizing', message: 'Finalizing assessment...', duration: 6000 }
     ],
     complete: 'Complete!',
     error: 'An error occurred. Please try again.',
@@ -39,10 +38,10 @@ const TRANSLATIONS = {
   },
   it: {
     steps: [
-      { id: 'preparation', message: 'Ricerca dati aziendali...' },
-      { id: 'analysis', message: 'Analisi dei dati...' },
-      { id: 'processing', message: 'Creazione test valutazione competenze esecutive...' },
-      { id: 'finalizing', message: 'Finalizzazione test esecutivo...' }
+      { id: 'preparation', message: 'Ricerca dati aziendali...', duration: 6000 },
+      { id: 'analysis', message: 'Analisi dei dati...', duration: 6000 },
+      { id: 'processing', message: 'Creazione test valutazione competenze esecutive...', duration: 6000 },
+      { id: 'finalizing', message: 'Finalizzazione test esecutivo...', duration: 6000 }
     ],
     complete: 'Completato!',
     error: 'Si è verificato un errore. Riprova.',
@@ -50,87 +49,95 @@ const TRANSLATIONS = {
   }
 };
 
-// Custom hook for managing loader state
-const useLoaderState = (steps, onComplete) => {
+const useStepProgression = (steps, onComplete) => {
   const [state, setState] = useState({
     currentStep: 0,
     progress: 0,
-    status: 'loading'
+    status: 'loading',
+    stepProgress: 0
   });
 
-  const startTimeRef = useRef(Date.now());
-  const progressRef = useRef(null);
-  const completionTimeout = useRef(null);
+  const timeoutRefs = useRef([]);
+  const animationRef = useRef(null);
+  const startTimeRef = useRef(null);
 
-  const handleCompletion = useCallback(() => {
-    setState(prev => ({ ...prev, progress: 1 }));
-    completionTimeout.current = setTimeout(() => {
-      setState(prev => ({ ...prev, status: 'complete' }));
-      onComplete?.();
-    }, CONFIG.TIMING.COMPLETION_DELAY);
-  }, [onComplete]);
+  const clearTimeouts = useCallback(() => {
+    timeoutRefs.current.forEach(timeout => clearTimeout(timeout));
+    timeoutRefs.current = [];
+    if (animationRef.current) {
+      cancelAnimationFrame(animationRef.current);
+    }
+  }, []);
 
-  const calculateProgress = useCallback(() => {
-    const currentTime = Date.now();
+  const calculateTotalDuration = useCallback((steps) => {
+    return steps.reduce((total, step) => total + step.duration, 0);
+  }, []);
+
+  const updateStepProgress = useCallback((currentTime) => {
     const elapsedTime = currentTime - startTimeRef.current;
-    
-    const currentStepIndex = Math.min(
-      Math.floor(elapsedTime / CONFIG.TIMING.STEP_DURATION),
-      steps.length - 1
-    );
-    
-    const stepProgress = (elapsedTime % CONFIG.TIMING.STEP_DURATION) / CONFIG.TIMING.STEP_DURATION;
-    const overallProgress = Math.min(
-      1,
-      currentStepIndex / steps.length + (stepProgress / steps.length)
-    );
+    let accumulatedTime = 0;
+    let currentStepIndex = 0;
+    let currentStepProgress = 0;
+    let overallProgress = 0;
+
+    for (let i = 0; i < steps.length; i++) {
+      const stepDuration = steps[i].duration;
+      if (elapsedTime < accumulatedTime + stepDuration) {
+        currentStepIndex = i;
+        currentStepProgress = (elapsedTime - accumulatedTime) / stepDuration;
+        break;
+      }
+      accumulatedTime += stepDuration;
+      if (i === steps.length - 1) {
+        currentStepIndex = steps.length - 1;
+        currentStepProgress = 1;
+      }
+    }
+
+    overallProgress = Math.min(1, elapsedTime / calculateTotalDuration(steps));
 
     setState(prev => ({
       ...prev,
       currentStep: currentStepIndex,
-      progress: overallProgress
+      progress: overallProgress,
+      stepProgress: currentStepProgress
     }));
 
-    if (elapsedTime >= CONFIG.TIMING.TOTAL_DURATION) {
-      handleCompletion();
-      return;
+    if (overallProgress < 1) {
+      animationRef.current = requestAnimationFrame(updateStepProgress);
+    } else {
+      setState(prev => ({ ...prev, status: 'complete' }));
+      onComplete?.();
     }
+  }, [steps, calculateTotalDuration, onComplete]);
 
-    progressRef.current = requestAnimationFrame(calculateProgress);
-  }, [steps.length, handleCompletion]);
+  const startProgression = useCallback(() => {
+    clearTimeouts();
+    startTimeRef.current = Date.now();
+    animationRef.current = requestAnimationFrame(updateStepProgress);
+  }, [clearTimeouts, updateStepProgress]);
 
   const handleRetry = useCallback(() => {
-    if (completionTimeout.current) {
-      clearTimeout(completionTimeout.current);
-    }
+    clearTimeouts();
     setState({
       currentStep: 0,
       progress: 0,
-      status: 'loading'
+      status: 'loading',
+      stepProgress: 0
     });
-    startTimeRef.current = Date.now();
-    progressRef.current = requestAnimationFrame(calculateProgress);
-  }, [calculateProgress]);
+    startProgression();
+  }, [clearTimeouts, startProgression]);
 
   useEffect(() => {
     if (state.status === 'loading') {
-      progressRef.current = requestAnimationFrame(calculateProgress);
+      startProgression();
     }
-    
-    return () => {
-      if (progressRef.current) {
-        cancelAnimationFrame(progressRef.current);
-      }
-      if (completionTimeout.current) {
-        clearTimeout(completionTimeout.current);
-      }
-    };
-  }, [state.status, calculateProgress]);
+    return clearTimeouts;
+  }, [state.status, startProgression, clearTimeouts]);
 
   return { state, handleRetry };
 };
 
-// Custom hook for responsive configuration
 const useResponsiveConfig = () => {
   const isTablet = useMediaQuery('(max-width: 1024px)');
   const isMobile = useMediaQuery('(max-width: 640px)');
@@ -151,6 +158,64 @@ const useResponsiveConfig = () => {
   }), [isMobile, isTablet]);
 };
 
+const ProgressCircle = ({ progress, status, dimensions, strokeDashoffset, circumference }) => (
+  <svg
+    className="transform -rotate-90"
+    width={dimensions.CIRCLE_SIZE}
+    height={dimensions.CIRCLE_SIZE}
+    aria-hidden="true"
+  >
+    <circle
+      cx={dimensions.CIRCLE_SIZE / 2}
+      cy={dimensions.CIRCLE_SIZE / 2}
+      r={(dimensions.CIRCLE_SIZE - dimensions.STROKE_WIDTH) / 2}
+      className="stroke-gray-100 dark:stroke-gray-700"
+      strokeWidth={dimensions.STROKE_WIDTH}
+      fill="none"
+    />
+    <motion.circle
+      cx={dimensions.CIRCLE_SIZE / 2}
+      cy={dimensions.CIRCLE_SIZE / 2}
+      r={(dimensions.CIRCLE_SIZE - dimensions.STROKE_WIDTH) / 2}
+      className={`stroke-current ${
+        status === 'error'
+          ? CONFIG.COLORS.error
+          : status === 'complete'
+          ? CONFIG.COLORS.success
+          : CONFIG.COLORS.accent
+      }`}
+      strokeWidth={dimensions.STROKE_WIDTH}
+      strokeLinecap="round"
+      fill="none"
+      strokeDasharray={circumference}
+      strokeDashoffset={strokeDashoffset}
+      initial={{ strokeDashoffset: circumference }}
+      animate={{ strokeDashoffset }}
+      transition={{ duration: CONFIG.TIMING.ANIMATION_DURATION, ease: 'linear' }}
+    />
+  </svg>
+);
+
+const StatusIcon = ({ status, dimensions }) => (
+  <AnimatePresence mode="wait">
+    {(status === 'complete' || status === 'error') && (
+      <motion.div
+        key={status}
+        className="absolute inset-0 flex items-center justify-center"
+        initial={{ scale: 0.8, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.8, opacity: 0 }}
+      >
+        {status === 'complete' ? (
+          <CheckCircle2 className={CONFIG.COLORS.success} size={dimensions.ICON_SIZE} />
+        ) : (
+          <AlertCircle className={CONFIG.COLORS.error} size={dimensions.ICON_SIZE} />
+        )}
+      </motion.div>
+    )}
+  </AnimatePresence>
+);
+
 const EnhancedLoader = ({
   onComplete,
   className = '',
@@ -162,8 +227,8 @@ const EnhancedLoader = ({
   const translations = TRANSLATIONS[language] || TRANSLATIONS.en;
   const steps = customSteps || translations.steps;
   const { dimensions, isMobile, containerClasses, textClasses } = useResponsiveConfig();
-  const { state, handleRetry } = useLoaderState(steps, onComplete);
-  const { currentStep, progress, status } = state;
+  const { state, handleRetry } = useStepProgression(steps, onComplete);
+  const { currentStep, progress, status, stepProgress } = state;
 
   const radius = (dimensions.CIRCLE_SIZE - dimensions.STROKE_WIDTH) / 2;
   const circumference = 2 * Math.PI * radius;
@@ -178,7 +243,6 @@ const EnhancedLoader = ({
       role="alert"
       aria-live="polite"
     >
-      {/* Backdrop with consistent blur effect */}
       <div className="absolute inset-0 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md" />
       
       <div className={`relative flex flex-col items-center ${containerClasses} bg-white dark:bg-gray-800 max-w-md w-full rounded-lg shadow-xl ${className}`}>
@@ -186,59 +250,14 @@ const EnhancedLoader = ({
           className="relative flex items-center justify-center"
           style={{ width: dimensions.CIRCLE_SIZE, height: dimensions.CIRCLE_SIZE }}
         >
-          <svg
-            className="transform -rotate-90"
-            width={dimensions.CIRCLE_SIZE}
-            height={dimensions.CIRCLE_SIZE}
-            aria-hidden="true"
-          >
-            <circle
-              cx={dimensions.CIRCLE_SIZE / 2}
-              cy={dimensions.CIRCLE_SIZE / 2}
-              r={radius}
-              className="stroke-gray-100 dark:stroke-gray-700"
-              strokeWidth={dimensions.STROKE_WIDTH}
-              fill="none"
-            />
-            <motion.circle
-              cx={dimensions.CIRCLE_SIZE / 2}
-              cy={dimensions.CIRCLE_SIZE / 2}
-              r={radius}
-              className={`stroke-current ${
-                status === 'error'
-                  ? CONFIG.COLORS.error
-                  : status === 'complete'
-                  ? CONFIG.COLORS.success
-                  : CONFIG.COLORS.accent
-              }`}
-              strokeWidth={dimensions.STROKE_WIDTH}
-              strokeLinecap="round"
-              fill="none"
-              strokeDasharray={circumference}
-              strokeDashoffset={strokeDashoffset}
-              initial={{ strokeDashoffset: circumference }}
-              animate={{ strokeDashoffset }}
-              transition={{ duration: CONFIG.TIMING.ANIMATION_DURATION, ease: 'linear' }}
-            />
-          </svg>
-
-          <AnimatePresence mode="wait">
-            {(status === 'complete' || status === 'error') && (
-              <motion.div
-                key={status}
-                className="absolute inset-0 flex items-center justify-center"
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.8, opacity: 0 }}
-              >
-                {status === 'complete' ? (
-                  <CheckCircle2 className={CONFIG.COLORS.success} size={dimensions.ICON_SIZE} />
-                ) : (
-                  <AlertCircle className={CONFIG.COLORS.error} size={dimensions.ICON_SIZE} />
-                )}
-              </motion.div>
-            )}
-          </AnimatePresence>
+          <ProgressCircle
+            progress={progress}
+            status={status}
+            dimensions={dimensions}
+            strokeDashoffset={strokeDashoffset}
+            circumference={circumference}
+          />
+          <StatusIcon status={status} dimensions={dimensions} />
         </div>
 
         <AnimatePresence mode="wait">
@@ -249,7 +268,7 @@ const EnhancedLoader = ({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
           >
-            <p className={`font-medium ${CONFIG.COLORS.text}`}>
+            <p className={`font-medium ${CONFIG.COLORS.text} mb-2`}>
               {status === 'complete'
                 ? translations.complete
                 : status === 'error'
@@ -257,9 +276,19 @@ const EnhancedLoader = ({
                 : steps[currentStep].message}
             </p>
             {status === 'loading' && (
-              <p className={`mt-2 ${isMobile ? 'text-xs' : 'text-sm'} font-medium ${CONFIG.COLORS.subtext}`}>
-                {Math.round(progress * 100)}%
-              </p>
+              <div className="flex flex-col items-center space-y-2">
+                <p className={`${isMobile ? 'text-xs' : 'text-sm'} font-medium ${CONFIG.COLORS.subtext}`}>
+                  {Math.round(progress * 100)}%
+                </p>
+                <div className="w-full h-1 bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden">
+                  <motion.div
+                    className="h-full bg-accent-500"
+                    initial={{ width: 0 }}
+                    animate={{ width: `${stepProgress * 100}%` }}
+                    transition={{ duration: 0.3 }}
+                  />
+                </div>
+              </div>
             )}
             {status === 'error' && retryEnabled && (
               <button
@@ -286,6 +315,7 @@ EnhancedLoader.propTypes = {
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       message: PropTypes.string.isRequired,
+      duration: PropTypes.number.isRequired,
     })
   ),
   language: PropTypes.oneOf(['en', 'it'])
