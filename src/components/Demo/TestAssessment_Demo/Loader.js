@@ -6,9 +6,9 @@ import { useMediaQuery } from '@/hooks/useMediaQuery';
 
 const CONFIG = {
   TIMING: {
-    TOTAL_DURATION: 20000, // 16 seconds total
-    STEP_DURATION: 5000,   // 4 seconds per step
-    COMPLETION_DELAY: 300, // Delay before showing completion
+    TOTAL_DURATION: 2400, // 16 seconds total
+    STEP_DURATION: 6000,   // 4 seconds per step
+    COMPLETION_DELAY: 1000, // Delay before showing completion
     ANIMATION_DURATION: 0.8,
   },
   DIMENSIONS: {
