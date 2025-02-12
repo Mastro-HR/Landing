@@ -44,6 +44,19 @@
   p {
     @apply text-base md:text-lg leading-relaxed;
   }
+
+  /* Remove any outline or box-shadow when an element receives focus */
+  *:focus {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Optional: Remove inner focus padding/border in Firefox for buttons/inputs */
+  button::-moz-focus-inner,
+  input::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+  }
 }
 
 /* Enhanced Utility Classes */

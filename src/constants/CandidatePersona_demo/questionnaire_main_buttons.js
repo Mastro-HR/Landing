@@ -18,7 +18,7 @@ export const formButtonTranslations = {
         backToAssessment: "Back to Assessment"
       },
       analysis: {
-        button: "Run Analysis",
+        button: "Create Candidate Profile",
         running: "Running Analysis...",
         error: {
           title: "Analysis Failed",
@@ -54,7 +54,7 @@ export const formButtonTranslations = {
         backToAssessment: "Torna alla Valutazione"
       },
       analysis: {
-        button: "Analizza",
+        button: "Crea Profilo Candidato",
         running: "Analisi in corso...",
         error: {
           title: "Analisi Fallita",

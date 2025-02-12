@@ -1,4 +1,3 @@
-// src/components/TestAssessmentForm/TestAssessmentFormContainer.jsx
 import React, { memo, useState, useCallback } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -21,6 +20,7 @@ const TestAssessmentFormContainer = () => {
   const translations = useUITranslations();
   const questions = useTestAssessmentQuestions();
 
+  // 1. State Declarations
   const [currentStep, setCurrentStep] = useState(0);
   const [answers, setAnswers] = useState({});
   const [isAnalyzing, setIsAnalyzing] = useState(false);
@@ -28,10 +28,11 @@ const TestAssessmentFormContainer = () => {
   const [error, setError] = useState(null);
   const [validationStates, setValidationStates] = useState({});
 
-  // 1. Handle user input for each question
+  // 2. Handle User Input for Each Question
   const handleAnswer = useCallback(
     (value, questionId) => {
       const question = questions.find((q) => q.id === questionId);
+      // Live URL validation
       if (question?.type === 'url') {
         const isValid = value ? isValidUrl(value) : true;
         setValidationStates((prev) => ({ ...prev, [questionId]: isValid }));
@@ -43,7 +44,7 @@ const TestAssessmentFormContainer = () => {
     [questions]
   );
 
-  // 2. Validate a single question’s answer
+  // 3. Validate a Single Question's Answer
   const validateQuestion = useCallback(
     (question, answer) => {
       if (!question.validation?.required) return null;
@@ -86,7 +87,7 @@ const TestAssessmentFormContainer = () => {
     [language, translations]
   );
 
-  // 3. Handle navigation between questions
+  // 4. Handle Navigation Between Questions
   const handleNavigation = useCallback(
     (direction) => {
       const currentQuestion = questions[currentStep];
@@ -120,7 +121,7 @@ const TestAssessmentFormContainer = () => {
     [answers, currentStep, questions, validateQuestion, language, translations]
   );
 
-  // 4. Final submission for analysis
+  // 5. Final Submission for AI Analysis
   const handleSubmit = useCallback(async () => {
     try {
       const requiredQuestions = questions.filter((q) => q.validation?.required);
@@ -138,12 +139,13 @@ const TestAssessmentFormContainer = () => {
       const sessionIdFromStorage = localStorage.getItem('assessment_session_id') || '';
       console.log('[TestAssessmentFormContainer] Session ID:', sessionIdFromStorage);
 
+      // Format answers if needed
       const formattedAnswers = Object.entries(answers).reduce((acc, [key, value]) => {
         if (Array.isArray(value)) {
           acc[key] = value;
         } else if (typeof value === 'object' && value !== null) {
           acc[key] = value.explanation ? [value.value, value.explanation] : [value.value];
-        } else if (questions.find(q => q.id === key)?.type === 'url' && value) {
+        } else if (questions.find((q) => q.id === key)?.type === 'url' && value) {
           acc[key] = cleanUrl(value);
         } else {
           acc[key] = value;
@@ -151,7 +153,7 @@ const TestAssessmentFormContainer = () => {
         return acc;
       }, {});
 
-      // IMPORTANT: Map each question’s text into a property named "text" (not "question")
+      // Build questionnaire metadata and questions array
       const questionnaireData = {
         answers: formattedAnswers,
         metadata: {
@@ -163,10 +165,10 @@ const TestAssessmentFormContainer = () => {
           platform: navigator.platform,
           formType: 'test_assessment'
         },
-        questions: questions.map(q => ({
+        questions: questions.map((q) => ({
           id: q.id,
           type: q.type,
-          text: q.question, // <-- change: use "text" because the backend expects it
+          text: q.question, // Ensure we pass "text" as expected by the backend
           options: q.options || undefined,
           validation: q.validation
         }))
@@ -179,10 +181,10 @@ const TestAssessmentFormContainer = () => {
         language
       };
 
-      console.log('[TestAssessmentFormContainer] Submitting Form Data:', 
+      console.log(
+        '[TestAssessmentFormContainer] Submitting Form Data:',
         JSON.stringify(submissionData, null, 2)
       );
-
       const result = await testAssessmentService.analyzeTestAssessment(submissionData, language);
       console.log('[TestAssessmentFormContainer] Received Analysis Result:', result);
 
@@ -190,28 +192,23 @@ const TestAssessmentFormContainer = () => {
         throw new Error('Invalid response format from the analysis service');
       }
 
-      setAnalysisResult({
-        ...result,
-        questionnaire: questionnaireData
-      });
-
+      setAnalysisResult({ ...result, questionnaire: questionnaireData });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch (e) {
-      console.error('[TestAssessmentFormContainer] Submission Error:', {
-        error: e.message,
-        stack: e.stack
-      });
+      console.error('[TestAssessmentFormContainer] Submission Error:', e);
       setError(e.message || 'Analysis failed');
       setAnalysisResult({
         error: true,
         title: 'Analysis Failed',
         summary: e.message || 'Analysis failed'
       });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     } finally {
       setIsAnalyzing(false);
     }
   }, [answers, questions, language, validateQuestion]);
 
-  // 5. Reset form
+  // 6. Reset Form
   const handleReset = useCallback(() => {
     setCurrentStep(0);
     setAnswers({});
@@ -220,38 +217,23 @@ const TestAssessmentFormContainer = () => {
     setValidationStates({});
   }, []);
 
-  // 6. Return from results to the form
+  // 7. Return from Results to the Form
   const handleGoBack = useCallback(() => {
     setAnalysisResult(null);
     setIsAnalyzing(false);
     setError(null);
   }, []);
 
+  // 8. "Go Back" Button Text
   const handleGoBack_Page = () => (language === 'it' ? 'Torna indietro' : 'Go Back');
 
+  // 9. Render Description Section
   const renderDescriptionSection = () => (
-    <div className="mb-12">
+    <div className="mb-4">
       <div className="flex items-center justify-center">
-        <div className="text-gray-600 rounded-lg shadow-lg p-6 md:p-8 lg:p-10 max-w-3xl w-full">
+        <div className="text-gray-600 rounded shadow-lg p-6 max-w-3xl w-full">
           <div className="flex items-start">
-            <div className="flex-shrink-0">
-              <svg
-                className="w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 text-accent-500 opacity-80"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M13 16h-1v-4h-1m1-4h.01
-                     M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9
-                     4.03-9 9-9 9 4.03 9 9z"
-                />
-              </svg>
-            </div>
-            <div className="ml-4">
+            <div>
               <p className="text-sm text-gray-600 mt-1">
                 {translations.description}
               </p>
@@ -262,6 +244,7 @@ const TestAssessmentFormContainer = () => {
     </div>
   );
 
+  // 10. Handle Validity Change Callback
   const handleValidityChange = useCallback(
     (isValid) => {
       if (!questions[currentStep]) return;
@@ -273,7 +256,9 @@ const TestAssessmentFormContainer = () => {
     [currentStep, questions]
   );
 
+  // --- RENDER LOGIC ---
   if (isAnalyzing || analysisResult) {
+    // Build a fallback questionnaire data in case analysisResult does not include it
     const analysisQuestionnaireData = {
       answers,
       metadata: {
@@ -285,10 +270,10 @@ const TestAssessmentFormContainer = () => {
         userAgent: navigator.userAgent,
         platform: navigator.platform
       },
-      questions: questions.map(q => ({
+      questions: questions.map((q) => ({
         id: q.id,
         type: q.type,
-        text: q.question, // <-- ensure we pass "text"
+        text: q.question,
         options: q.options || undefined,
         validation: q.validation
       }))
@@ -313,19 +298,19 @@ const TestAssessmentFormContainer = () => {
   const isCurrentValid = validationStates[currentQuestion?.id] ?? false;
 
   return (
-    <div className="w-full min-h-screen py-2">
+    <div className="w-full min-h-screen">
       <div className="max-w-3xl mx-auto">
-        {/* Go Back button */}
-        <div className="mb-8">
+        {/* Go Back Button */}
+        <div className="mb-2">
           <button
             onClick={() => navigate('/ai_form')}
-            className="group flex items-left rounded-full bg-white"
+            className="group flex items-left rounded bg-white"
           >
             <div className="flex items-center justify-left space-x-1">
               <span className="flex items-center justify-center w-8 h-8">
                 <ChevronLeft className="w-5 h-5 text-gray-600 group-hover:text-accent-500" />
               </span>
-              <span className="font-medium text-gray-600 group-hover:text-accent-500">
+              <span className="font-medium text-sm text-gray-600 group-hover:text-accent-500">
                 {handleGoBack_Page()}
               </span>
             </div>
@@ -334,7 +319,8 @@ const TestAssessmentFormContainer = () => {
 
         {renderDescriptionSection()}
 
-        <div className="rounded-2xl p-8 bg-white shadow-lg border border-gray-200">
+        {/* Form Container */}
+        <div className="rounded p-6 bg-white shadow-lg border border-gray-200">
           <div className="mb-8">
             <TestAssessment_Form_ProgressBar
               currentStep={currentStep}
@@ -363,11 +349,12 @@ const TestAssessmentFormContainer = () => {
             )}
           </div>
 
+          {/* Navigation Buttons */}
           <div className="mt-8 pt-6 border-t border-gray-200 flex justify-between">
             <button
               onClick={() => handleNavigation('prev')}
               disabled={currentStep === 0 || isAnalyzing}
-              className="flex items-center px-6 py-3 rounded-full text-primary-900 disabled:opacity-50 transition-all hover:scale-[1.02]"
+              className="flex items-center px-4 py-2 rounded text-primary-900 disabled:opacity-50 transition-all hover:scale-[1.02]"
             >
               <ChevronLeft className="w-5 h-5 mr-2" />
               {translations?.navigation?.previous}
@@ -377,7 +364,7 @@ const TestAssessmentFormContainer = () => {
               <button
                 onClick={handleSubmit}
                 disabled={isAnalyzing || !isCurrentValid}
-                className="flex items-center px-6 py-3 rounded-full bg-accent-500 hover:bg-accent-600 text-white disabled:opacity-50 transition-transform hover:scale-[1.02]"
+                className="flex items-center px-4 py-2 rounded bg-accent-500 hover:bg-accent-600 text-white disabled:opacity-50 transition-transform hover:scale-[1.02]"
               >
                 {isAnalyzing ? <AnimatedLoader /> : translations?.analysis?.button}
               </button>
@@ -385,7 +372,7 @@ const TestAssessmentFormContainer = () => {
               <button
                 onClick={() => handleNavigation('next')}
                 disabled={!isCurrentAnswered}
-                className="flex items-center px-6 py-3 rounded-full bg-accent-500 hover:bg-accent-600 text-white disabled:opacity-50 transition-transform hover:scale-[1.02]"
+                className="flex items-center px-4 py-2 rounded bg-accent-500 hover:bg-accent-600 text-white disabled:opacity-50 transition-transform hover:scale-[1.02]"
               >
                 {translations?.navigation?.next}
                 <ChevronRight className="w-5 h-5 ml-2" />

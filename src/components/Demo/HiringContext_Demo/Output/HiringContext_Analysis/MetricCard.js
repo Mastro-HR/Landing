@@ -4,7 +4,7 @@ import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 
 const MetricCard = memo(({ label, value }) => (
-  <div className="bg-white rounded-lg border border-gray-200 p-3 sm:p-4 hover:shadow-md transition-shadow">
+  <div className="bg-white rounded border border-gray-200 p-3 sm:p-4 hover:shadow-md transition-shadow">
     <dt className="text-xs sm:text-sm font-normal text-gray-500 truncate">
       {label}
     </dt>

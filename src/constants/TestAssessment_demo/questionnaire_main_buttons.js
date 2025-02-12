@@ -4,7 +4,7 @@ import { useLanguage } from '@/context/LanguageContext';
 export const formButtonTranslations = {
   en: {
     recruitment: {
-      title: "Executive Hiring Assessment",
+      title: "C-Suite Test Assessment",
       description: "This assessment will help you develop a data-driven framework for senior leadership recruitment and strengthen your executive hiring decisions.",
       progress: {
         complete: "Complete",
@@ -19,7 +19,7 @@ export const formButtonTranslations = {
         backToAssessment: "Return to Assessment"
       },
       analysis: {
-        button: "Generate Executive Insights",
+        button: "Generate C-Suite Test",
         running: "Analyzing Leadership Requirements...",
         error: {
           title: "Analysis Interrupted",
@@ -31,7 +31,7 @@ export const formButtonTranslations = {
   },
   it: {
     recruitment: {
-      title: "Test di Valutazione Competenze",
+      title: "Crea Test Valutazione Competenze Esecutive",
       description: "Questa valutazione ti fornirà un framework basato sui dati per il recruitment di senior leadership e rafforzerà le tue decisioni di selezione executive.",
       progress: {
         complete: "Completato",
@@ -46,7 +46,7 @@ export const formButtonTranslations = {
         backToAssessment: "Torna alla Valutazione"
       },
       analysis: {
-        button: "Genera Insights Executive",
+        button: "Genera Test",
         running: "Analisi Requisiti Leadership in corso...",
         error: {
           title: "Analisi Interrotta",

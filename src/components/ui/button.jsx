@@ -7,7 +7,7 @@ export const Button = React.forwardRef(({
   children,
   ...props 
 }, ref) => {
-  const baseStyles = "inline-flex items-center justify-center rounded-lg px-4 py-2 text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50";
+  const baseStyles = "inline-flex items-center justify-center rounded-lg px-4 py-2 text-sm font-medium transition-colors focus:outline-none disabled:pointer-events-none disabled:opacity-50";
   
   const variants = {
     default: "bg-accent-500 text-white hover:bg-accent-600",

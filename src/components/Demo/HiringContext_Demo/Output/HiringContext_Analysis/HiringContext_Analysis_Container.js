@@ -29,12 +29,6 @@ const HiringContext_Analysis_Container = memo(function HiringContext_Analysis_Co
   // The descriptionBox translations from your localTranslations.
   const descriptionBox = localTranslations?.[language]?.descriptionBox || {};
 
-  /**
-   * Our 'sections' object sets the key to match EXACT data keys from the server:
-   *   - "strategic_foundation"
-   *   - "talent_architecture"
-   *   - "growth_catalysts"
-   */
   const sections = {
     strategic_foundation: {
       icon: Target,
@@ -69,12 +63,28 @@ const HiringContext_Analysis_Container = memo(function HiringContext_Analysis_Co
   // Contact modal state
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
 
+  // Local state for fade-in effect
+  const [isVisible, setIsVisible] = useState(false);
+
+  // Detect mobile screen size
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 1024);
-    handleResize(); // Check initial width
+    handleResize();
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  // Trigger fade-in after the component mounts
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
+
+  // Scroll to top once the analysis is available (only once)
+  useEffect(() => {
+    if (!isAnalyzing && analysisResult) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [isAnalyzing, analysisResult]);
 
   const handleModalClose = useCallback(() => {
     setIsContactModalOpen(false);
@@ -212,7 +222,11 @@ const HiringContext_Analysis_Container = memo(function HiringContext_Analysis_Co
   );
 
   return (
-    <div className="min-h-screen">
+    <div
+      className={`min-h-screen transition-opacity duration-700 ${
+        isVisible ? 'opacity-100' : 'opacity-0'
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-3 sm:px-4">
         {/* Go Back Button */}
         <button

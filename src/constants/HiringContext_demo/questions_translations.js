@@ -73,7 +73,7 @@ export const hiring_contextQuestionsTranslations = {
           { label: "Cost optimization", value: "cost_optimization" },
           { label: "Other", value: "other" }
         ],
-        maxSelection: 4,
+        maxSelection: 1,
         maxLength: 150,
         validation: {
           required: true
@@ -111,7 +111,7 @@ export const hiring_contextQuestionsTranslations = {
           { label: "Limited budget to attract the best candidates", value: "budget_constraints" },
           { label: "Other", value: "other" }
         ],
-        maxSelection: 3,
+        maxSelection: 1,
         maxLength: 150,
         validation: {
           required: true
@@ -122,6 +122,7 @@ export const hiring_contextQuestionsTranslations = {
         section: "Hiring Mistakes",
         question: "What was the most costly mistake made in a recent hire?",
         type: "multiselect",
+        multiSelectHint: true,
         options: [
           { label: "Hiring too quickly without proper evaluation", value: "rushed_hiring" },
           { label: "Underestimating cultural fit with the company", value: "cultural_mismatch" },
@@ -130,7 +131,7 @@ export const hiring_contextQuestionsTranslations = {
           { label: "Not providing effective onboarding and losing the new hire", value: "poor_onboarding" },
           { label: "Other", value: "other" }
         ],
-        maxSelection: 3,
+        maxSelection: 2,
         maxLength: 150,
         validation: {
           required: true
@@ -141,6 +142,7 @@ export const hiring_contextQuestionsTranslations = {
         section: "Recruitment Optimization",
         question: "If you could improve one aspect of your hiring process, what would it be?",
         type: "multiselect",
+        multiSelectHint: true,
         options: [
           { label: "Increase the quality of incoming candidates", value: "better_candidate_quality" },
           { label: "Speed up the selection process without losing effectiveness", value: "faster_hiring_process" },
@@ -149,7 +151,7 @@ export const hiring_contextQuestionsTranslations = {
           { label: "Integrate software to optimize our recruiting processes", value: "recruitment_automation" },
           { label: "Other", value: "other" }
         ],
-        maxSelection: 3,
+        maxSelection: 1,
         maxLength: 150,
         validation: {
           required: true
@@ -229,7 +231,7 @@ export const hiring_contextQuestionsTranslations = {
           { label: "Ottimizzazione costi", value: "cost_optimization" },
           { label: "Altro", value: "other" }
         ],
-        maxSelection: 3,
+        maxSelection: 1,
         maxLength: 150,
         validation: {
           required: true
@@ -267,7 +269,7 @@ export const hiring_contextQuestionsTranslations = {
           { label: "Budget limitato per attrarre i migliori candidati", value: "budget_constraints" },
           { label: "Altro", value: "other" }
         ],
-        maxSelection: 3,
+        maxSelection: 1,
         maxLength: 150,
         validation: {
           required: true
@@ -278,6 +280,7 @@ export const hiring_contextQuestionsTranslations = {
         section: "Errori di Hiring",
         question: "Qual è l’errore più costoso che avete fatto in una recente assunzione?",
         type: "multiselect",
+        multiSelectHint: true,
         options: [
           { label: "Assumere troppo velocemente senza un’adeguata valutazione", value: "rushed_hiring" },
           { label: "Sottovalutare l’allineamento culturale con l’azienda", value: "cultural_mismatch" },
@@ -286,7 +289,7 @@ export const hiring_contextQuestionsTranslations = {
           { label: "Non fornire un onboarding efficace e perdere il nuovo assunto", value: "poor_onboarding" },
           { label: "Altro", value: "other" }
         ],
-        maxSelection: 3,
+        maxSelection: 2,
         maxLength: 150,
         validation: {
           required: true
@@ -297,6 +300,7 @@ export const hiring_contextQuestionsTranslations = {
         section: "Ottimizzazione del Recruiting",
         question: "Se doveste migliorare un solo aspetto del vostro processo di hiring, quale sarebbe?",
         type: "multiselect",
+        multiSelectHint: true,
         options: [
           { label: "Aumentare la qualità dei candidati in ingresso", value: "better_candidate_quality" },
           { label: "Velocizzare il processo di selezione senza perdere efficacia", value: "faster_hiring_process" },
@@ -305,7 +309,7 @@ export const hiring_contextQuestionsTranslations = {
           { label: "Integrare software per ottimizzare il recruiting", value: "recruitment_automation" },
           { label: "Altro", value: "other" }
         ],
-        maxSelection: 3,
+        maxSelection: 1,
         maxLength: 150,
         validation: {
           required: true

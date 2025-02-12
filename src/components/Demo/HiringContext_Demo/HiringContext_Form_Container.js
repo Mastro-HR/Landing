@@ -136,6 +136,8 @@ const HiringContextFormContainer = () => {
 
       setIsAnalyzing(true);
       setError(null);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
       const sessionIdFromStorage = localStorage.getItem('recruitment_session_id') || '';
       console.log('LocalStorage recruitment_session_id =', sessionIdFromStorage);
 
@@ -161,7 +163,9 @@ const HiringContextFormContainer = () => {
       if (!result || typeof result !== 'object') {
         throw new Error('Invalid response format from the analysis service.');
       }
+      // Set the result immediately (the fade-in effect in the Analysis container will handle the smooth entrance)
       setAnalysisResult(result);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch (e) {
       console.error('Submission Error:', e);
       setError(e.message || 'Analysis failed');
@@ -170,6 +174,7 @@ const HiringContextFormContainer = () => {
         title: 'Analysis Failed',
         summary: e.message || 'Analysis failed',
       });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     } finally {
       setIsAnalyzing(false);
     }
@@ -209,26 +214,11 @@ const HiringContextFormContainer = () => {
   );
 
   const renderDescriptionSection = () => (
-    <div className="mb-12">
+    <div className="mb-4">
       <div className="flex items-center justify-center">
-        <div className="text-gray-600 rounded-lg shadow-lg p-6 md:p-8 lg:p-10 max-w-3xl w-full">
+        <div className="text-gray-600 rounded shadow-lg p-6 max-w-3xl w-full">
           <div className="flex items-start">
-            <div className="flex-shrink-0">
-              <svg
-                className="w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 text-accent-500 opacity-80"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M13 16h-1v-4h-1m1-4h.01 M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z"
-                />
-              </svg>
-            </div>
-            <div className="ml-4">
+            <div >
               <p className="text-sm text-gray-600 mt-1">{translations.description}</p>
             </div>
           </div>
@@ -257,10 +247,10 @@ const HiringContextFormContainer = () => {
   const isCurrentValid = validationStates[currentQuestion?.id] ?? false;
 
   return (
-    <div className="w-full min-h-screen py-2">
+    <div className="w-full min-h-screen">
       <div className="max-w-3xl mx-auto">
         {/* Go Back button */}
-        <div className="mb-8">
+        <div className="mb-2">
           <button
             onClick={() => navigate('/ai_form')}
             className="group flex items-left rounded-lg bg-white"
@@ -269,7 +259,7 @@ const HiringContextFormContainer = () => {
               <span className="flex items-center justify-center w-8 h-8">
                 <ChevronLeft className="w-5 h-5 text-gray-600 group-hover:text-accent-500" />
               </span>
-              <span className="font-medium text-gray-600 group-hover:text-accent-500">
+              <span className="font-medium text-sm text-gray-600 group-hover:text-accent-500">
                 {handleGoBack_Page()}
               </span>
             </div>
@@ -279,7 +269,7 @@ const HiringContextFormContainer = () => {
         {renderDescriptionSection()}
 
         {/* Form Container */}
-        <div className="rounded-lg p-8 bg-white shadow-lg border border-gray-200">
+        <div className="rounded p-6 bg-white shadow-lg border border-gray-200">
           <div className="mb-8">
             <HiringContext_Form_ProgressBar
               currentStep={currentStep}
@@ -309,11 +299,11 @@ const HiringContextFormContainer = () => {
           </div>
 
           {/* Navigation Buttons */}
-          <div className="mt-8 pt-6 border-t border-gray-200 flex justify-between">
+          <div className="mt-8 pt-2 border-t border-gray-200 flex justify-between">
             <button
               onClick={() => handleNavigation('prev')}
               disabled={currentStep === 0 || isAnalyzing}
-              className="flex items-center px-6 py-3 rounded-lg text-primary-900 disabled:opacity-50 transition-all hover:scale-[1.02]"
+              className="flex items-center px-4 py-2 rounded text-primary-900 disabled:opacity-50 transition-all hover:scale-[1.02]"
             >
               <ChevronLeft className="w-5 h-5 mr-2" />
               {translations?.navigation?.previous}
@@ -323,7 +313,7 @@ const HiringContextFormContainer = () => {
               <button
                 onClick={handleSubmit}
                 disabled={isAnalyzing || !isCurrentValid}
-                className="flex items-center px-6 py-3 rounded-lg bg-accent-500 hover:bg-accent-600 text-white disabled:opacity-50 transition-transform hover:scale-[1.02]"
+                className="flex items-center px-4 py-2 rounded bg-accent-500 hover:bg-accent-600 text-white disabled:opacity-50 transition-transform hover:scale-[1.02]"
               >
                 {isAnalyzing ? <AnimatedLoader /> : translations?.analysis?.button}
               </button>
@@ -331,7 +321,7 @@ const HiringContextFormContainer = () => {
               <button
                 onClick={() => handleNavigation('next')}
                 disabled={!isCurrentAnswered}
-                className="flex items-center px-6 py-3 rounded-lg bg-accent-500 hover:bg-accent-600 text-white disabled:opacity-50 transition-transform hover:scale-[1.02]"
+                className="flex items-center px-4 py-2 rounded bg-accent-500 hover:bg-accent-600 text-white disabled:opacity-50 transition-transform hover:scale-[1.02]"
               >
                 {translations?.navigation?.next}
                 <ChevronRight className="w-5 h-5 ml-2" />

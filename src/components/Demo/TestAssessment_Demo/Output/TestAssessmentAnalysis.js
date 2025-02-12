@@ -1,7 +1,6 @@
-import React, { memo, useState, useCallback } from 'react';
+import React, { memo, useState, useEffect, useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { ArrowLeft } from 'lucide-react';
-
 import DescriptionBox from './DescriptionBox';
 import Loader from '../Loader';
 import ErrorDisplay from './ErrorDisplay';
@@ -9,157 +8,196 @@ import TestAssessmentDocument from './TestAssessmentDocument';
 import EvaluationCriteriaTable from './EvaluationCriteriaTable';
 import FloatingActionButton from './FloatingActionButton';
 import ContactModal from './ContactModal';
-
+import { useUITranslations } from '@/constants/HiringContext_demo/questionnaire_main_buttons';
 import { sendContactEmail } from '@/services/api';
 import { translations as localTranslations } from './translations';
 
-const TestAssessmentAnalysis = memo(({
+const TestAssessmentAnalysis = memo(function TestAssessmentAnalysis({
   isAnalyzing,
   analysisResult,
   onGoBack,
   error,
   language,
   questionnaire,
-}) => {
-  const [showContactModal, setShowContactModal] = useState(false);
-
-  // Get translations from localTranslations using language key
+}) {
+  const uiTranslations = useUITranslations();
   const translations = localTranslations?.[language] || {};
-  
-  // Use proper translation structure matching HiringContext
-  const descriptionBox = translations?.descriptionBox || {
+  const descriptionBox = {
     title: translations?.title || 'Test Assessment Overview',
-    text: translations?.description || 'This analysis provides insights into your test assessment performance.'
+    text:
+      translations?.description ||
+      'This analysis provides insights into your test assessment performance.',
+  };
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
+
+  useEffect(() => {
+    if (!isAnalyzing && analysisResult) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [isAnalyzing, analysisResult]);
+
+  const handleModalClose = useCallback(() => {
+    setIsContactModalOpen(false);
+  }, []);
+
+  const handleContactSubmit = useCallback(
+    async (formData) => {
+      try {
+        if (
+          !formData.contactInfo?.name?.trim() ||
+          !formData.contactInfo?.email?.trim() ||
+          !formData.contactInfo?.phone?.trim()
+        ) {
+          throw new Error(
+            language === 'it'
+              ? 'Per favore, completa tutti i campi di contatto'
+              : 'Please complete all contact information fields'
+          );
+        }
+        const submissionPayload = {
+          questionnaireData: questionnaire,
+          analysisData: {
+            test_assessment_data: {
+              title: analysisResult?.test_assessment?.title,
+              focus: analysisResult?.test_assessment?.focus,
+              time: analysisResult?.test_assessment?.time,
+              context_and_challenge:
+                analysisResult?.test_assessment?.context_and_challenge,
+              assignment_overview:
+                analysisResult?.test_assessment?.assignment_overview,
+              format: analysisResult?.test_assessment?.format,
+            },
+            evaluation_criteria: analysisResult?.evaluation_criteria,
+            analysis_summary: analysisResult?.analysis_summary,
+          },
+          contactInfo: formData.contactInfo,
+          metadata: {
+            submittedAt: new Date().toISOString(),
+            language,
+            sessionId: localStorage.getItem('assessment_session_id') || '',
+            submissionType: 'test_assessment',
+            version: '1.0',
+            source: 'test_assessment_analysis',
+            analysisId: analysisResult?.id || null,
+            userAgent: navigator.userAgent,
+          },
+        };
+        const response = await sendContactEmail(submissionPayload);
+        if (response.status === 'success') {
+          setIsContactModalOpen(false);
+          return true;
+        }
+        throw new Error(
+          response.message ||
+            (language === 'it' ? 'Invio email fallito' : 'Failed to send email')
+        );
+      } catch (err) {
+        alert(err.message);
+        return false;
+      }
+    },
+    [analysisResult, language, questionnaire]
+  );
+
+  const removeDuplicateNumbering = (text) => {
+    if (!text || typeof text !== 'string') return text;
+    return text.replace(/^(?:(\d+\.\s+))\1+/g, '$1');
   };
 
-  const handleContactSubmit = useCallback(async (formData) => {
-    try {
-      console.log('[TestAssessmentAnalysis] Starting contact submission with:', {
-        formData,
-        analysisResult,
-        questionnaire
-      });
-  
-      if (!formData.contactInfo?.name?.trim() || !formData.contactInfo?.email?.trim() || !formData.contactInfo?.phone?.trim()) {
-        throw new Error(
-          language === 'it'
-            ? 'Per favore, completa tutti i campi delle informazioni di contatto'
-            : 'Please complete all contact information fields'
+  const cleanedAnalysisResult = useMemo(() => {
+    if (!analysisResult) return analysisResult;
+    let cleanedTestAssessment = analysisResult.test_assessment
+      ? { ...analysisResult.test_assessment }
+      : null;
+    if (cleanedTestAssessment) {
+      if (cleanedTestAssessment.assignment_overview) {
+        cleanedTestAssessment.assignment_overview = removeDuplicateNumbering(
+          cleanedTestAssessment.assignment_overview
         );
       }
-  
-      // Build submission payload with both analysis and questionnaire data
-      const submissionPayload = {
-        questionnaireData: questionnaire,
-        analysisData: {
-          // Ensure test_assessment data is included
-          test_assessment_data: {
-            title: analysisResult?.test_assessment?.title,
-            focus: analysisResult?.test_assessment?.focus,
-            time: analysisResult?.test_assessment?.time,
-            context_and_challenge: analysisResult?.test_assessment?.context_and_challenge,
-            assignment_overview: analysisResult?.test_assessment?.assignment_overview,
-            format: analysisResult?.test_assessment?.format
-          },
-          // Include evaluation criteria
-          evaluation_criteria: analysisResult?.evaluation_criteria,
-          // Include any additional analysis data
-          analysis_summary: analysisResult?.analysis_summary
-        },
-        contactInfo: formData.contactInfo,
-        metadata: {
-          submittedAt: new Date().toISOString(),
-          language,
-          sessionId: localStorage.getItem('assessment_session_id') || '',
-          submissionType: 'test_assessment',
-          version: '1.0',
-          source: 'test_assessment_analysis',
-          analysisId: analysisResult?.id || null,
-          userAgent: navigator.userAgent,
-        },
-      };
-  
-      console.log('[TestAssessmentAnalysis] Analysis data being sent:', 
-        JSON.stringify(submissionPayload.analysisData, null, 2)
-      );
-      console.log('[TestAssessmentAnalysis] Questionnaire data being sent:', 
-        JSON.stringify(submissionPayload.questionnaireData, null, 2)
-      );
-      console.log('[TestAssessmentAnalysis] Full submission payload:', 
-        JSON.stringify(submissionPayload, null, 2)
-      );
-  
-      const result = await sendContactEmail(submissionPayload);
-      console.log('[TestAssessmentAnalysis] Email service response:', result);
-      
-      return result;
-    } catch (error) {
-      console.error('[TestAssessmentAnalysis] Error in contact submission:', {
-        error: error.message,
-        stack: error.stack,
-        analysisData: analysisResult,
-        questionnaireData: questionnaire
-      });
-      throw error;
+      if (cleanedTestAssessment.context_and_challenge) {
+        cleanedTestAssessment.context_and_challenge = removeDuplicateNumbering(
+          cleanedTestAssessment.context_and_challenge
+        );
+      }
     }
-  }, [analysisResult, language, questionnaire]);
+    let cleanedEvaluationCriteria = analysisResult.evaluation_criteria;
+    if (Array.isArray(cleanedEvaluationCriteria)) {
+      cleanedEvaluationCriteria = cleanedEvaluationCriteria.filter(
+        (item, index, arr) => index === arr.findIndex((t) => t.id === item.id)
+      );
+    }
+    return {
+      ...analysisResult,
+      test_assessment: cleanedTestAssessment,
+      evaluation_criteria: cleanedEvaluationCriteria,
+    };
+  }, [analysisResult]);
 
-  return (
-    <div className="min-h-screen py-16">
-      <div className="max-w-6xl mx-auto px-4">
-        {/* Back Button */}
-        <button 
-          onClick={onGoBack}
-          className="flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-8"
-          aria-label={language === 'it' ? 'Indietro' : 'Back'}
-        >
-          <ArrowLeft className="w-5 h-5" />
-          <span>{language === 'it' ? 'Indietro' : 'Back'}</span>
-        </button>
-
-        {/* Description Box - Now properly implemented */}
-        {!isAnalyzing && !error && (
-          <DescriptionBox 
-            title={descriptionBox.title} 
-            text={descriptionBox.text}
+  const renderMainContent = () => (
+    <div className="space-y-6">
+      <DescriptionBox title={descriptionBox.title} text={descriptionBox.text} />
+      <div className="space-y-8 mt-6">
+        {cleanedAnalysisResult?.test_assessment && (
+          <TestAssessmentDocument
+            testAssessment={cleanedAnalysisResult.test_assessment}
+            language={language}
           />
         )}
+        {cleanedAnalysisResult?.evaluation_criteria && (
+          <EvaluationCriteriaTable
+            evaluationCriteria={cleanedAnalysisResult.evaluation_criteria}
+            language={language}
+          />
+        )}
+      </div>
+    </div>
+  );
 
-        {isAnalyzing ? (
-          <Loader />
-        ) : error ? (
-          <ErrorDisplay error={error} language={language} />
+  return (
+    <div
+      className={`min-h-screen transition-opacity duration-700 ${
+        isVisible ? 'opacity-100' : 'opacity-0'
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-3 sm:px-4">
+        <button
+          onClick={onGoBack}
+          className="flex items-center gap-1 sm:gap-2 text-gray-600 hover:text-gray-900 mt-6 mb-6 sm:mb-12 text-sm sm:text-base"
+        >
+          <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" />
+          <span>
+            {uiTranslations?.navigation?.backToAssessment ||
+              'Back to Assessment'}
+          </span>
+        </button>
+        {isAnalyzing || error ? (
+          isAnalyzing ? (
+            <Loader />
+          ) : (
+            <ErrorDisplay error={error} language={language} />
+          )
         ) : (
           <>
-            <div className="space-y-8 mt-6">
-              {analysisResult?.test_assessment && (
-                <TestAssessmentDocument 
-                  testAssessment={analysisResult.test_assessment}
-                  language={language} 
-                />
-              )}
-              {analysisResult?.evaluation_criteria && (
-                <EvaluationCriteriaTable 
-                  evaluationCriteria={analysisResult.evaluation_criteria}
-                  language={language} 
-                />
-              )}
-            </div>
-
+            {renderMainContent()}
             <FloatingActionButton
               label={language === 'it' ? 'Contattaci' : 'Contact Us'}
-              onClick={() => setShowContactModal(true)}
+              onClick={() => setIsContactModalOpen(true)}
             />
           </>
         )}
-
         <ContactModal
-          isOpen={showContactModal}
-          onClose={() => setShowContactModal(false)}
+          isOpen={isContactModalOpen}
+          onClose={handleModalClose}
           onSubmit={handleContactSubmit}
-          questionnaire={questionnaire}
-          analysisResult={analysisResult}
           language={language}
+          analysisResult={analysisResult}
+          questionnaire={questionnaire}
         />
       </div>
     </div>
@@ -170,8 +208,9 @@ TestAssessmentAnalysis.propTypes = {
   isAnalyzing: PropTypes.bool.isRequired,
   analysisResult: PropTypes.shape({
     test_assessment: PropTypes.object,
-    evaluation_criteria: PropTypes.object,
-    analysis_summary: PropTypes.object,
+    evaluation_criteria: PropTypes.any,
+    analysis_summary: PropTypes.any,
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   }),
   onGoBack: PropTypes.func.isRequired,
   error: PropTypes.string,

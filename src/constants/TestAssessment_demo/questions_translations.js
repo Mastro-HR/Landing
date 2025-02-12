@@ -257,11 +257,11 @@ export const test_assessmentQuestionsTranslations = {
         type: "multiselect",
         multiSelectHint: true,
         options: [
-          { label: "Capacità di analizzare e definire il problema", value: "problem_analysis" },
-          { label: "Proposta di soluzioni concrete e fattibili", value: "feasible_solutions" },
+          { label: "Analisi del problema", value: "problem_analysis" },
+          { label: "Proposta di soluzioni concrete", value: "feasible_solutions" },
           { label: "Innovazione e approccio differenziante", value: "innovation_approach" },
-          { label: "Capacità di prioritizzazione e execution", value: "execution_prioritization" },
-          { label: "Allineamento con i valori e la cultura aziendale", value: "culture_fit" },
+          { label: "Capacità di prioritizzazione", value: "execution_prioritization" },
+          { label: "Allineamento con valori e cultura aziendale", value: "culture_fit" },
           { label: "Altro", value: "other" }
         ],
         maxSelection: 3,

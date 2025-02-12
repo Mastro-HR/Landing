@@ -6,13 +6,13 @@ import PropTypes from 'prop-types';
 const SectionCard = memo(({ icon: Icon, title, description, onClick, isSelected }) => (
   <button
     onClick={onClick}
-    className={`w-full text-left p-3 sm:p-4 rounded-lg border ${
+    className={`w-full text-left p-3 sm:p-4 rounded border ${
       isSelected ? 'bg-accent-50 border-accent-200' : 'bg-white border-gray-200'
     } hover:shadow-md transition-all group`}
   >
     <div className="flex items-center gap-2 sm:gap-3 mb-1 sm:mb-2">
       <div
-        className={`p-1.5 sm:p-2 rounded-lg ${
+        className={`p-1.5 sm:p-2 rounded ${
           isSelected ? 'bg-accent-100' : 'bg-gray-100'
         } group-hover:bg-accent-100`}
       >

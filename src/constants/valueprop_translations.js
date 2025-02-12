@@ -9,7 +9,7 @@ export const valuePropositionTranslations = {
     buttons: {
       try_now: "Try",
       step: "Step",
-      access_experts: "Access our Network of Experts"
+      access_experts: "Connect with our experts"
     },
     sections: {
       hiring_context: {
@@ -48,12 +48,12 @@ export const valuePropositionTranslations = {
     },
     sections: {
       hiring_context: {
-        title: "Il tuo hiring è davvero a prova di futuro? ",
+        title: "Il tuo hiring è a prova di futuro? ",
         problem: "La maggior parte delle aziende non riesce ad articolare le proprie reali esigenze di assunzione",
         improvement: "Ti aiutiamo a porti le domande giuste per determinare competenze, responsabilità e metriche di successo necessarie"
       },
       candidateProfile: {
-        title: "Chi è il candidato ideale per il tuo team?",
+        title: "Definisci il tuo candidato ideale",
         problem: "Oltre la metà delle assunzioni executive fallisce perché le aziende selezionano per criteri sbagliati",
         improvement: "La nostra AI elabora descrizioni delle posizioni precise e allineate alle tue specifiche esigenze"
       },
@@ -63,7 +63,7 @@ export const valuePropositionTranslations = {
         improvement: "La nostra AI crea valutazioni personalizzate che misurano le reali capacità di leadership"
       },    
       matchExpert: {
-        title: "Connettiti con il nostro network di esperti",
+        title: "Accedi alla nostra rete di esperti",
         problem: "Senza un esperto del settore, i colloqui tecnici rischiano di valutare male le reali competenze dei candidati",
         improvement: "Accedi al nostro network di esperti del settore per colloqui tecnici mirati"
       },    

@@ -4,7 +4,7 @@ import { useUITranslations } from '@/constants/CandidatePersona_demo/questionnai
 
 const CandidatePersona_ProgressBar = ({ currentStep, totalSteps, onRestart }) => {
   const translations = useUITranslations();
-
+  
   const handleRestart = (e) => {
     e.preventDefault();
     onRestart?.();
@@ -29,13 +29,13 @@ const CandidatePersona_ProgressBar = ({ currentStep, totalSteps, onRestart }) =>
         </div>
         <button
           onClick={handleRestart}
-          className="flex items-center px-2 py-2 hover:bg-accent-100 text-accent-500 rounded-xl transition-all"
+          className="flex items-center px-2 py-2 hover:bg-accent-100 text-accent-500 rounded-lg transition-all"
+          aria-label={translations.progress.restart}
         >
-          <RotateCcw className="w-5 h-5 mr-2" />
-          {translations.progress.restart}
+          <RotateCcw className="w-5 h-5" />
+          <span className="hidden sm:inline ml-2">{translations.progress.restart}</span>
         </button>
       </div>
-
       <div className="space-y-2">
         <div className="w-full bg-gray-100 rounded-full h-2">
           <div
